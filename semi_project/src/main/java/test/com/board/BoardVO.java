@@ -1,10 +1,10 @@
 package test.com.board;
 
 public class BoardVO {
-	private long board_id; // 게시판 번호 
-	private String title; // 게시판 제목 
-	private String contents; // 게시판 내용 
-	private boolean notice; // 공지 표시 
+	private long board_id; 
+	private String title; 
+	private String contents; 
+	private boolean notice; 
 	
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
