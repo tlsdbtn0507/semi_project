@@ -19,7 +19,6 @@ public class MeetingController extends HttpServlet {
      */
     public MeetingController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
