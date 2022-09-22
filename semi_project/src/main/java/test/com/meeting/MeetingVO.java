@@ -2,20 +2,26 @@ package test.com.meeting;
 
 public class MeetingVO {
 	private long meeting_id;
-	private String name; 
+	private String name;
 	private String explanation;
 	private String gender;
 	private String age;
 	private String location;
-	private boolean permission; // 가입 승낙 필요 
-	private boolean secret; // 공개형 비공개형 
-	
+	private int total_people;
+	private String permission; // 가입 승낙 필요
+	private String secret; // 공개형 비공개형
+
+	// meetingImage
+	private String image_url;
+
 	public MeetingVO() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public MeetingVO(long meeting_id, String name, String explanation, String gender, String age, String location,
-			boolean permission, boolean secret) {
+			int total_people, String permission, String secret, String image_url) {
 		super();
 		this.meeting_id = meeting_id;
 		this.name = name;
@@ -23,9 +29,13 @@ public class MeetingVO {
 		this.gender = gender;
 		this.age = age;
 		this.location = location;
+		this.total_people = total_people;
 		this.permission = permission;
 		this.secret = secret;
+		this.image_url = image_url;
 	}
+
+
 
 	public long getMeeting_id() {
 		return meeting_id;
@@ -75,20 +85,37 @@ public class MeetingVO {
 		this.location = location;
 	}
 
-	public boolean isPermission() {
+	public String getPermission() {
 		return permission;
 	}
 
-	public void setPermission(boolean permission) {
+	public void setPermission(String permission) {
 		this.permission = permission;
 	}
 
-	public boolean isSecret() {
+	public String getSecret() {
 		return secret;
 	}
 
-	public void setSecret(boolean secret) {
+	public void setSecret(String secret) {
 		this.secret = secret;
 	}
+
+	public String getImage_url() {
+		return image_url;
+	}
+
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
+	}
+
+	public int getTotal_people() {
+		return total_people;
+	}
+
+	public void setTotal_people(int total_people) {
+		this.total_people = total_people;
+	}
+
 	
 }

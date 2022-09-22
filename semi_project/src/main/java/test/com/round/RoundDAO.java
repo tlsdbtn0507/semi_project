@@ -10,6 +10,8 @@ public interface RoundDAO {
 	public int update(RoundVO vo);
 	// 라운드 리스트     1
 	public List<RoundVO> selectAll();
+	// 내 라운드 리스트 
+	public List<RoundVO> mySelectAll(String member_id);
 	// 라운드 검색하기    1
 	public List<RoundVO> searchList(String key, String value);
 	

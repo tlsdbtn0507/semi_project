@@ -1,8 +1,8 @@
-package test.com.user;
+package test.com.member;
 
-public class UserVO {
-	private long user_id; // 사용자 번호  
-	private String username; // 사용자 아이디  
+public class MemberVO {
+	private long member_id; // 사용자 번호  
+	private String member_name; // 사용자 아이디  
 	private String password; // 비밀번호   
 	private String nickname; // 사용자 닉네임   
 	private String age; // 나이  
@@ -11,15 +11,20 @@ public class UserVO {
 	private String handy; // 타수 
 	private Enum role; // 역할 
 	
-	public UserVO() {
+	// memberImage
+	private String profile_image; 
+	
+	public MemberVO() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public UserVO(long user_id, String username, String password, String nickname, String age, String gender,
-			String location, String handy, Enum role) {
+	
+
+	public MemberVO(long member_id, String member_name, String password, String nickname, String age, String gender,
+			String location, String handy, Enum role, String profile_image) {
 		super();
-		this.user_id = user_id;
-		this.username = username;
+		this.member_id = member_id;
+		this.member_name = member_name;
 		this.password = password;
 		this.nickname = nickname;
 		this.age = age;
@@ -27,22 +32,25 @@ public class UserVO {
 		this.location = location;
 		this.handy = handy;
 		this.role = role;
+		this.profile_image = profile_image;
 	}
 
-	public long getUser_id() {
-		return user_id;
+
+
+	public long getMember_id() {
+		return member_id;
 	}
 
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
+	public void setMember_id(long member_id) {
+		this.member_id = member_id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getMember_name() {
+		return member_name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
 	}
 
 	public String getPassword() {
@@ -100,6 +108,17 @@ public class UserVO {
 	public void setRole(Enum role) {
 		this.role = role;
 	}
+
+	public String getProfile_image() {
+		return profile_image;
+	}
+
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
+	}
+
+
+	
 	
 	
 }

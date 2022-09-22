@@ -1,28 +1,28 @@
-package test.com.user;
+package test.com.member;
 
 import java.util.List;
 
-public interface UserDAO {
+public interface MemberDAO {
 	// 회원가입하기   1
-	public int insert(UserVO vo);
+	public int insert(MemberVO vo);
 
 	// 회원 수정     1
-	public int update(UserVO vo);
+	public int update(MemberVO vo);
 
 	// 회원 탈퇴       1
-	public int delete(UserVO vo);
+	public int delete(MemberVO vo);
 
 	// 회원 목록      1 모임, 
-	public List<UserVO> selectAll();
+	public List<MemberVO> selectAll();
 
 	// 아이디 확인    1
-	public UserVO idCheck(UserVO vo);
+	public MemberVO idCheck(MemberVO vo);
 
 	// 닉네임 확인    1
-	public UserVO nickNameCheck(UserVO vo);
+	public MemberVO nickNameCheck(MemberVO vo);
 
 	// 로그인        2
-	public UserVO login(UserVO vo);
+	public MemberVO login(MemberVO vo);
 	
 	//8
 	
