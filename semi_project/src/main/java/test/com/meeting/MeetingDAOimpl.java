@@ -2,7 +2,7 @@ package test.com.meeting;
 
 import java.util.List;
 
-import test.com.user.UserVO;
+import test.com.member.MemberVO;
 
 public class MeetingDAOimpl implements MeetingDAO {
 
@@ -19,7 +19,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 	}
 
 	@Override
-	public int leave(UserVO vo) {
+	public int leave(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
