@@ -1,47 +1,47 @@
-package test.com.user;
+package test.com.member;
 
 import java.util.List;
 
-public class UserDAOimpl implements UserDAO {
+public class MemberDAOimpl implements MemberDAO {
 
 	@Override
-	public int insert(UserVO vo) {
+	public int insert(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int update(UserVO vo) {
+	public int update(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int delete(UserVO vo) {
+	public int delete(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public List<UserVO> selectAll() {
+	public List<MemberVO> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserVO idCheck(UserVO vo) {
+	public MemberVO idCheck(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserVO nickNameCheck(UserVO vo) {
+	public MemberVO nickNameCheck(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserVO login(UserVO vo) {
+	public MemberVO login(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

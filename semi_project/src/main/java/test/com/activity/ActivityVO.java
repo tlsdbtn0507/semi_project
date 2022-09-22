@@ -4,25 +4,31 @@ public class ActivityVO {
 	private long activity_id;
 	private String name;  //액티비티명 
 	private String explanation; // 액티비티 설명
-	private String start_period; // 시작 날짜 
-	private String end_period; // 마감 날짜 
+	private String activity_date; // 액티비티 날짜
+	private String activity_time; // 액티비티 시간
 	private String location; // 장소 
-	private int personnel; // 인원 수 
+	private int total_people; // 총 인원 수  
+	private int current_people; // 현재 인원 수  
+	
+	//activity image
+	private String image_url;
 	
 	public ActivityVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ActivityVO(long activity_id, String name, String explanation, String start_period, String end_period,
-			String location, int personnel) {
+	public ActivityVO(long activity_id, String name, String explanation, String activity_date, String activity_time,
+			String location, int total_people, int current_people, String image_url) {
 		super();
 		this.activity_id = activity_id;
 		this.name = name;
 		this.explanation = explanation;
-		this.start_period = start_period;
-		this.end_period = end_period;
+		this.activity_date = activity_date;
+		this.activity_time = activity_time;
 		this.location = location;
-		this.personnel = personnel;
+		this.total_people = total_people;
+		this.current_people = current_people;
+		this.image_url = image_url;
 	}
 
 	public long getActivity_id() {
@@ -49,20 +55,20 @@ public class ActivityVO {
 		this.explanation = explanation;
 	}
 
-	public String getStart_period() {
-		return start_period;
+	public String getActivity_date() {
+		return activity_date;
 	}
 
-	public void setStart_period(String start_period) {
-		this.start_period = start_period;
+	public void setActivity_date(String activity_date) {
+		this.activity_date = activity_date;
 	}
 
-	public String getEnd_period() {
-		return end_period;
+	public String getActivity_time() {
+		return activity_time;
 	}
 
-	public void setEnd_period(String end_period) {
-		this.end_period = end_period;
+	public void setActivity_time(String activity_time) {
+		this.activity_time = activity_time;
 	}
 
 	public String getLocation() {
@@ -73,13 +79,31 @@ public class ActivityVO {
 		this.location = location;
 	}
 
-	public int getPersonnel() {
-		return personnel;
+	public int getTotal_people() {
+		return total_people;
 	}
 
-	public void setPersonnel(int personnel) {
-		this.personnel = personnel;
+	public void setTotal_people(int total_people) {
+		this.total_people = total_people;
 	}
+
+	public int getCurrent_people() {
+		return current_people;
+	}
+
+	public void setCurrent_people(int current_people) {
+		this.current_people = current_people;
+	}
+
+	public String getImage_url() {
+		return image_url;
+	}
+
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
+	}
+
 	
+
 	
 }

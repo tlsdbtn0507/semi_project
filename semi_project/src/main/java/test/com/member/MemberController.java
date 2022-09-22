@@ -1,4 +1,4 @@
-package test.com.user;
+package test.com.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class UserController
  */
 @WebServlet("/UserController")
-public class UserController extends HttpServlet {
+public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserController() {
+    public MemberController() {
         super();
         // TODO Auto-generated constructor stub
     }
