@@ -5,7 +5,7 @@ import java.sql.Date;
 public class RoundVO {
 	private long round_id; // 라운드 번호
 	private String name; // 라운드 이름
-	private Date round_date; // 라운딩 날짜
+	private String round_date; // 라운딩 날짜
 	private String course; // 코스
 	private int total_people; // 인원 수
 	private int current_people; // 인원 수
@@ -17,7 +17,7 @@ public class RoundVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RoundVO(long round_id, String name, Date round_date, String course, int total_people, int current_people,
+	public RoundVO(long round_id, String name, String round_date, String course, int total_people, int current_people,
 			String image_url) {
 		super();
 		this.round_id = round_id;
@@ -45,11 +45,11 @@ public class RoundVO {
 		this.name = name;
 	}
 
-	public Date getRound_date() {
+	public String getRound_date() {
 		return round_date;
 	}
 
-	public void setRound_date(Date round_date) {
+	public void setRound_date(String round_date) {
 		this.round_date = round_date;
 	}
 
@@ -85,6 +85,6 @@ public class RoundVO {
 		this.image_url = image_url;
 	}
 
-	
+
 	
 }
