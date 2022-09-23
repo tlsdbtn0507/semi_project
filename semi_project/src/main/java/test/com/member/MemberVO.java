@@ -1,27 +1,25 @@
 package test.com.member;
 
 public class MemberVO {
-	private long member_id; // 사용자 번호  
-	private String member_name; // 사용자 아이디  
-	private String password; // 비밀번호   
-	private String nickname; // 사용자 닉네임   
-	private String age; // 나이  
+	private long member_id; // 사용자 번호
+	private String member_name; // 사용자 아이디
+	private String password; // 비밀번호
+	private String nickname; // 사용자 닉네임
+	private String age; // 나이
 	private String gender; // 성별
-	private String location; // 장소 
-	private String handy; // 타수 
-	private Enum role; // 역할 
-	
+	private String location; // 장소
+	private String handy; // 타수
+	private Enum role; // 역할
+
 	// memberImage
-	private String profile_image; 
-	
+	private String image_url;
+
 	public MemberVO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	public MemberVO(long member_id, String member_name, String password, String nickname, String age, String gender,
-			String location, String handy, Enum role, String profile_image) {
+			String location, String handy, Enum role, String image_url) {
 		super();
 		this.member_id = member_id;
 		this.member_name = member_name;
@@ -32,10 +30,8 @@ public class MemberVO {
 		this.location = location;
 		this.handy = handy;
 		this.role = role;
-		this.profile_image = profile_image;
+		this.image_url = image_url;
 	}
-
-
 
 	public long getMember_id() {
 		return member_id;
@@ -109,16 +105,15 @@ public class MemberVO {
 		this.role = role;
 	}
 
-	public String getProfile_image() {
-		return profile_image;
+	public String getImage_url() {
+		return image_url;
 	}
 
-	public void setProfile_image(String profile_image) {
-		this.profile_image = profile_image;
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
 	}
-
-
 	
 	
 	
 }
+

@@ -7,9 +7,12 @@ public class MeetingVO {
 	private String gender;
 	private String age;
 	private String location;
-	private int total_people;
 	private String permission; // 가입 승낙 필요
 	private String secret; // 공개형 비공개형
+	private int total_people;
+	
+	// fk
+	private long member_id;
 
 	// meetingImage
 	private String image_url;
@@ -18,10 +21,8 @@ public class MeetingVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	public MeetingVO(long meeting_id, String name, String explanation, String gender, String age, String location,
-			int total_people, String permission, String secret, String image_url) {
+			String permission, String secret, String image_url, int total_people,long member_id) {
 		super();
 		this.meeting_id = meeting_id;
 		this.name = name;
@@ -29,13 +30,20 @@ public class MeetingVO {
 		this.gender = gender;
 		this.age = age;
 		this.location = location;
-		this.total_people = total_people;
 		this.permission = permission;
 		this.secret = secret;
 		this.image_url = image_url;
+		this.total_people = total_people;
+		this.member_id = member_id;
 	}
 
+	public long getMember_id() {
+		return member_id;
+	}
 
+	public void setMember_id(long member_id) {
+		this.member_id = member_id;
+	}
 
 	public long getMeeting_id() {
 		return meeting_id;
@@ -101,14 +109,6 @@ public class MeetingVO {
 		this.secret = secret;
 	}
 
-	public String getImage_url() {
-		return image_url;
-	}
-
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
-	}
-
 	public int getTotal_people() {
 		return total_people;
 	}
@@ -117,5 +117,12 @@ public class MeetingVO {
 		this.total_people = total_people;
 	}
 
-	
+	public String getImage_url() {
+		return image_url;
+	}
+
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
+	}
+
 }
