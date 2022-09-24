@@ -22,7 +22,7 @@ import test.com.round.RoundDAOimpl;
 import test.com.round.RoundVO;
 
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_insert.do",
-		"/main_meeting_insertOK.do","/mymeeting_list.do" })
+		"/main_meeting_insertOK.do","/mymeeting_list.do"})
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
