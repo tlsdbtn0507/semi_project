@@ -21,6 +21,12 @@ public interface MeetingDAO {
 	// 모임 검색하기 1 (진행중)
 	public List<MeetingVO> searchList(String key, String value);
 
+	// 모임 상세보기 (가입전)
+	public MeetingVO selectOne(MeetingVO vo);
+	
+	// 모임 입장하기
+	public int enter(MeetingUserVO vo);
+
 	// 모임 멤버 초대하기 4
 	public boolean invite(MeetingVO vo);
 
