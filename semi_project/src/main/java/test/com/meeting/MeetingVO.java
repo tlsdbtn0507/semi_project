@@ -7,10 +7,10 @@ public class MeetingVO {
 	private String gender;
 	private String age;
 	private String location;
-	private String handy;
 	private String permission; // 가입 승낙 필요
-	private String secret; // 공개형(false) 비공개형(true)
-	private int total_people;
+	private String secret; // 공개형 비공개형
+	private String handy; // 타수 
+	private int total_people; // 컬럼에는 없고 VO에만 있음.
 	
 	// fk
 	private long member_id;
@@ -23,7 +23,7 @@ public class MeetingVO {
 	}
 
 	public MeetingVO(long meeting_id, String name, String explanation, String gender, String age, String location,
-			String handy, String permission, String secret, int total_people, long member_id, String image_url) {
+			String permission, String secret, String handy,String image_url, int total_people,long member_id) {
 		super();
 		this.meeting_id = meeting_id;
 		this.name = name;
@@ -31,12 +31,12 @@ public class MeetingVO {
 		this.gender = gender;
 		this.age = age;
 		this.location = location;
-		this.handy = handy;
 		this.permission = permission;
 		this.secret = secret;
+		this.image_url = image_url;
 		this.total_people = total_people;
 		this.member_id = member_id;
-		this.image_url = image_url;
+		this.handy = handy;
 	}
 
 	public long getMember_id() {
@@ -134,6 +134,5 @@ public class MeetingVO {
 	public void setHandy(String handy) {
 		this.handy = handy;
 	}
-	
 
 }

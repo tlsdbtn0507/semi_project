@@ -236,6 +236,88 @@ public class MeetingDAOimpl implements MeetingDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public MeetingVO selectOne(MeetingVO vo) {
+		MeetingVO vo2 = new MeetingVO();
+		try {
+			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
+
+			pstmt = conn.prepareStatement(DB_oracle.MEETING_SELECT_ONE); // 쿼리문이 들어감.
+
+			pstmt.setLong(1, vo.getMeeting_id());
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				vo2.setMeeting_id(rs.getLong("meeting_id"));
+				vo2.setName(rs.getString("name"));
+				vo2.setExplanation(rs.getString("explanation"));
+				vo2.setTotal_people(rs.getInt("total_people"));
+				vo2.setGender(rs.getString("gender"));
+				vo2.setAge(rs.getString("age"));
+				vo2.setLocation(rs.getString("location"));
+				vo2.setImage_url(rs.getString("image_url"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // close가 있어서 finally 해줘야됨.
+			if (rs != null) {
+				try {
+					rs.close(); // 나중에 쓴걸 먼저 닫는다.
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		} // end finally
+
+		return vo2;
+	}
+
+	@Override
+	public int enter(MeetingUserVO vo) {
+		int flag = 0;
+
+		try {
+			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER,
+					DB_oracle.PASSWORD);
+			
+			pstmt = conn.prepareStatement(DB_oracle.MEETING_ENTER); // 쿼리문이 들어감.
+			
+			pstmt.setLong(1, vo.getMeeting_id());
+			pstmt.setLong(2, vo.getMember_id());
+			pstmt.setString(3, vo.getRole());
+
+			flag = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // close가 있어서 finally 해줘야ㅕ 됨.
+			if (rs != null) {
+				try {
+					rs.close(); // 나중에 쓴걸 먼저 닫는다.
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		} // end finally
+
+		return flag;
+	}
 	
 	
 
