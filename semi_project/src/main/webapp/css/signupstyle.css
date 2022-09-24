@@ -1,7 +1,7 @@
-/* 배경사진 */
+/* 諛곌꼍�궗吏� */
 html {
   box-sizing: border-box;
-  background: url("bgimg.png") center no-repeat;
+  background: url("png/bgimg.png") center no-repeat;
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -10,32 +10,32 @@ html {
   text-align: center;
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
-/* 모바일 사이즈의 하얀 바탕화면 */
+/* 紐⑤컮�씪 �궗�씠利덉쓽 �븯�� 諛뷀깢�솕硫� */
 div {
   padding: 20px;
   height: 780px;
   width: 414px;
   background: white;
 }
-/* 회원가입 타이틀 */
+/* �쉶�썝媛��엯 ���씠�� */
 h2 {
   text-align: left;
 }
-/* 닉네임 아이디 입력칸 */
+/* �땳�꽕�엫 �븘�씠�뵒 �엯�젰移� */
 .check {
   width: 200px;
   margin: 10px;
   margin-left: 0;
 }
-/* 아이디 설명을 위해 아이디 바닥 마진 */
+/* �븘�씠�뵒 �꽕紐낆쓣 �쐞�빐 �븘�씠�뵒 諛붾떏 留덉쭊 */
 #id {
   margin-bottom: 5px;
 }
-/* 비밀번호 설명을 위해 비번 바닥 마진 */
+/* 鍮꾨�踰덊샇 �꽕紐낆쓣 �쐞�빐 鍮꾨쾲 諛붾떏 留덉쭊 */
 #pwa {
   margin-bottom: 3px;
 }
-/* 닉네임 아이디 중복확인 버튼 */
+/* �땳�꽕�엫 �븘�씠�뵒 以묐났�솗�씤 踰꾪듉 */
 #btn_idCheck,
 #btn_nickCheck {
   margin: 15px;
@@ -47,14 +47,14 @@ h2 {
   border: 1px solid blue;
   border-radius: 5px;
 }
-/* 아이디 비번 설명 글 */
+/* �븘�씠�뵒 鍮꾨쾲 �꽕紐� 湲� */
 p {
   height: 20px;
   font-size: 12px;
   text-align: left;
   margin-top: 1px;
 }
-/* 모든 입력칸 */
+/* 紐⑤뱺 �엯�젰移� */
 input {
   float: left;
   margin-left: px;
@@ -66,17 +66,17 @@ input {
   border-radius: 5px;
   border: 1px solid gray;
 }
-/* 지역 선택칸 */
+/* 吏��뿭 �꽑�깮移� */
 select {
   float: left;
   font-size: 20px;
 }
-/* 지역 버튼 설명 */
+/* 吏��뿭 踰꾪듉 �꽕紐� */
 label {
   float: left;
   font-size: 20px;
 }
-/* 완료버튼 */
+/* �셿猷뚮쾭�듉 */
 #insert {
   text-align: center;
   width: 350px;

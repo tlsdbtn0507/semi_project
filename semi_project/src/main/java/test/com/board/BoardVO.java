@@ -1,22 +1,39 @@
 package test.com.board;
 
+import java.security.Timestamp;
+import java.util.Date;
+
 public class BoardVO {
 	private long board_id; // 게시판 번호 
-	private String title; // 게시판 제목 
-	private String contents; // 게시판 내용 
-	private boolean notice; // 공지 표시 
+	private int meeting_id;
+	private String title;
+	private String contents;
+	private String writer;
+	private String notice;
+	private Date wdate;
+	
 	
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public BoardVO(long board_id, String title, String contents, boolean notice) {
+	
+	
+	
+	
+	public BoardVO(long board_id, int meeting_id, String title,
+			String contents, String writer, String notice, Date wdate) {
 		super();
 		this.board_id = board_id;
+		this.meeting_id = meeting_id;
 		this.title = title;
 		this.contents = contents;
+		this.writer = writer;
 		this.notice = notice;
+		this.wdate = wdate;
 	}
+
+
+
 
 	public long getBoard_id() {
 		return board_id;
@@ -24,6 +41,14 @@ public class BoardVO {
 
 	public void setBoard_id(long board_id) {
 		this.board_id = board_id;
+	}
+
+	public int getMeeting_id() {
+		return meeting_id;
+	}
+
+	public void setMeeting_id(int meeting_id) {
+		this.meeting_id = meeting_id;
 	}
 
 	public String getTitle() {
@@ -42,13 +67,30 @@ public class BoardVO {
 		this.contents = contents;
 	}
 
-	public boolean isNotice() {
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public String getnotice() {
 		return notice;
 	}
 
-	public void setNotice(boolean notice) {
+	public void setnotice(String notice) {
 		this.notice = notice;
 	}
+	
+	public Date getWdate() {
+		return wdate;
+	}
+	
+	public void setWdate(Date wdate) {
+		this.wdate = wdate;
+	}
+	
 	
 	
 }

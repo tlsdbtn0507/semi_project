@@ -9,7 +9,7 @@
 <body>
 <body>
       <div>
-        <h1><img src="golfzon.png" alt="" /></h1>
+        <h1><img src="png/golfzon.png" alt="" /></h1>
         <form id="loginId">
           <input type="text" value="ID" placeholder="아이디" />
         </form>

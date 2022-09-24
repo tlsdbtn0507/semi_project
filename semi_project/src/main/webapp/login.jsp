@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>semi project login</title>
-<link rel="stylesheet" href="style.css"></head>
+<link rel="stylesheet" href="css/style.css"></head>
 <body>
 <body>
       <div>
-        <h1><img src="golfzon.png" alt="" /></h1>
+        <h1><img src="png/golfzon.png" alt="" /></h1>
         <form id="login"action="loginOk.do" method="post">
           <input type="text" name="userID" placeholder="아이디" />
           <input type="password" name="userPW" placeholder="비밀번호" />

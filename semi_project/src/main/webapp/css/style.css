@@ -1,7 +1,7 @@
-/* 배경사진 */
+/* 諛곌꼍�궗吏� */
 html {
   box-sizing: border-box;
-  background: url("bgimg.png") center no-repeat;
+  background: url("../png/bgimg.png") center no-repeat;
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -10,27 +10,27 @@ html {
   text-align: center;
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
-/* 모바일 사이즈의 하얀 바탕화면 */
+/* 紐⑤컮�씪 �궗�씠利덉쓽 �븯�� 諛뷀깢�솕硫� */
 div {
   padding: 20px;
   height: 780px;
   width: 414px;
   background: white;
 }
-/* 골프존 이미지 위치지정 */
+/* 怨⑦봽議� �씠誘몄� �쐞移섏��젙 */
 h1 {
   /* text-align: left; */
   margin-top: 200px;
 }
-/* 골프존 이미지 조절 */
+/* 怨⑦봽議� �씠誘몄� 議곗젅 */
 img {
   width: 150px;
 }
-/* 아이디 비번 마진x */
+/* �븘�씠�뵒 鍮꾨쾲 留덉쭊x */
 form {
   margin: none;
 }
-/* 아이디 비번 입력칸 */
+/* �븘�씠�뵒 鍮꾨쾲 �엯�젰移� */
 input {
   text-align: left;
   width: 350px;
