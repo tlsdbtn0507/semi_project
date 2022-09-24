@@ -18,12 +18,16 @@ public interface ActivityDAO {
 	
 	// 내 액티비티 전체 리스트
 	public List<ActivityVO> mySelectAll(String member_name, String activityState);
-	
-	// 액티비티 추천 리스트      1
-//	public List<ActivityVO> selectAll();
 
 
 	// 액티비티 검색하기
 	public List<ActivityVO> searchList(String key, String value);
 
+	//액티비티 추천 리스트
+	public List<ActivityVO> recommendSelectAll(String member_id, String category);
+	
+	//마감임박 액티비티 리스트
+	public List<ActivityVO> imminentSelectAll(String member_id);
+	
+	// 5
 }

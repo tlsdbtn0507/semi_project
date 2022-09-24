@@ -19,10 +19,12 @@ import org.apache.commons.io.FilenameUtils;
 
 import test.com.round.RoundDAO;
 import test.com.round.RoundDAOimpl;
+import test.com.round.RoundUserVO;
 import test.com.round.RoundVO;
 
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_insert.do",
-		"/main_meeting_insertOK.do","/mymeeting_list.do" })
+		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do",
+		"/meeting_enter.do"})
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,10 +36,34 @@ public class MeetingController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8"); // UTF-8형식으로 바꿔주기 
 		String sPath = request.getServletPath();
+		
 		if (sPath.equals("/main_round_insert.do")) {
 
 			request.getRequestDispatcher("meeting/insert.jsp").forward(request, response);
+		} else if (sPath.equals("/meeting_selectOne.do")) {
+			String meeting_id = request.getParameter("meeting_id");
+
+			MeetingDAO dao = new MeetingDAOimpl();
+
+			MeetingVO vo = new MeetingVO();
+			vo.setMeeting_id(Long.parseLong(meeting_id));
+
+			MeetingVO vo2 = dao.selectOne(vo);
+
+			request.setAttribute("vo2", vo2);
+
+			response.getWriter().println(vo2.getMeeting_id());
+			response.getWriter().println(vo2.getName());
+			response.getWriter().println(vo2.getExplanation());
+			response.getWriter().println(vo2.getGender());
+			response.getWriter().println(vo2.getLocation());
+			response.getWriter().println(vo2.getSecret());
+			response.getWriter().println(vo2.getTotal_people());
+			response.getWriter().println(vo2.getImage_url());
+//			RequestDispatcher rd = request.getRequestDispatcher("round/selectOne.jsp");
+//			rd.forward(request, response);
 		} else if (sPath.equals("/main_meeting_selectAll.do")) {
 
 			List<MeetingVO> vos = dao.selectAll();
@@ -54,20 +80,20 @@ public class MeetingController extends HttpServlet {
 //			System.out.println(vos.get(0).getName());
 
 			request.getRequestDispatcher("meeting/selectAll.jsp").forward(request, response);
-		}else if(sPath.equals("/mymeeting_list.do")) {
-			
-			//test용--> 로그인구현 다 되면 지우기
-			HttpSession session = request.getSession(); //객체 초기화
-			session.setMaxInactiveInterval(60);//interval 설정(초단위, 기본은 10~15분)
-			session.setAttribute("member_id", "1"); //-> 브라우저 X표 누르기전까지는 session에 저장됨.
-			//session에서 member_id를 가져옴.
+		} else if (sPath.equals("/mymeeting_list.do")) {
+
+			// test용--> 로그인구현 다 되면 지우기
+			HttpSession session = request.getSession(); // 객체 초기화
+			session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
+			session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
+			// session에서 member_id를 가져옴.
 			String member_id = (String) session.getAttribute("member_id");
-			
+
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
-			//json으로 반환
+			// json으로 반환
 //			PrintWriter out = response.getWriter();
 //			out.print(vos.toString());
-			request.setAttribute("vos",vos);
+			request.setAttribute("vos", vos);
 			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
 		}
 
@@ -79,12 +105,12 @@ public class MeetingController extends HttpServlet {
 		System.out.println(dir_path);
 		request.setCharacterEncoding("UTF-8");
 		String sPath = request.getServletPath();
-		
+
 		// session
 		HttpSession session = request.getSession();
 		session.setAttribute("member_id", "1");
-		String member_id = (String) session.getAttribute("member_id"); //member_name 
-		
+		String member_id = (String) session.getAttribute("member_id"); // member_name
+
 		if (sPath.equals("/main_meeting_insertOK.do")) {
 
 			String name = "";
@@ -168,14 +194,37 @@ public class MeetingController extends HttpServlet {
 			vo.setTotal_people(total_people);
 			vo.setImage_url(image_url);
 //			vo.setMember_id(1); 
-			vo.setMember_id(Long.parseLong(member_id)); 
-			
+			vo.setMember_id(Long.parseLong(member_id));
+
 			int result = dao.insert(vo);
 
 			if (result == 1) {
 				System.out.println("모임이 개설되었습니다.");
 			} else {
 				System.out.println("모임개설을 실패하였습니다.");
+			}
+		}else if(sPath.equals("/meeting_enter.do")) {
+			
+//			HttpSession session = request.getSession(); //객체 초기화
+//			session.setMaxInactiveInterval(60);//interval 설정(초단위, 기본은 10~15분)
+//			session.setAttribute("member_id", "1"); //-> 브라우저 X표 누르기전까지는 session에 저장됨.
+			
+			//session에서 member_id를 가져옴.
+//			String member_id = (String) session.getAttribute("member_id");
+			
+			MeetingDAO dao = new MeetingDAOimpl();
+
+			MeetingUserVO vo = new MeetingUserVO();
+			vo.setMeeting_id(Long.parseLong(request.getParameter("meeting_id")));
+			// 현재 로그인된 자신의 member_id로 넣어야함.
+			vo.setMember_id(Long.parseLong(member_id));
+			vo.setRole("MEETING_MEMBER");
+			int result = dao.enter(vo);
+
+			if (result == 1) {
+				System.out.println("모임에 입장하였습니다.");
+			} else {
+				System.out.println("모임에 입장 실패하였습니다.");
 			}
 		}
 	}

@@ -16,6 +16,8 @@ public class RoundDAOimpl implements RoundDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
+	long round_id = 0l;
+	
 	public RoundDAOimpl() {
 		try {
 			Class.forName(DB_oracle.DRIVER_NAME);
@@ -24,26 +26,64 @@ public class RoundDAOimpl implements RoundDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	// round_id  nextval 
+	// 라운드테이블과 라운드유저테이블에 사용할 것이다.
+	public long round_id() {
+		long round_id = 0l;
+		RoundVO vo2 = new RoundVO();
+		try {
+			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
+
+			pstmt = conn.prepareStatement(DB_oracle.ROUND_ID); 
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				vo2.setRound_id(rs.getLong("nextval"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // close가 있어서 finally 해줘야됨.
+			if (rs != null) {
+				try {
+					rs.close(); // 나중에 쓴걸 먼저 닫는다.
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		} // end finally
+
+		round_id = vo2.getRound_id();
+		
+		return round_id;
+	}
+	// 라운드 개설하기 (현재 본인이 라운드 장이 된다.)
 	@Override
 	public int insert(RoundVO vo) {
-		
 		int flag = 0;
 
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER,
 					DB_oracle.PASSWORD);
-
+			
 			pstmt = conn.prepareStatement(DB_oracle.ROUND_INSERT); // 쿼리문이 들어감.
 			
-			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getCourse());
-			pstmt.setInt(3, vo.getTotal_people());
-			pstmt.setString(4, vo.getRound_date().toString());
-			pstmt.setString(5, vo.getImage_url());
+			pstmt.setLong(1, vo.getRound_id());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getCourse());
+			pstmt.setInt(4, vo.getTotal_people());
+			pstmt.setString(5, vo.getRound_date().toString());
+			pstmt.setString(6, vo.getImage_url());
 
 			flag = pstmt.executeUpdate();
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally { // close가 있어서 finally 해줘야ㅕ 됨.
@@ -257,6 +297,45 @@ public class RoundDAOimpl implements RoundDAO {
 		} // end finally
 
 		return vo2;
+	}
+
+	@Override
+	public int enter(RoundUserVO vo) {
+		
+		int flag = 0;
+
+		try {
+			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER,
+					DB_oracle.PASSWORD);
+			
+			pstmt = conn.prepareStatement(DB_oracle.ROUND_ENTER); // 쿼리문이 들어감.
+			
+			pstmt.setLong(1, vo.getRound_id());
+			pstmt.setLong(2, vo.getMember_id());
+			pstmt.setString(3, vo.getRole());
+
+			flag = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // close가 있어서 finally 해줘야ㅕ 됨.
+			if (rs != null) {
+				try {
+					rs.close(); // 나중에 쓴걸 먼저 닫는다.
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		} // end finally
+
+		return flag;
 	}
 
 }
