@@ -1,0 +1,53 @@
+/* 諛곌꼍�궗吏� */
+html {
+  box-sizing: border-box;
+  background: url("../png/bgimg.png") center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+/* 紐⑤컮�씪 �궗�씠利덉쓽 �븯�� 諛뷀깢�솕硫� */
+div {
+  padding: 20px;
+  height: 780px;
+  width: 414px;
+  background: white;
+}
+/* 怨⑦봽議� �씠誘몄� �쐞移섏��젙 */
+h1 {
+  /* text-align: left; */
+  margin-top: 200px;
+}
+/* 怨⑦봽議� �씠誘몄� 議곗젅 */
+img {
+  width: 150px;
+}
+/* �븘�씠�뵒 鍮꾨쾲 留덉쭊x */
+form {
+  margin: none;
+}
+/* �븘�씠�뵒 鍮꾨쾲 �엯�젰移� */
+input {
+  text-align: left;
+  width: 350px;
+  font-size: 35px;
+  border: none;
+  opacity: 0.3;
+  border-bottom: 0.5px solid gray;
+}
+input::placeholder {
+  color: black;
+}
+button {
+  margin-top: 10px;
+  width: 350px;
+  height: 50px;
+  font-size: 30px;
+  color: white;
+  background-color: blue;
+  border: 1px solid blue;
+}
