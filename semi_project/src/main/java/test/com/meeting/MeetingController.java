@@ -25,17 +25,6 @@ import test.com.round.RoundVO;
 		"/main_meeting_insertOK.do","/mymeeting_list.do" })
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MeetingController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-=======
->>>>>>> 0574ae638d7fa4a00e889ffeb0db092dac3d4166
 
 	public MeetingController() {
 		super();

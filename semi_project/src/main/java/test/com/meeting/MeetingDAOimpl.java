@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import test.com.member.MemberVO;
-<<<<<<< HEAD
-=======
 import test.com.utils.DB_oracle;
->>>>>>> 0574ae638d7fa4a00e889ffeb0db092dac3d4166
 
 public class MeetingDAOimpl implements MeetingDAO {
 

@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-<<<<<<< HEAD
 public class MemberDAOimpl implements MemberDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -16,26 +15,11 @@ public class MemberDAOimpl implements MemberDAO {
 	public MemberDAOimpl() {
 		try {
 			Class.forName(MemberDB_postgres.DRIVER_NAME);
-
-=======
-import test.com.utils.DB_oracle;
-
-public class MemberDAOimpl implements MemberDAO {
-	
-	Connection conn;
-	PreparedStatement pstmt;
-	ResultSet rs;
-	
-	public MemberDAOimpl() {
-		try {
-			Class.forName(DB_oracle.DRIVER_NAME);
 			System.out.println("Driver Successed...");
->>>>>>> 0574ae638d7fa4a00e889ffeb0db092dac3d4166
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
 
 	private void jdbcConnectionTest() {
 		Connection conn = null;
@@ -136,13 +120,6 @@ public class MemberDAOimpl implements MemberDAO {
 			}
 		} // end finally
 		return flag;
-=======
-	
-	@Override
-	public int insert(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
->>>>>>> 0574ae638d7fa4a00e889ffeb0db092dac3d4166
 	}
 
 	@Override
@@ -165,7 +142,6 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public MemberVO idCheck(MemberVO vo) {
-<<<<<<< HEAD
 		System.out.println("idCheck()...");
 		MemberVO vo2 = null;
 
@@ -210,15 +186,10 @@ public class MemberDAOimpl implements MemberDAO {
 		} // end finally
 
 		return vo2;
-=======
-		// TODO Auto-generated method stub
-		return null;
->>>>>>> 0574ae638d7fa4a00e889ffeb0db092dac3d4166
 	}
 
 	@Override
 	public MemberVO nickNameCheck(MemberVO vo) {
-<<<<<<< HEAD
 		MemberVO vo2 = null;
 
 		try {
@@ -262,16 +233,11 @@ public class MemberDAOimpl implements MemberDAO {
 		} // end finally
 
 		return vo2;
-=======
-		// TODO Auto-generated method stub
-		return null;
->>>>>>> 0574ae638d7fa4a00e889ffeb0db092dac3d4166
 	}
 
 	@Override
 	public MemberVO login(MemberVO vo) {
 		MemberVO vo2 = new MemberVO();
-<<<<<<< HEAD
 
 		try {
 			conn = DriverManager.getConnection(MemberDB_postgres.URL, MemberDB_postgres.USER,
@@ -323,66 +289,11 @@ public class MemberDAOimpl implements MemberDAO {
 		} // end finally
 
 		return vo2;
+	
 	}
 
 }
-=======
-	      
-	      try {
-	         conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
-	         System.out.println("conn successed...");
-	         pstmt = conn.prepareStatement(DB_oracle.SQL_LOGIN);
-	         pstmt.setString(1, vo.getMember_name());
-	         pstmt.setString(2, vo.getPassword());
-	         rs = pstmt.executeQuery();
-
-	         while (rs.next()) {
-	            vo2 = new MemberVO();
-	            vo2.setMember_id(rs.getLong("member_id"));
-	            vo2.setMember_name(rs.getString("member_name"));
-	            vo2.setPassword(rs.getString("password"));
-	            vo2.setNickname(rs.getString("nickname"));
-	            vo2.setAge(rs.getString("age"));
-	            vo2.setGender(rs.getString("gender"));
-	            vo2.setLocation(rs.getString("location"));
-	            vo2.setHandy(rs.getString("handy"));
-//	            vo2.setRole(rs.get("role"));
-	            
-	         }
-
-	      } catch (SQLException e) {
-	         e.printStackTrace();
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      } finally {
-	         if (rs != null) {
-	            try {
-	               rs.close();
-	            } catch (SQLException e) {
-	               e.printStackTrace();
-	            }
-	         }
-	         if (pstmt != null) {
-	            try {
-	               pstmt.close();
-	            } catch (SQLException e) {
-	               e.printStackTrace();
-	            }
-	         }
-	         if (conn != null) {
-	            try {
-	               conn.close();
-	            } catch (SQLException e) {
-	               e.printStackTrace();
-	            }
-	         }
-	      } // end finally
-	      
-	      return vo2;
-	   }
 	
 
-}
 
 
->>>>>>> 0574ae638d7fa4a00e889ffeb0db092dac3d4166
