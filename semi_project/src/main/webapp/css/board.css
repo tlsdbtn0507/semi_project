@@ -136,7 +136,8 @@ a {
 }
 #writer {
   margin-left: 250px;
-  /* right: 0; */
-  /* float: right; */
-  /* text-align: right; */
+}
+
+th > a {
+  color: black;
 }

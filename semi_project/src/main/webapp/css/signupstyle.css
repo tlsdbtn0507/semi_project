@@ -1,7 +1,7 @@
 /* 諛곌꼍�궗吏� */
 html {
   box-sizing: border-box;
-  background: url("png/bgimg.png") center no-repeat;
+  background: url("../png/bgimg.png") center no-repeat;
   background-size: cover;
   min-height: 100vh;
   display: flex;

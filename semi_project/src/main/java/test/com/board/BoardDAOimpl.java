@@ -12,6 +12,7 @@ import java.util.List;
 
 
 
+
 public class BoardDAOimpl implements BoardDAO {
 
 	
@@ -131,6 +132,65 @@ public class BoardDAOimpl implements BoardDAO {
 				} // end finally
 
 				return flag;
+	}
+	@Override
+	public BoardVO selectOne(BoardVO vo) {
+		//System.out.println("selectOne()...");
+		//System.out.println(vo);
+
+		BoardVO vo2 = new BoardVO();
+
+		// 2.
+		try {
+			// 3.
+			conn = DriverManager.getConnection(BoardDB_postgres.URL, BoardDB_postgres.USER, BoardDB_postgres.PASSWORD);
+			//System.out.println("conn successed...");
+			// 4.
+			pstmt = conn.prepareStatement(BoardDB_postgres.SQL_SELECT_ONE);
+			pstmt.setLong(1, vo.getBoard_id());
+			// 5
+			rs = pstmt.executeQuery();
+
+			// 6.
+			while (rs.next()) {
+				vo2.setBoard_id(rs.getLong("board_id"));
+				vo2.setWdate(rs.getDate("date_for"));
+				vo2.setMeeting_id(rs.getInt("meeting_id"));
+				vo2.setTitle(rs.getString("title"));
+				vo2.setContents(rs.getString("contents"));
+				vo2.setWriter(rs.getString("writer"));
+				vo2.setnotice(rs.getString("notice"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		} // end finally
+
+		return vo2;
 	}
 
 
