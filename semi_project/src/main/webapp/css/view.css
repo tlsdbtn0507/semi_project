@@ -19,122 +19,72 @@ body {
   width: 414px;
   background: white;
 }
-
-/* btn�궗�씠利� */
+tr > #title {
+  float: center;
+  font-size: 20px;
+  padding-left: 140px;
+  border-left: 50px;
+}
+.backBtn {
+  border: 1px solid white;
+  background: white;
+  float: left;
+  font-size: 29px;
+}
+.profImg {
+  float: left;
+  width: 70px;
+  height: 70px;
+}
+#writer {
+  text-align: left;
+  margin-bottom: 0;
+}
+#wdate {
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+button {
+  float: right;
+  background: white;
+  border: solid white;
+}
+#title {
+  text-align: left;
+  font-size: 20px;
+}
+#contents {
+  text-align: left;
+}
+/* 
 .hidden {
   display: none;
+  모달 창이 숨겨지게 함
 }
 
-/* �긽�떒 諛� */
-#navup ul {
-  list-style: none;
-  margin: 0;
-}
+*/
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
 
-#navup li {
-  width: 80px;
-  background-color: rgb(193, 199, 184);
-  display: block;
-  float: left;
-  margin-right: 7px;
-  border: none;
-  border-bottom: 1px solid #777;
-}
-
-#navup a {
-  color: gray;
-  display: block;
-  font-weight: bold;
-  padding: 5px;
-  text-decoration: none;
-  text-align: center;
   background-color: white;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
 
-#navup li:hover {
-  border-bottom: #24b3ff;
-}
-
-#navup a :hover {
-  color: skyblue;
-}
-p {
-  height: 10px;
-}
-/*寃뚯떆湲� �벑濡앸쾭�듉 */
-#boardInsert {
-  border-radius: 10%;
-  height: 25px;
-  color: white;
-  background: blue;
-  border: blue;
-  float: right;
-  margin-top: 20px;
-}
-
-#writer {
-  float: right;
-}
-
-/* �븯�떒 諛� */
-#navmain {
-  position: fixed;
-  bottom: 0;
-  float: left;
-  height: 80px;
-}
-/* �븯�떒 諛� 諛곌꼍 */
-#navmain li {
-  width: 80px;
-  background-color: white;
-  display: block;
-  float: left;
-  border: none;
-}
-/* �븘�씠肄� 湲��뵪 */
-#navmain a {
-  font-size: 13px;
-  color: #777;
-}
-/* �솃 �븘�씠肄� */
-#homeIcon {
-  height: 30px;
-  width: 30px;
-  border: 2px solid gray;
-  border-radius: 90%;
-}
-/* 寃��깋 �븘�씠肄� */
-#search {
-  height: 35px;
-  width: 35px;
-  opacity: 0.8;
-}
-/* 媛쒖꽕 �븘�씠肄� */
-#Addbtn {
-  height: 55px;
-  width: 90px;
-}
-/* �븣由� �븘�씠肄� */
-#bell {
-  height: 18px;
-  width: 18px;
-  padding: 7px;
-  border: 2px solid gray;
-  border-radius: 90%;
-  opacity: 0.8;
-}
-/* 留덉씠�럹�씠吏� �븘�씠肄� */
-#mypage {
-  height: 37px;
-  width: 37px;
-  border-radius: 90%;
-  background: white;
-  border: 1px solid gray;
-}
-#writer {
-  margin-left: 250px;
-}
-
-th > a {
-  color: black;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
 }
