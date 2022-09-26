@@ -13,6 +13,8 @@ import java.util.List;
 
 
 
+
+
 public class BoardDAOimpl implements BoardDAO {
 
 	
@@ -196,8 +198,60 @@ public class BoardDAOimpl implements BoardDAO {
 
 	@Override
 	public int update(BoardVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		//System.out.println("update()...");
+				//System.out.println(vo);
+
+				// 1.flag
+				int flag = 0;
+
+				// 2.try and conn
+				// 2.
+				try {
+					// 3.
+					conn = DriverManager.getConnection(BoardDB_postgres.URL, BoardDB_postgres.USER, BoardDB_postgres.PASSWORD);
+					//System.out.println("conn successed...");
+
+					// 4.
+					pstmt = conn.prepareStatement(BoardDB_postgres.SQL_UPDATE);
+//					// 5.
+					pstmt.setString(1, vo.getTitle());
+					pstmt.setString(2, vo.getContents());
+					pstmt.setString(3, vo.getWriter());
+					pstmt.setString(4, vo.getnotice());
+					pstmt.setLong(5, vo.getBoard_id());
+
+					// 6.
+					flag = pstmt.executeUpdate();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				} // end finally
+
+				return flag;
 	}
 
 
@@ -261,6 +315,46 @@ public class BoardDAOimpl implements BoardDAO {
 		} // end finally
 
 		return vos;
+	}
+	@Override
+	public int delete(BoardVO vo) {
+		System.out.println("delete()");
+		
+		int flag = 0;
+		
+		try {
+			conn = DriverManager.getConnection(BoardDB_postgres.URL, BoardDB_postgres.USER, BoardDB_postgres.PASSWORD);
+			//System.out.println("conn successed...");
+
+			pstmt = conn.prepareStatement(BoardDB_postgres.SQL_DELETE);
+			pstmt.setLong(1, vo.getBoard_id());
+
+			flag = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return flag;
 	}
 
 

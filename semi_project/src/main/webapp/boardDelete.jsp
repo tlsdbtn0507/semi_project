@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>semi project viewpage</title>
+<title>semi project boardDelete</title>
 <link rel="stylesheet" href="css/view.css" />
 </head>
 <body>
@@ -19,7 +19,6 @@
 					<thead>
 						<tr>
 							<th colspan="3">게시판</th>
-							<button><a href="board.jsp"></button>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,9 +39,8 @@
 							<td colspan="3" style="min-height: 200px">${vo2.contents}</td>
 						</tr>
 						<tr>
-							<td colspan="3">
-							<button><a href="boardUpdate.do?board_id=${param.board_id}">게시글 수정</a></button>
-								<button><a href="boardDelete.do?board_id=${param.board_id}">게시글 삭제</a></button></td>
+							<td colspan="2">정말 삭제하시겠습니까?</td>
+							<td><a href="boardDeleteOK.do?board_id=${param.board_id}">네 삭제하겠습니다</a></td>
 						</tr>
 					</tbody>
 					<%-- </c:forEach>  --%>

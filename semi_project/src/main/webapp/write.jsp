@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>semi project meetingboard</title>
-<link rel="stylesheet" href="css/board.css" />
+<link rel="stylesheet" href="css/write.css" />
 <script>
 console.log("sessionStorage:",sessionStorage.user_id);
 console.log("localStorage:",localStorage.user_name);
@@ -22,8 +22,8 @@ console.log("localStorage:",localStorage.user_name);
           <table class="table">
             <th>
               <tr>
-            <input type="submit" class="btn" value="글쓰기완료">
                 <th colspan ="2" id="title">게시판 양식</th>
+            <input type="submit" class="btn" value="글쓰기완료">
               </tr>
             </th>
             <tbody>
