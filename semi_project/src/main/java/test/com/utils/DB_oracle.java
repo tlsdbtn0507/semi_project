@@ -71,4 +71,24 @@ public interface DB_oracle {
 			+ "(TO_DATE(activity_date, 'YYYY-MM-DD') - TO_DATE(TO_CHAR(SYSDATE,'YYYY-MM-DD'))) d_day "
 			+ "from recommend_activity_view "
 			+ "where secret like 'false' and member_id !=? and current_people<total_people";
+	String SQL_RECOMMEND_MEETING_AGE_SELECT_ALL = "select distinct meeting_id,name,image_url "
+			+ "from recommend_meeting_view where age like (select age from member where member_id=?) "
+			+ "and secret like 'false' "
+			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
+			+ "and current_people<total_people";
+	String SQL_RECOMMEND_MEETING_GENDER_SELECT_ALL = "select distinct meeting_id,name,image_url "
+			+ "from recommend_meeting_view where gender like (select gender from member where member_id=?) "
+			+ "and secret like 'false' "
+			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
+			+ "and current_people<total_people";
+	String SQL_RECOMMEND_MEETING_HANDY_SELECT_ALL = "select distinct meeting_id,name,image_url "
+			+ "from recommend_meeting_view where meeting_handy like (select handy from member where member_id=?) "
+			+ "and secret like 'false' "
+			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
+			+ "and current_people<total_people";
+	String SQL_RECOMMEND_MEETING_LOCATION_SELECT_ALL = "select distinct meeting_id,name,image_url "
+			+ "from recommend_meeting_view where meeting_location like (select location from member where member_id=?) "
+			+ "and secret like 'false' "
+			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
+			+ "and current_people<total_people";
 }

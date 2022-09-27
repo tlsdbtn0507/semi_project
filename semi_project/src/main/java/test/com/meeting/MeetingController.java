@@ -24,7 +24,7 @@ import test.com.round.RoundVO;
 
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_insert.do",
 		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do",
-		"/meeting_enter.do"})
+		"/meeting_enter.do","/meeting_invite.do"})
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -90,9 +90,18 @@ public class MeetingController extends HttpServlet {
 			String member_id = (String) session.getAttribute("member_id");
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
-			// json으로 반환
-//			PrintWriter out = response.getWriter();
-//			out.print(vos.toString());
+			request.setAttribute("vos", vos);
+			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
+		} else if (sPath.equals("/meeting_invite.do")) {
+
+			// test용--> 로그인구현 다 되면 지우기
+			HttpSession session = request.getSession(); // 객체 초기화
+			session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
+			session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
+			// session에서 member_id를 가져옴.
+			String member_id = (String) session.getAttribute("member_id");
+
+			List<MeetingVO> vos = dao.mySelectAll(member_id);
 			request.setAttribute("vos", vos);
 			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
 		}

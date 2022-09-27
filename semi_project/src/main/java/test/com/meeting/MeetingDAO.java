@@ -33,4 +33,6 @@ public interface MeetingDAO {
 	// 나의 모임리스트 조회하기
 	public List<MeetingVO> mySelectAll(String member_id);
 	// 10
+	
+	public List<MeetingVO> recommendSelectAll(String member_id);
 }

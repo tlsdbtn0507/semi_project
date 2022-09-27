@@ -24,5 +24,7 @@ public interface MemberDAO {
 	// 로그인
 	public MemberVO login(MemberVO vo);
 
+	public MemberVO selectOne(String member_id);
+
 
 }
