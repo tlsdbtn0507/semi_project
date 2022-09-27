@@ -69,7 +69,7 @@ public class BoardWriteController extends HttpServlet {
 		vo.setTitle(request.getParameter("title"));
 		vo.setContents(request.getParameter("contents"));
 		vo.setWriter(request.getParameter("writer"));
-		vo.setnotice(request.getParameter("notice"));
+		vo.setNotice(request.getParameter("notice"));
 		int result = dao.createBoard(vo);
 		System.out.println("result:" + result);
 

@@ -32,7 +32,6 @@
             </button>
           </p>
 
-          <p id="wdate" colspan="2">${vo2.wdate}</p>
           <hr />
           <p id="title" colspan="2">${vo2.title}</p>
           <p id="contents" colspan="3" style="min-height: 200px">

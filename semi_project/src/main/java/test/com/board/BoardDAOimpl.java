@@ -100,7 +100,7 @@ public class BoardDAOimpl implements BoardDAO {
 					pstmt.setString(1, vo.getTitle());
 					pstmt.setString(2, vo.getContents());
 					pstmt.setString(3, vo.getWriter());
-					pstmt.setString(4, vo.getnotice());
+					pstmt.setString(4, vo.getNotice());
 
 					// 6.
 					flag = pstmt.executeUpdate();
@@ -158,10 +158,11 @@ public class BoardDAOimpl implements BoardDAO {
 				vo2.setBoard_id(rs.getLong("board_id"));
 				vo2.setWdate(rs.getDate("date_for"));
 				vo2.setMeeting_id(rs.getInt("meeting_id"));
+				vo2.setMember_id(rs.getInt("member_id"));
 				vo2.setTitle(rs.getString("title"));
 				vo2.setContents(rs.getString("contents"));
 				vo2.setWriter(rs.getString("writer"));
-				vo2.setnotice(rs.getString("notice"));
+				vo2.setNotice(rs.getString("notice"));
 			}
 
 		} catch (SQLException e) {
@@ -217,7 +218,7 @@ public class BoardDAOimpl implements BoardDAO {
 					pstmt.setString(1, vo.getTitle());
 					pstmt.setString(2, vo.getContents());
 					pstmt.setString(3, vo.getWriter());
-					pstmt.setString(4, vo.getnotice());
+					pstmt.setString(4, vo.getNotice());
 					pstmt.setLong(5, vo.getBoard_id());
 
 					// 6.
@@ -279,10 +280,11 @@ public class BoardDAOimpl implements BoardDAO {
 				vo.setBoard_id(rs.getLong("board_id"));
 				vo.setWdate(rs.getDate("date_for"));
 				vo.setMeeting_id(rs.getInt("meeting_id"));
+				vo.setMember_id(rs.getInt("member_id"));
 				vo.setTitle(rs.getString("title"));
 				vo.setContents(rs.getString("contents"));
 				vo.setWriter(rs.getString("writer"));
-				vo.setnotice(rs.getString("notice"));
+				vo.setNotice(rs.getString("notice"));
 				vos.add(vo);
 			}
 

@@ -77,7 +77,7 @@ public class BoardUpdateController extends HttpServlet {
 		vo.setTitle(request.getParameter("title"));
 		vo.setContents(request.getParameter("contents"));
 		vo.setWriter(request.getParameter("writer"));
-		vo.setnotice(request.getParameter("notice"));
+		vo.setNotice(request.getParameter("notice"));
 		int result = dao.update(vo);
 		System.out.println("result:" + result);
 
