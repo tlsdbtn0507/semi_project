@@ -32,11 +32,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           <p id="writer" colspan="2">
             ${vo2.writer}
 
-			<%
+<%-- 			<%
 			if(userId !=null && userId==${vo2.member_id}){
 				
 			}
-			%>
+			%> --%>
             <button>
               <a href="boardUpdate.do?board_id=${param.board_id}">📝</a>
             </button>
