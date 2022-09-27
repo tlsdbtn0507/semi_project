@@ -2,6 +2,8 @@ package test.com.activity;
 
 import java.util.List;
 
+import test.com.meeting.MeetingVO;
+
 public interface ActivityDAO {
 
 	// 액티비티 개설하기
@@ -18,7 +20,9 @@ public interface ActivityDAO {
 	
 	// 내 액티비티 전체 리스트
 	public List<ActivityVO> mySelectAll(String member_name, String activityState);
-
+	
+	// 모임 내 액티비티 리스트
+	public List<ActivityVO> inSelectAll(MeetingVO vo);
 
 	// 액티비티 검색하기
 	public List<ActivityVO> searchList(String key, String value);

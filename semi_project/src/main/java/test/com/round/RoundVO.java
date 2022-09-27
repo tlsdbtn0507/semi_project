@@ -9,6 +9,8 @@ public class RoundVO {
 	private String course; // 코스
 	private int total_people; // 인원 수
 	private int current_people; // 인원 수
+	private long member_id; // 멤버 번호
+	
 	
 	// roundImage
 	private String image_url;
@@ -18,7 +20,7 @@ public class RoundVO {
 	}
 
 	public RoundVO(long round_id, String name, String round_date, String course, int total_people, int current_people,
-			String image_url) {
+			String image_url,long member_id) {
 		super();
 		this.round_id = round_id;
 		this.name = name;
@@ -27,6 +29,7 @@ public class RoundVO {
 		this.total_people = total_people;
 		this.current_people = current_people;
 		this.image_url = image_url;
+		this.member_id = member_id;
 	}
 
 	public long getRound_id() {
@@ -83,6 +86,14 @@ public class RoundVO {
 
 	public void setImage_url(String image_url) {
 		this.image_url = image_url;
+	}
+
+	public long getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(long member_id) {
+		this.member_id = member_id;
 	}
 
 

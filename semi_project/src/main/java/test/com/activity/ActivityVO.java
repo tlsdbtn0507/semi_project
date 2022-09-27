@@ -9,6 +9,8 @@ public class ActivityVO {
 	private String location; // 장소 
 	private int total_people; // 총 인원 수  
 	private int current_people; // 현재 인원 수  
+	private long meeting_id;
+	private long member_id;
 	
 	//activity image
 	private String image_url;
@@ -18,7 +20,7 @@ public class ActivityVO {
 	}
 
 	public ActivityVO(long activity_id, String name, String explanation, String activity_date, String activity_time,
-			String location, int total_people, int current_people, String image_url) {
+			String location, int total_people, int current_people, String image_url,long meeting_id, long member_id) {
 		super();
 		this.activity_id = activity_id;
 		this.name = name;
@@ -29,6 +31,8 @@ public class ActivityVO {
 		this.total_people = total_people;
 		this.current_people = current_people;
 		this.image_url = image_url;
+		this.meeting_id = meeting_id;
+		this.member_id = member_id;
 	}
 
 	public long getActivity_id() {
@@ -101,6 +105,22 @@ public class ActivityVO {
 
 	public void setImage_url(String image_url) {
 		this.image_url = image_url;
+	}
+
+	public long getMeeting_id() {
+		return meeting_id;
+	}
+
+	public void setMeeting_id(long meeting_id) {
+		this.meeting_id = meeting_id;
+	}
+
+	public long getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(long member_id) {
+		this.member_id = member_id;
 	}
 
 	

@@ -19,8 +19,8 @@ public interface RoundDAO {
 	// 라운드 검색하기 
 	public List<RoundVO> searchList(String searchKey, String searchWord);
 
-	// 라운드 상세보기 (가입전)
-	public RoundVO selectOne(RoundVO vo);
+	// 라운드 상세보기 
+	public RoundVO selectOne(RoundUserVO vo1);
 	
 	// 라운드 입장하기
 	public int enter(RoundUserVO vo);

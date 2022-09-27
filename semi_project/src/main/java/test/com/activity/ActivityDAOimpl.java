@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import test.com.meeting.MeetingVO;
 import test.com.utils.DB_oracle;
 
 public class ActivityDAOimpl implements ActivityDAO {
@@ -289,6 +290,64 @@ public class ActivityDAOimpl implements ActivityDAO {
 					vo.setImage_url(rs.getString("image_url"));
 					vos.add(vo);
 				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return vos;
+	}
+
+	@Override
+	public List<ActivityVO> inSelectAll(MeetingVO vo2) {
+		List<ActivityVO> vos = new ArrayList<ActivityVO>();
+
+		try {
+			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
+			System.out.println("Conn Successed...");
+			pstmt = conn.prepareStatement(DB_oracle.MEETING_ACTIVITY_SELECT_ALL);
+			
+			pstmt.setLong(1, vo2.getMeeting_id());
+			
+			System.out.println(vo2.getMeeting_id());
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				ActivityVO vo = new ActivityVO();
+				vo.setActivity_id(rs.getLong("activity_id"));
+				vo.setName(rs.getString("name"));
+				vo.setExplanation(rs.getString("explanation"));
+				vo.setActivity_date(rs.getString("activity_date"));
+				vo.setActivity_time(rs.getString("activity_time"));
+				vo.setLocation(rs.getString("location"));
+				vo.setCurrent_people(rs.getInt("current_people"));
+				vo.setTotal_people(rs.getInt("total_people"));
+				vo.setImage_url(rs.getString("image_url"));
+				vo.setMeeting_id(rs.getLong("meeting_id"));
+				
+				vos.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
