@@ -1,0 +1,76 @@
+html {
+  box-sizing: border-box;
+  background: url("../png/bgimg.png") center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+body {
+  margin: 0;
+}
+/* 紐⑤컮�씪 �궗�씠利덉쓽 �븯�� 諛뷀깢�솕硫� */
+#bg {
+  padding: 20px;
+  height: 900px;
+  width: 414px;
+  background: white;
+}
+.table {
+  /* float: center; */
+  margin: 50px;
+  margin-top: 20px;
+  border-left: white;
+  border-right: white;
+  border-bottom: white;
+}
+input {
+  font-size: 20px;
+}
+tr > #title {
+  float: center;
+  font-size: 20px;
+  padding-left: 140px;
+  border-left: 50px;
+}
+
+#writetitle > input {
+  width: 300px;
+  height: 50px;
+  border: 1px solid white;
+  margin-top: 10px;
+}
+#writer > input {
+  width: 300px;
+  height: 50px;
+  border: 1px solid white;
+}
+#contents > textarea {
+  width: 300px;
+  max-height: 500px;
+  border: solid white;
+  font-size: 25px;
+}
+.backBtn {
+  border: 1px solid white;
+  background: white;
+  float: left;
+  font-size: 29px;
+}
+.btn {
+  border: 1px solid white;
+  background: white;
+  float: right;
+  font-size: 17px;
+  margin-top: 10px;
+  color: blue;
+}
+select {
+  width: 80px;
+  height: 30px;
+  font-size: 15px;
+  border: solid white;
+}

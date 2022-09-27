@@ -38,7 +38,7 @@ public class MemberController extends HttpServlet {
 
 		System.out.print("doGet():");
 		System.out.println(sPath);
-		if (sPath.equals("/m_insert.do")) {
+		if (sPath.equals("/insert.do")) {
 			RequestDispatcher rd = request.getRequestDispatcher("insert.jsp");
 			rd.forward(request, response);
 		}

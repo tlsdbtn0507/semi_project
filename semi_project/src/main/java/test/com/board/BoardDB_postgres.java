@@ -9,6 +9,9 @@ public interface BoardDB_postgres {
 			+ "values(SEQ_board.nextval,sysdate,1,?,?,?,?)";
 	
 	String SQL_SHOW_ALL = "select * from board order by board_id desc";
+	String SQL_SELECT_ONE = "select * from board where board_id=?";
+	String SQL_DELETE = "delete from board where board_id=?";
+	String SQL_UPDATE = "update board set date_for=sysdate, title=?,contents=?, writer=?, notice=? where board_id=?";
 	
 
 

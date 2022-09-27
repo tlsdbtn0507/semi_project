@@ -8,7 +8,7 @@
 <title>semi project meetingboard</title>
 <link rel="stylesheet" href="css/board.css" />
 <script>
-console.log("sessionStorage:",sessionStorage.user_id);
+console.log("sessionStorage:",sessionStorage.board_id);
 console.log("localStorage:",localStorage.user_name);
 </script>
   </head>
@@ -17,7 +17,7 @@ console.log("localStorage:",localStorage.user_name);
       <div id="navup">
         <ul>
           <li><a href="home.do">액티비티</a></li>
-          <li><a href="board.jsp">게시판</a></li>
+          <li><a href="board.do">게시판</a></li>
           <li><a href="vote.do">투표</a></li>
           <li><a href="album.do">앨범</a></li>
         </ul>
@@ -31,8 +31,8 @@ console.log("localStorage:",localStorage.user_name);
             <c:forEach var="vo" items="${vos}">
             <th>
               <tr>
-                <th id="title">${vo.title}</th>
-                <th class="hidden" id="title">${vo.notice}</th>
+                <th id="board_id"><a href="view.do?board_id=${vo.board_id}">${vo.title}</a></th>
+                <th class="hidden" id="notice">${vo.notice}</th>
               </tr>
             </th>
             <tbody>
