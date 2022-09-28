@@ -158,7 +158,6 @@ public class BoardDAOimpl implements BoardDAO {
 				vo2.setBoard_id(rs.getLong("board_id"));
 				vo2.setWdate(rs.getDate("date_for"));
 				vo2.setMeeting_id(rs.getInt("meeting_id"));
-				vo2.setMember_id(rs.getInt("member_id"));
 				vo2.setTitle(rs.getString("title"));
 				vo2.setContents(rs.getString("contents"));
 				vo2.setWriter(rs.getString("writer"));
@@ -280,7 +279,6 @@ public class BoardDAOimpl implements BoardDAO {
 				vo.setBoard_id(rs.getLong("board_id"));
 				vo.setWdate(rs.getDate("date_for"));
 				vo.setMeeting_id(rs.getInt("meeting_id"));
-				vo.setMember_id(rs.getInt("member_id"));
 				vo.setTitle(rs.getString("title"));
 				vo.setContents(rs.getString("contents"));
 				vo.setWriter(rs.getString("writer"));

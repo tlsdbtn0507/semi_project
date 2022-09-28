@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BoardController
  */
-@WebServlet("/board.do")
+@WebServlet("/b_board.do")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +38,7 @@ public class BoardController extends HttpServlet {
 		
 		request.setAttribute("vos", vos);
 
-		request.getRequestDispatcher("board.jsp").forward(request, response);
+		request.getRequestDispatcher("boardJsp/board.jsp").forward(request, response);
 	}
 
 	/**

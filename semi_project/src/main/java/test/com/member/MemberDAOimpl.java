@@ -250,6 +250,7 @@ public class MemberDAOimpl implements MemberDAO {
 
 			while (rs.next()) {
 				vo2 = new MemberVO();
+				vo2.setMember_id(rs.getLong("member_id"));
 				vo2.setMember_name(rs.getString("member_name"));
 				vo2.setPassword(rs.getString("password"));
 				vo2.setNickname(rs.getString("nickname"));

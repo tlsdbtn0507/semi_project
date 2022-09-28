@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class BoardInsertController
  */
-@WebServlet({ "/write.do", "/writeOK.do" })
+@WebServlet({ "/b_write.do", "/b_writeOK.do" })
 public class BoardWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,15 +34,23 @@ public class BoardWriteController extends HttpServlet {
 			throws ServletException, IOException {
 		String sPath = request.getServletPath();
 		System.out.println("doGet:" + sPath);
+		
+//		System.out.println(request.getParameter("board_id"));
+//		
+//		BoardVO vo = new BoardVO();
+//		vo.setBoard_id(Integer.parseInt(request.getParameter("board_id")));
+//		
+//		BoardDAO dao = new BoardDAOimpl();
+//		
+//		BoardVO vo2 = dao.selectOne(vo);
+//		System.out.println("vo2:"+vo2);
+//		
+//		request.setAttribute("vo2", vo2);
+		request.getRequestDispatcher("boardJsp/write.jsp").forward(request,response);
+		
+		
 
-		HttpSession session = request.getSession();
-		String user_id = (String) session.getAttribute("user_id");
-		System.out.println("user_id:"+user_id);
-		if(user_id != null) {
-			request.getRequestDispatcher("board.jsp").forward(request, response);
-		}else {
-			response.sendRedirect("write.do");
-		}
+	
 		
 
 	}
@@ -58,7 +66,7 @@ public class BoardWriteController extends HttpServlet {
 		System.out.println("doPost:" + sPath);
 
 		System.out.println(request.getParameter("title"));
-		System.out.println(request.getParameter("content"));
+		System.out.println(request.getParameter("contents"));
 		System.out.println(request.getParameter("writer"));
 		System.out.println(request.getParameter("notice"));
 
@@ -74,9 +82,9 @@ public class BoardWriteController extends HttpServlet {
 		System.out.println("result:" + result);
 
 		if(result==1)
-			response.sendRedirect("board.do");
+			response.sendRedirect("b_board.do");
 		else 
-			response.sendRedirect("write.do");
+			response.sendRedirect("b_write.do");
 
 	}// end doPost
 
