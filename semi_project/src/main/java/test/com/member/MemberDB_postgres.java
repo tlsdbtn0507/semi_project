@@ -11,6 +11,11 @@ public interface MemberDB_postgres {
 			+ "values(SEQ_MEMBER.nextval ,?,?,?,?,?,?,?,'ROLE_MEMBER','default.png')";
 	String SQL_ID_CHECK = "select * from member where member_name=?";
 	String SQL_NICK_CHECK = "select * from member where NICKNAME=?";
+	String SQL_MEMBER_UPDATE = "update member set nickname=?,age=?,handy=?, location=?, image_url=? where member_id=?";
+	String SQL_MEMBER_SELECT_ONE = "select * from member where member_id=?";
+	String SQL_MEMBER_SELECT_ALL = "select * from member";
+	
+	String MEMBER_ID = "select seq_member.nextval from dual";
 
 
 }

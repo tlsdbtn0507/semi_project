@@ -19,14 +19,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
-import test.com.round.RoundDAO;
-import test.com.round.RoundDAOimpl;
-import test.com.round.RoundUserVO;
-import test.com.round.RoundVO;
-
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_insert.do",
-		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do",
-		"/meeting_enter.do","/meeting_update.do","/meeting_updateOK.do"})
+		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do","/meeting_enter.do","/meeting_update.do","/meeting_updateOK.do"})
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -97,9 +91,11 @@ public class MeetingController extends HttpServlet {
 
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
-			// json으로 반환
-//			PrintWriter out = response.getWriter();
-//			out.print(vos.toString());
+			request.setAttribute("vos", vos);
+			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
+		} else if (sPath.equals("/meeting_invite.do")) {
+
+			List<MeetingVO> vos = dao.mySelectAll(member_id);
 			request.setAttribute("vos", vos);
 			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
 		}

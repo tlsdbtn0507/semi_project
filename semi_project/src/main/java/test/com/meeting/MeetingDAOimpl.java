@@ -7,8 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import test.com.member.MemberVO;
+import test.com.notice.NoticeDAO;
+import test.com.notice.NoticeDAOimpl;
+import test.com.notice.NoticeVO;
 import test.com.utils.DB_oracle;
 
 public class MeetingDAOimpl implements MeetingDAO {
@@ -16,6 +20,8 @@ public class MeetingDAOimpl implements MeetingDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
+	
+	NoticeDAO noticeDAO = new NoticeDAOimpl();
 
 	public MeetingDAOimpl() {
 		try {
@@ -74,6 +80,11 @@ public class MeetingDAOimpl implements MeetingDAO {
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 //			name,explanation,gender,age,location,permission,secret,total_people,image_url)
+			pstmt = conn.prepareStatement(DB_oracle.MEETING_ID); // 쿼리문이 들어감.
+			rs = pstmt.executeQuery();
+			rs.next();
+			long meeting_id = rs.getLong("nextval");
+			System.out.println(meeting_id);
 			pstmt = conn.prepareStatement(DB_oracle.MEETING_INSERT); // 쿼리문이 들어감.
 
 			pstmt.setLong(1, vo.getMeeting_id());
@@ -90,6 +101,14 @@ public class MeetingDAOimpl implements MeetingDAO {
 			pstmt.setString(12, vo.getCreation_date());
 
 			flag = pstmt.executeUpdate();
+			
+			if (flag == 1) {
+				// 알림
+				NoticeVO noticeVO = new NoticeVO("\'" + vo.getName() + "\'" 
+				+ "모임을 개설하였습니다.", vo.getMember_id(), meeting_id);
+				noticeDAO.insert(noticeVO);
+				System.out.println("알림 push 완료");
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -473,6 +492,71 @@ public class MeetingDAOimpl implements MeetingDAO {
 		} // end finally
 
 		return flag;
+	}
+
+
+	@Override
+	public List<MeetingVO> recommendSelectAll(String member_id) {
+		System.out.println("mySelectAll()...");
+		List<MeetingVO> vos = new ArrayList<MeetingVO>();
+		try {
+			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
+			System.out.println("Conn Successed...");
+
+			Random random = new Random();
+			int num = random.nextInt(4);
+
+			// num(또래끼리,성별끼리,실력이 비슷한,내 근처의)
+			if (num == 0) {
+				System.out.println(num + ": 또래끼리");
+				pstmt = conn.prepareStatement(DB_oracle.SQL_RECOMMEND_MEETING_AGE_SELECT_ALL);
+			} else if (num == 1) {
+				System.out.println(num + ": 성별끼리");
+				pstmt = conn.prepareStatement(DB_oracle.SQL_RECOMMEND_MEETING_GENDER_SELECT_ALL);
+			} else if (num == 2) {
+				System.out.println(num + ": 실력이 비슷한");
+				pstmt = conn.prepareStatement(DB_oracle.SQL_RECOMMEND_MEETING_HANDY_SELECT_ALL);
+			} else if (num == 3) {
+				System.out.println(num + ": 내 근처의");
+				pstmt = conn.prepareStatement(DB_oracle.SQL_RECOMMEND_MEETING_LOCATION_SELECT_ALL);
+			}
+
+			pstmt.setLong(1, Long.parseLong(member_id));
+			pstmt.setLong(2, Long.parseLong(member_id));
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MeetingVO vo = new MeetingVO();
+				vo.setMeeting_id(rs.getLong("meeting_id"));
+				vo.setName(rs.getString("name"));
+				vo.setImage_url(rs.getString("image_url"));
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return vos;
 	}
 
 }
