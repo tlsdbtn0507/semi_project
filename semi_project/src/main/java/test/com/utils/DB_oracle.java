@@ -14,22 +14,29 @@ public interface DB_oracle {
 	String MEETING_INSERT = "insert into "
 			+ "meeting (meeting_id,name,explanation,gender,age,location,permission,secret,total_people,image_url,member_id) "
 			+ "values(?,?,?,?,?,?,?,?,?,?,?)";
+	String MEETING_UPDATE = "update meeting set name = ?,explanation = ?, gender = ?,age=?,location = ?,permission = ? ,secret = ? ,total_people = ?,image_url = ? where meeting_id = ?";
 	String MEETING_SEARCH_LIST_NAME = "select name from meeting where name like ?";
 	String MEETING_SELECT_ALL = "select * from meeting";
 	String MEETING_SELECT_ONE = "select * from meeting where meeting_id = ?";
 	String MEETING_ENTER = "insert into " + "meeting_user (meeting_user_id,meeting_id,member_id,role) "
 			+ "values(seq_meeting_user.nextval,?,?,?)";
 	String MEETING_ID = "select seq_meeting.nextval from dual";
+	String MEETING_DISTINGUISH = "select count(role) from meeting_user where meeting_id = ? and member_id = ?";
 
 	// 라운드
-	String ROUND_INSERT = "insert into " + "round (round_id,name,course,total_people,round_date,image_url) "
-			+ "values(?,?,?,?,?,?)";
+	String ROUND_INSERT = "insert into " + "round (round_id,name,course,total_people,round_date,image_url,member_id) "
+			+ "values(?,?,?,?,?,?,?)";
 	String ROUND_SEARCH_LIST_NAME = "select name from round where name like ?";
 	String ROUND_SELECT_ALL = "select * from round";
 	String ROUND_SELECT_ONE = "select * from round where round_id = ?";
 	String ROUND_ENTER = "insert into " + "round_user (round_user_id,round_id,member_id,role) "
 			+ "values(seq_round_user.nextval,?,?,?)";
 	String ROUND_ID = "select seq_round.nextval from dual";
+	// 라운드 가입유무 구별 쿼리
+	String ROUND_DISTINGUISH = "select count(role) from round_user where round_id = ? and member_id = ?";
+
+	// 액티비티
+	String MEETING_ACTIVITY_SELECT_ALL = "select * from activity where meeting_id = ?";
 
 	// notice(알림)
 	String SQL_NOTICE_SELECT_ALL = "select * from notice where member_id = ? order by notice_id desc";

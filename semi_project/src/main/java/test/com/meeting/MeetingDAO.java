@@ -22,7 +22,7 @@ public interface MeetingDAO {
 	public List<MeetingVO> searchList(String key, String value);
 
 	// 모임 상세보기 (가입전)
-	public MeetingVO selectOne(MeetingVO vo);
+	public MeetingVO selectOne(MeetingUserVO vo);
 	
 	// 모임 입장하기
 	public int enter(MeetingUserVO vo);

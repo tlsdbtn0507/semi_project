@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import test.com.meeting.MeetingVO;
+
 /**
  * Servlet implementation class ActivityController
  */
@@ -81,6 +83,28 @@ public class ActivityController extends HttpServlet {
 //			out.print(vos.toString());
 			request.setAttribute("vos",vos);
 			request.getRequestDispatcher("a_selectAll.jsp").forward(request, response);
+		}else if (sPath.equals("/meeting_activity_selectAll.do")) {
+			
+			MeetingVO vo2 = new MeetingVO();
+			vo2.setMeeting_id(Long.parseLong(request.getParameter("meeting_id")));
+
+			List<ActivityVO> vos_ma = dao.inSelectAll(vo2);
+
+//			request.setAttribute("vos_ma",vos_ma); 
+//			request.getRequestDispatcher("meeting/activity_selectAll.jsp").forward(request, response);
+			
+			for (ActivityVO data : vos_ma) {
+				response.getWriter().println(data.getMeeting_id());
+				response.getWriter().println(data.getActivity_id());
+				response.getWriter().println(data.getName());
+				response.getWriter().println(data.getExplanation());
+				response.getWriter().println(data.getActivity_date());
+				response.getWriter().println(data.getActivity_time());
+				response.getWriter().println(data.getImage_url());
+				response.getWriter().println(data.getTotal_people());
+				response.getWriter().println(data.getCurrent_people());
+			}
+
 		}
 	
 	}
