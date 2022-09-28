@@ -11,6 +11,7 @@ public class MeetingVO {
 	private String secret; // 공개형 비공개형
 	private String handy; // 타수 
 	private int total_people; // 컬럼에는 없고 VO에만 있음.
+	private String creation_date; // 타수 
 	
 	// fk
 	private long member_id;
@@ -23,7 +24,7 @@ public class MeetingVO {
 	}
 
 	public MeetingVO(long meeting_id, String name, String explanation, String gender, String age, String location,
-			String permission, String secret, String handy,String image_url, int total_people,long member_id) {
+			String permission, String secret, String handy,String image_url, int total_people,long member_id,String creation_date) {
 		super();
 		this.meeting_id = meeting_id;
 		this.name = name;
@@ -37,6 +38,7 @@ public class MeetingVO {
 		this.total_people = total_people;
 		this.member_id = member_id;
 		this.handy = handy;
+		this.creation_date = creation_date;
 	}
 
 	public long getMember_id() {
@@ -133,6 +135,14 @@ public class MeetingVO {
 
 	public void setHandy(String handy) {
 		this.handy = handy;
+	}
+
+	public String getCreation_date() {
+		return creation_date;
+	}
+
+	public void setCreation_date(String creation_date) {
+		this.creation_date = creation_date;
 	}
 
 }

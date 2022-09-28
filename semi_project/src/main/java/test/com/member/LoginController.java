@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else if (sPath.equals("/logout.do")) {
 			HttpSession session = request.getSession();
-			session.removeAttribute("member_name");
+			session.removeAttribute("member_id");
 			response.sendRedirect("meeting.jsp");
 
 		}

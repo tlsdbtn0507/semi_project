@@ -19,10 +19,10 @@ public interface MeetingDAO {
 	public List<MeetingVO> selectAll();
 
 	// 모임 검색하기 1 (진행중)
-	public List<MeetingVO> searchList(String key, String value);
+	public List<MeetingVO> searchList(MeetingVO vo,String searchWord);
 
 	// 모임 상세보기 (가입전)
-	public MeetingVO selectOne(MeetingVO vo);
+	public MeetingVO selectOne(MeetingUserVO vo);
 	
 	// 모임 입장하기
 	public int enter(MeetingUserVO vo);
@@ -32,5 +32,6 @@ public interface MeetingDAO {
 
 	// 나의 모임리스트 조회하기
 	public List<MeetingVO> mySelectAll(String member_id);
-	// 10
+	
+	public List<MeetingVO> recommendSelectAll(String member_id);
 }

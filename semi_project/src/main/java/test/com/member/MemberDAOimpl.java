@@ -5,12 +5,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import test.com.notice.NoticeDAO;
+import test.com.notice.NoticeDAOimpl;
+import test.com.notice.NoticeVO;
 
 public class MemberDAOimpl implements MemberDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+
+	private NoticeDAO noticeDAO = new NoticeDAOimpl();
 
 	public MemberDAOimpl() {
 		try {
@@ -80,17 +87,30 @@ public class MemberDAOimpl implements MemberDAO {
 			conn = DriverManager.getConnection(MemberDB_postgres.URL, MemberDB_postgres.USER,
 					MemberDB_postgres.PASSWORD);
 			System.out.println("conn successed...");
+			pstmt = conn.prepareStatement(MemberDB_postgres.MEMBER_ID); // 쿼리문이 들어감.
+			rs = pstmt.executeQuery();
+			rs.next();
+			long member_id = rs.getLong("nextval");
+			System.out.println(member_id);
 			pstmt = conn.prepareStatement(MemberDB_postgres.SQL_INSERT);
-			pstmt.setString(1, vo.getNickname());
-			pstmt.setString(2, vo.getMember_name());
-			pstmt.setString(3, vo.getPassword());
-			pstmt.setString(4, vo.getAge());
-			pstmt.setString(5, vo.getHandy());
-			pstmt.setString(6, vo.getLocation());
-			pstmt.setString(7, vo.getGender());
+			pstmt.setLong(1, member_id);
+			pstmt.setString(2, vo.getNickname());
+			pstmt.setString(3, vo.getMember_name());
+			pstmt.setString(4, vo.getPassword());
+			pstmt.setString(5, vo.getAge());
+			pstmt.setString(6, vo.getHandy());
+			pstmt.setString(7, vo.getLocation());
+			pstmt.setString(8, vo.getGender());
 
 			// 3-6
 			flag = pstmt.executeUpdate();
+
+			if (flag == 1) {
+				// 알림
+				NoticeVO noticeVO = new NoticeVO(vo.getNickname() + "님 가입을 축하합니다.", member_id, 0);
+				noticeDAO.insert(noticeVO);
+				System.out.println("가입알림 push 완료");
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -124,8 +144,51 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public int update(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("update()...");
+		System.out.println(vo);
+		int flag = 0;
+		try {
+			conn = DriverManager.getConnection(MemberDB_postgres.URL, MemberDB_postgres.USER,
+					MemberDB_postgres.PASSWORD);
+			System.out.println("conn successed...");
+			pstmt = conn.prepareStatement(MemberDB_postgres.SQL_MEMBER_UPDATE);
+			pstmt.setString(1, vo.getNickname());
+			pstmt.setString(2, vo.getAge());
+			pstmt.setString(3, vo.getHandy());
+			pstmt.setString(4, vo.getLocation());
+			pstmt.setString(5, vo.getImage_url());
+			pstmt.setLong(6, vo.getMember_id());
+
+			flag = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		} // end finally
+		return flag;
 	}
 
 	@Override
@@ -136,8 +199,54 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public List<MemberVO> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("selectAll()...");
+
+		List<MemberVO> vos = new ArrayList<MemberVO>();
+
+		try {
+			conn = DriverManager.getConnection(MemberDB_postgres.URL, MemberDB_postgres.USER,
+					MemberDB_postgres.PASSWORD);
+			System.out.println("conn successed...");
+			pstmt = conn.prepareStatement(MemberDB_postgres.SQL_MEMBER_SELECT_ALL);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MemberVO vo = new MemberVO();
+				vo.setMember_id(rs.getLong("member_id"));
+				vo.setMember_name(rs.getString("member_name"));
+				vo.setNickname(rs.getString("nickname"));
+				vo.setAge(rs.getString("age"));
+				vo.setHandy(rs.getString("handy"));
+				vo.setLocation(rs.getString("location"));
+				vo.setGender(rs.getString("gender"));
+				vo.setImage_url(rs.getString("image_url"));
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return vos;
 	}
 
 	@Override
@@ -290,11 +399,58 @@ public class MemberDAOimpl implements MemberDAO {
 		} // end finally
 
 		return vo2;
-	
+	}
+
+	@Override
+	public MemberVO selectOne(String member_id) {
+		System.out.println("selectOne()...");
+		System.out.println("member_id:" + member_id);
+
+		MemberVO vo = new MemberVO();
+
+		try {
+			conn = DriverManager.getConnection(MemberDB_postgres.URL, MemberDB_postgres.USER,
+					MemberDB_postgres.PASSWORD);
+			System.out.println("conn successed...");
+			pstmt = conn.prepareStatement(MemberDB_postgres.SQL_MEMBER_SELECT_ONE);
+			pstmt.setLong(1, Long.parseLong(member_id));
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				vo.setMember_id(rs.getLong("member_id"));
+				vo.setMember_name(rs.getString("member_name"));
+				vo.setNickname(rs.getString("nickname"));
+				vo.setAge(rs.getString("age"));
+				vo.setHandy(rs.getString("handy"));
+				vo.setLocation(rs.getString("location"));
+				vo.setGender(rs.getString("gender"));
+				vo.setImage_url(rs.getString("image_url"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return vo;
 	}
 
 }
-	
-
-
-

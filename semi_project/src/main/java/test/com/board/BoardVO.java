@@ -11,8 +11,21 @@ public class BoardVO {
 	private String writer;
 	private String notice;
 	private Date wdate;
+	private int member_id;
 	
 	
+	
+	
+	public int getMember_id() {
+		return member_id;
+	}
+
+
+	public void setMember_id(int member_id) {
+		this.member_id = member_id;
+	}
+
+
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -101,6 +114,9 @@ public class BoardVO {
 		this.notice = notice;
 		this.wdate = wdate;
 	}
+
+
+	
 	
 	
 	
