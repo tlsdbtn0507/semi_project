@@ -19,8 +19,14 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
+import test.com.round.RoundDAO;
+import test.com.round.RoundDAOimpl;
+import test.com.round.RoundUserVO;
+import test.com.round.RoundVO;
+
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_insert.do",
-		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do","/meeting_enter.do","/meeting_update.do","/meeting_updateOK.do"})
+		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do", "/meeting_enter.do",
+		"/meeting_update.do", "/meeting_updateOK.do" })
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,30 +38,30 @@ public class MeetingController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8"); // UTF-8형식으로 바꿔주기 
-		
+		response.setCharacterEncoding("UTF-8"); // UTF-8형식으로 바꿔주기
+
 		// test용--> 로그인구현 다 되면 지우기
 		HttpSession session = request.getSession(); // 객체 초기화
 		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
 		session.setAttribute("member_id", "2"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
 		// session에서 member_id를 가져옴.
 		String member_id = (String) session.getAttribute("member_id");
-		
+
 		String sPath = request.getServletPath();
-		
-		if (sPath.equals("/main_round_insert.do")) {
+
+		if (sPath.equals("/main_meeting_insert.do")) {
 
 			request.getRequestDispatcher("meeting/insert.jsp").forward(request, response);
 		} else if (sPath.equals("/meeting_selectOne.do")) {
 			String meeting_id = request.getParameter("meeting_id");
 
 			MeetingDAO dao = new MeetingDAOimpl();
-			
-			// 모임 유저 
+
+			// 모임 유저
 			MeetingUserVO vo = new MeetingUserVO();
 			vo.setMeeting_id(Long.parseLong(meeting_id));
 			vo.setMember_id(Long.parseLong(member_id));
-			
+
 			MeetingVO vo2 = dao.selectOne(vo);
 
 			request.setAttribute("vo2", vo2);
@@ -81,14 +87,21 @@ public class MeetingController extends HttpServlet {
 			request.getRequestDispatcher("meeting/selectAll.jsp").forward(request, response);
 		} else if (sPath.equals("/main_meeting_searchList.do")) {
 
-			List<MeetingVO> vos = dao.searchList(request.getParameter("searchKey"), request.getParameter("searchWord"));
+			MeetingVO vo = new MeetingVO();
+			vo.setLocation(request.getParameter("location"));
+			vo.setGender(request.getParameter("gender"));
+			vo.setAge(request.getParameter("age"));
+
+			List<MeetingVO> vos = dao.searchList(vo, request.getParameter("searchWord"));
+			System.out.println("vos.size():" + vos.size());
 
 			request.setAttribute("vos", vos);
+
+//			response.getWriter().println(vos.get(0).getName());
 //			System.out.println(vos.get(0).getName());
 
 			request.getRequestDispatcher("meeting/selectAll.jsp").forward(request, response);
 		} else if (sPath.equals("/mymeeting_list.do")) {
-
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
 			request.setAttribute("vos", vos);
@@ -111,7 +124,7 @@ public class MeetingController extends HttpServlet {
 		String sPath = request.getServletPath();
 
 		long meeting_id = 0l;
-		
+
 		// session
 		HttpSession session = request.getSession();
 		session.setAttribute("member_id", "1");
@@ -120,8 +133,8 @@ public class MeetingController extends HttpServlet {
 		if (sPath.equals("/main_meeting_insertOK.do")) {
 			// 현재 시간 구하기
 			SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-			Date now = new Date();         
-		
+			Date now = new Date();
+
 			String name = "";
 			String explanation = "";
 			String gender = "";
@@ -197,10 +210,10 @@ public class MeetingController extends HttpServlet {
 			MeetingDAO dao = new MeetingDAOimpl();
 			MeetingDAOimpl dao2 = new MeetingDAOimpl();
 			MeetingVO vo = new MeetingVO();
-			
+
 			meeting_id = dao2.meeting_id();
 			System.out.println("meeting_id 값 : " + meeting_id);
-			
+
 			vo.setMeeting_id(meeting_id);
 			vo.setName(name);
 			vo.setExplanation(explanation);
@@ -219,9 +232,9 @@ public class MeetingController extends HttpServlet {
 
 			if (result == 1) {
 				System.out.println("모임이 개설되었습니다.");
-				
+
 				MeetingUserVO vo2 = new MeetingUserVO();
-				
+
 				vo2.setMeeting_id(meeting_id);
 				System.out.println("meeting_id 값  : " + meeting_id);
 				// 현재 로그인된 자신의 member_id로 넣어야함.
@@ -234,12 +247,12 @@ public class MeetingController extends HttpServlet {
 				} else {
 					System.out.println("모임장이 될 수 없습니다.");
 				}
-				
+
 			} else {
 				System.out.println("모임개설을 실패하였습니다.");
 			}
-		}else if(sPath.equals("/meeting_enter.do")) {
-			
+		} else if (sPath.equals("/meeting_enter.do")) {
+
 			MeetingDAO dao22 = new MeetingDAOimpl();
 
 			MeetingUserVO vo = new MeetingUserVO();
@@ -254,8 +267,8 @@ public class MeetingController extends HttpServlet {
 			} else {
 				System.out.println("모임에 입장 실패하였습니다.");
 			}
-		}else if(sPath.equals("/meeting_updateOK.do")) {
-			
+		} else if (sPath.equals("/meeting_updateOK.do")) {
+
 			String name = "";
 			String explanation = "";
 			String gender = "";
@@ -306,7 +319,7 @@ public class MeetingController extends HttpServlet {
 						} else { // file정보받기.
 
 							image_url = FilenameUtils.getName(item.getName());
-							image_url += "/"+member_id;
+							image_url += "/" + member_id;
 							// 다른사람이 같은 이름으로 저장했을때, 덮어써질 수 있으므로 unique한 id나 system time 같이 저장.
 
 							File saveFile = new File(dir_path, image_url);
@@ -325,7 +338,7 @@ public class MeetingController extends HttpServlet {
 				}
 			}
 			MeetingDAO dao = new MeetingDAOimpl();
-			
+
 			MeetingVO vo = new MeetingVO();
 			vo.setMeeting_id(Long.parseLong(request.getParameter("meeting_id")));
 			vo.setName(name);
@@ -337,13 +350,13 @@ public class MeetingController extends HttpServlet {
 			vo.setSecret(secret);
 			vo.setTotal_people(total_people);
 			vo.setImage_url(image_url);
-			
+
 			System.out.println(name + " " + total_people);
-			
+
 			int result = dao.update(vo);
 			if (result == 1) {
 				System.out.println("모임정보수정이 완료.");
-			}else {
+			} else {
 				System.out.println("모임정보수정이 실패.");
 			}
 		}

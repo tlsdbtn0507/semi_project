@@ -20,8 +20,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	
-	NoticeDAO noticeDAO = new NoticeDAOimpl();
+	private NoticeDAO noticeDAO = new NoticeDAOimpl();
 
 	public MeetingDAOimpl() {
 		try {
@@ -80,7 +79,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 //			name,explanation,gender,age,location,permission,secret,total_people,image_url)
-		
+
 			pstmt = conn.prepareStatement(DB_oracle.MEETING_INSERT); // 쿼리문이 들어감.
 
 			pstmt.setLong(1, vo.getMeeting_id());
@@ -97,6 +96,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 			pstmt.setString(12, vo.getCreation_date());
 
 			flag = pstmt.executeUpdate();
+
 			
 			if (flag == 1) {
 				// 알림
@@ -105,6 +105,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 				noticeDAO.insert(noticeVO);
 				System.out.println("알림 push 완료");
 			}
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -238,18 +239,18 @@ public class MeetingDAOimpl implements MeetingDAO {
 
 	// 모임 검색 페이지
 	@Override
-	public List<MeetingVO> searchList(String searchKey, String searchWord) {
+	public List<MeetingVO> searchList(MeetingVO vo2,String searchWord) {
 		List<MeetingVO> list = new ArrayList<MeetingVO>();
-		searchKey = "meeting";
+		
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 
-			// 분기처리
-			if (searchKey.equals("meeting")) {
-				pstmt = conn.prepareStatement(DB_oracle.MEETING_SEARCH_LIST_NAME);
-			}
+			pstmt = conn.prepareStatement(DB_oracle.MEETING_SEARCH_LIST_NAME);
 
-			pstmt.setString(1, "%" + searchWord + "%"); // 여기에 물음표를 넣어주어야 하네.
+			pstmt.setString(1, "%" + searchWord + "%"); 
+			pstmt.setString(2, vo2.getLocation()); 
+			pstmt.setString(3, vo2.getGender()); 
+			pstmt.setString(4, vo2.getAge()); 
 
 			rs = pstmt.executeQuery();
 
@@ -489,8 +490,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 
 		return flag;
 	}
-
-
+	
 	@Override
 	public List<MeetingVO> recommendSelectAll(String member_id) {
 		System.out.println("mySelectAll()...");
@@ -554,5 +554,4 @@ public class MeetingDAOimpl implements MeetingDAO {
 		}
 		return vos;
 	}
-
 }

@@ -12,15 +12,15 @@ public interface DB_oracle {
 	// 모임
 	// member_id 컬럼은 일단
 	String MEETING_INSERT = "insert into "
-			+ "meeting (meeting_id,name,explanation,gender,age,location,permission,secret,total_people,image_url,member_id) "
-			+ "values(?,?,?,?,?,?,?,?,?,?,?)";
+			+ "meeting (meeting_id,name,explanation,gender,age,location,permission,secret,total_people,image_url,member_id,creation_date) "
+			+ "values(?,?,?,?,?,?,?,?,?,?,?,?)";
 	String MEETING_UPDATE = "update meeting set name = ?,explanation = ?, gender = ?,age=?,location = ?,permission = ? ,secret = ? ,total_people = ?,image_url = ? where meeting_id = ?";
-	String MEETING_SEARCH_LIST_NAME = "select name from meeting where name like ?";
+	String MEETING_SEARCH_LIST_NAME = "select * from meeting where name like ? and location = ? and gender = ? and age = ?";
 	String MEETING_SELECT_ALL = "select * from meeting";
 	String MEETING_SELECT_ONE = "select * from meeting where meeting_id = ?";
 	String MEETING_ENTER = "insert into " + "meeting_user (meeting_user_id,meeting_id,member_id,role) "
 			+ "values(seq_meeting_user.nextval,?,?,?)";
-	String MEETING_ID = "select seq_meeting.nextval from dual";
+	String MEETING_ID = "select seq_meeting1.nextval from dual";
 	String MEETING_DISTINGUISH = "select count(role) from meeting_user where meeting_id = ? and member_id = ?";
 
 	// 라운드
@@ -36,7 +36,13 @@ public interface DB_oracle {
 	String ROUND_DISTINGUISH = "select count(role) from round_user where round_id = ? and member_id = ?";
 
 	// 액티비티
+	String ACTIVITY_INSERT = "insert into "
+			+ "activity (activity_id,name,explanation,activity_date,activity_time,location,total_people,member_id,meeting_id,image_url) "
+			+ "values(?,?,?,?,?,?,?,?,?,?)";
 	String MEETING_ACTIVITY_SELECT_ALL = "select * from activity where meeting_id = ?";
+	String ACTIVITY_ID = "select seq_activity.nextval from dual";
+	String ACTIVITY_ENTER = "insert into " + "activity_user (activity_user_id,activity_id,meeting_id,member_id,role) "
+			+ "values(seq_activity_user.nextval,?,?,?,?)";
 
 	// notice(알림)
 	String SQL_NOTICE_SELECT_ALL = "select * from notice where member_id = ? order by notice_id desc";
@@ -52,11 +58,33 @@ public interface DB_oracle {
 	
 	//초대하기
 	String MEMBER_SEARCH_NAME = "select * from member where nickname like ? and member_id not in(select member_id from meeting_user where meeting_id=?)";
+
+	// 미팅
+	String SQL_RECOMMEND_MEETING_AGE_SELECT_ALL = "select distinct meeting_id,name,image_url "
+			+ "from recommend_meeting_view where age like (select age from member where member_id=?) "
+			+ "and secret like 'false' "
+			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
+			+ "and current_people<total_people";
+	String SQL_RECOMMEND_MEETING_GENDER_SELECT_ALL = "select distinct meeting_id,name,image_url "
+			+ "from recommend_meeting_view where gender like (select gender from member where member_id=?) "
+			+ "and secret like 'false' "
+			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
+			+ "and current_people<total_people";
+	String SQL_RECOMMEND_MEETING_HANDY_SELECT_ALL = "select distinct meeting_id,name,image_url "
+			+ "from recommend_meeting_view where meeting_handy like (select handy from member where member_id=?) "
+			+ "and secret like 'false' "
+			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
+			+ "and current_people<total_people";
+	String SQL_RECOMMEND_MEETING_LOCATION_SELECT_ALL = "select distinct meeting_id,name,image_url "
+			+ "from recommend_meeting_view where meeting_location like (select location from member where member_id=?) "
+			+ "and secret like 'false' "
+			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
+			+ "and current_people<total_people";
 	
-	// main (메인페이지)
 	String SQL_MY_MEETING_SELECT_ALL = "select meeting.meeting_id, name, explanation, image_url "
 			+ "from meeting join meeting_user on meeting.meeting_id = meeting_user.meeting_id "
 			+ "where meeting_user.member_id=?";
+	// 액티비티
 	String SQL_MY_ACTIVITY_SELECT_ALL = "select activity.activity_id,name,activity_date,activity_time,location, "
 			+ "(select count(*)from activity_user where activity_user.activity_id = activity.activity_id) current_people, "
 			+ "image_url, total_people from activity join activity_user "
@@ -82,25 +110,5 @@ public interface DB_oracle {
 			+ "(TO_DATE(activity_date, 'YYYY-MM-DD') - TO_DATE(TO_CHAR(SYSDATE,'YYYY-MM-DD'))) d_day "
 			+ "from recommend_activity_view "
 			+ "where secret like 'false' and member_id !=? and current_people<total_people";
-	String SQL_RECOMMEND_MEETING_AGE_SELECT_ALL = "select distinct meeting_id,name,image_url "
-			+ "from recommend_meeting_view where age like (select age from member where member_id=?) "
-			+ "and secret like 'false' "
-			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
-			+ "and current_people<total_people";
-	String SQL_RECOMMEND_MEETING_GENDER_SELECT_ALL = "select distinct meeting_id,name,image_url "
-			+ "from recommend_meeting_view where gender like (select gender from member where member_id=?) "
-			+ "and secret like 'false' "
-			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
-			+ "and current_people<total_people";
-	String SQL_RECOMMEND_MEETING_HANDY_SELECT_ALL = "select distinct meeting_id,name,image_url "
-			+ "from recommend_meeting_view where meeting_handy like (select handy from member where member_id=?) "
-			+ "and secret like 'false' "
-			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
-			+ "and current_people<total_people";
-	String SQL_RECOMMEND_MEETING_LOCATION_SELECT_ALL = "select distinct meeting_id,name,image_url "
-			+ "from recommend_meeting_view where meeting_location like (select location from member where member_id=?) "
-			+ "and secret like 'false' "
-			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
-			+ "and current_people<total_people";
-	
+
 }
