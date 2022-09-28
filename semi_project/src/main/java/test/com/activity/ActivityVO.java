@@ -123,7 +123,6 @@ public class ActivityVO {
 		this.member_id = member_id;
 	}
 
-	
-
-	
+   
+   
 }
