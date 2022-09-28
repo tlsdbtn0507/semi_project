@@ -80,11 +80,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 //			name,explanation,gender,age,location,permission,secret,total_people,image_url)
-			pstmt = conn.prepareStatement(DB_oracle.MEETING_ID); // 쿼리문이 들어감.
-			rs = pstmt.executeQuery();
-			rs.next();
-			long meeting_id = rs.getLong("nextval");
-			System.out.println(meeting_id);
+		
 			pstmt = conn.prepareStatement(DB_oracle.MEETING_INSERT); // 쿼리문이 들어감.
 
 			pstmt.setLong(1, vo.getMeeting_id());
@@ -105,7 +101,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 			if (flag == 1) {
 				// 알림
 				NoticeVO noticeVO = new NoticeVO("\'" + vo.getName() + "\'" 
-				+ "모임을 개설하였습니다.", vo.getMember_id(), meeting_id);
+				+ "모임을 개설하였습니다.", vo.getMember_id(), vo.getMeeting_id());
 				noticeDAO.insert(noticeVO);
 				System.out.println("알림 push 완료");
 			}

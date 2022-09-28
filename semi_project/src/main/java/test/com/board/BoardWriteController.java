@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 /**
  * Servlet implementation class BoardInsertController
  */
@@ -36,14 +35,13 @@ public class BoardWriteController extends HttpServlet {
 		System.out.println("doGet:" + sPath);
 
 		HttpSession session = request.getSession();
-		String user_id = (String) session.getAttribute("user_id");
-		System.out.println("user_id:"+user_id);
-		if(user_id != null) {
+		String member_id = (String) session.getAttribute("member_id");
+		System.out.println("member_id:" + member_id);
+		if (member_id != null) {
 			request.getRequestDispatcher("board.jsp").forward(request, response);
-		}else {
+		} else {
 			response.sendRedirect("write.do");
 		}
-		
 
 	}
 
@@ -57,6 +55,11 @@ public class BoardWriteController extends HttpServlet {
 		String sPath = request.getServletPath();
 		System.out.println("doPost:" + sPath);
 
+		// test용--> 로그인구현 다 되면 지우기
+		HttpSession session = request.getSession(); // 객체 초기화
+		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
+		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
+
 		System.out.println(request.getParameter("title"));
 		System.out.println(request.getParameter("content"));
 		System.out.println(request.getParameter("writer"));
@@ -65,6 +68,7 @@ public class BoardWriteController extends HttpServlet {
 		BoardDAO dao = new BoardDAOimpl();
 
 		BoardVO vo = new BoardVO();
+		vo.setMember_id(Integer.parseInt((String) session.getAttribute("member_id")));
 		vo.setMeeting_id(request.getIntHeader("meeting_id"));
 		vo.setTitle(request.getParameter("title"));
 		vo.setContents(request.getParameter("contents"));
@@ -73,9 +77,9 @@ public class BoardWriteController extends HttpServlet {
 		int result = dao.createBoard(vo);
 		System.out.println("result:" + result);
 
-		if(result==1)
+		if (result == 1)
 			response.sendRedirect("board.do");
-		else 
+		else
 			response.sendRedirect("write.do");
 
 	}// end doPost

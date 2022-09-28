@@ -93,6 +93,14 @@ public class MemberDAOimpl implements MemberDAO {
 			long member_id = rs.getLong("nextval");
 			System.out.println(member_id);
 			pstmt = conn.prepareStatement(MemberDB_postgres.SQL_INSERT);
+			pstmt.setLong(1, member_id);
+			pstmt.setString(2, vo.getNickname());
+			pstmt.setString(3, vo.getMember_name());
+			pstmt.setString(4, vo.getPassword());
+			pstmt.setString(5, vo.getAge());
+			pstmt.setString(6, vo.getHandy());
+			pstmt.setString(7, vo.getLocation());
+			pstmt.setString(8, vo.getGender());
 
 			// 3-6
 			flag = pstmt.executeUpdate();

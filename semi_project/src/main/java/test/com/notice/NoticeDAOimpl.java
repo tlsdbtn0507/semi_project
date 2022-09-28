@@ -31,16 +31,30 @@ public class NoticeDAOimpl implements NoticeDAO {
 		System.out.println("insert()...");
 		System.out.println(vo);
 		int flag = 0;
+		NoticeVO vo2 = new NoticeVO();
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, MemberDB_postgres.USER, MemberDB_postgres.PASSWORD);
 			System.out.println("conn successed...");
-			pstmt = conn.prepareStatement(DB_oracle.SQL_NOTICE_INSERT);
-			pstmt.setString(1, vo.getContents());
-			pstmt.setLong(2, vo.getMember_id());
-			pstmt.setLong(3, vo.getMeeting_id());
+			pstmt = conn.prepareStatement(DB_oracle.SQL_NOTICE);
+			pstmt.setLong(1, vo.getMember_id());
+			pstmt.setLong(2, vo.getMeeting_id());
+			rs = pstmt.executeQuery();
 
-			// 3-6
-			flag = pstmt.executeUpdate();
+			// 6.
+			while (rs.next()) {
+				vo2.setNotice_id(rs.getLong("notice_id"));
+				vo2.setMeeting_id(rs.getLong("meeting_id"));
+				vo2.setMember_id(rs.getLong("member_id"));
+				vo2.setContents(rs.getString("contents"));
+			}
+
+			if (vo2.getContents()==null) {
+				pstmt = conn.prepareStatement(DB_oracle.SQL_NOTICE_INSERT);
+				pstmt.setString(1, vo.getContents());
+				pstmt.setLong(2, vo.getMember_id());
+				pstmt.setLong(3, vo.getMeeting_id());
+				flag = pstmt.executeUpdate();
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -166,7 +180,7 @@ public class NoticeDAOimpl implements NoticeDAO {
 		System.out.println("activity_notice()...");
 		NoticeVO vo = new NoticeVO();
 		NoticeDAO noticeDAO = new NoticeDAOimpl();
-		
+
 		int flag = 0;
 		int d_day = 0;
 		long activityUser = 0;
@@ -182,21 +196,21 @@ public class NoticeDAOimpl implements NoticeDAO {
 				d_day = rs.getInt("d_day");
 				System.out.println("d_day: " + d_day);
 				if (d_day == 0 & rs.getString("notice_start").equals("false")) {
-					
-					vo.setContents("\'"+rs.getString("name")+"\'"+" 액티비티가 시작되었습니다.");
+
+					vo.setContents("\'" + rs.getString("name") + "\'" + " 액티비티가 시작되었습니다.");
 					vo.setMeeting_id(rs.getLong("meeting_id"));
 					vo.setMember_id(rs.getLong("member_id"));
 					activityUser = rs.getLong("activity_user");
-					
+
 					noticeDAO.insert(vo);
 					pstmt = conn.prepareStatement(DB_oracle.SQL_ACTIVITY_UPDATE_NOTICE_START);
 					pstmt.setLong(1, activityUser);
-				} else if (d_day >0 & rs.getString("notice_end").equals("false")) {
-					vo.setContents("\'"+rs.getString("name")+"\'"+" 액티비티가 종료되었습니다.");
+				} else if (d_day > 0 & rs.getString("notice_end").equals("false")) {
+					vo.setContents("\'" + rs.getString("name") + "\'" + " 액티비티가 종료되었습니다.");
 					vo.setMeeting_id(rs.getLong("meeting_id"));
 					vo.setMember_id(rs.getLong("member_id"));
 					activityUser = rs.getLong("activity_user");
-					
+
 					noticeDAO.insert(vo);
 					pstmt = conn.prepareStatement(DB_oracle.SQL_ACTIVITY_UPDATE_NOTICE_END);
 					pstmt.setLong(1, activityUser);
