@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class EventController
  */
-@WebServlet("/EventController")
+@WebServlet({"/event_insert.do","/event_update.do","/event_delete .do"})
 public class EventController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

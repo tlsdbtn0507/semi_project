@@ -112,6 +112,13 @@ public class MemberVO {
 	public void setImage_url(String image_url) {
 		this.image_url = image_url;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberVO [member_id=" + member_id + ", member_name=" + member_name + ", password=" + password
+				+ ", nickname=" + nickname + ", age=" + age + ", gender=" + gender + ", location=" + location
+				+ ", handy=" + handy + ", role=" + role + ", image_url=" + image_url + "]";
+	}
 	
 	
 	

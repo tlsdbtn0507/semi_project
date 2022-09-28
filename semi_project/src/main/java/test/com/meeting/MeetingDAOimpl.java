@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Random;
 
 import test.com.member.MemberVO;
+import test.com.notice.NoticeDAO;
+import test.com.notice.NoticeDAOimpl;
+import test.com.notice.NoticeVO;
 import test.com.utils.DB_oracle;
 
 public class MeetingDAOimpl implements MeetingDAO {
@@ -17,6 +20,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
+	private NoticeDAO noticeDAO = new NoticeDAOimpl();
 
 	public MeetingDAOimpl() {
 		try {
@@ -75,6 +79,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 //			name,explanation,gender,age,location,permission,secret,total_people,image_url)
+
 			pstmt = conn.prepareStatement(DB_oracle.MEETING_INSERT); // 쿼리문이 들어감.
 
 			pstmt.setLong(1, vo.getMeeting_id());
@@ -91,6 +96,16 @@ public class MeetingDAOimpl implements MeetingDAO {
 			pstmt.setString(12, vo.getCreation_date());
 
 			flag = pstmt.executeUpdate();
+
+			
+			if (flag == 1) {
+				// 알림
+				NoticeVO noticeVO = new NoticeVO("\'" + vo.getName() + "\'" 
+				+ "모임을 개설하였습니다.", vo.getMember_id(), vo.getMeeting_id());
+				noticeDAO.insert(noticeVO);
+				System.out.println("알림 push 완료");
+			}
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();

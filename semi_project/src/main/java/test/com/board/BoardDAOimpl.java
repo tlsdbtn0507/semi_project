@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import test.com.notice.NoticeDAO;
+import test.com.notice.NoticeDAOimpl;
+import test.com.notice.NoticeVO;
+
 
 
 
@@ -21,6 +25,8 @@ public class BoardDAOimpl implements BoardDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+	
+	NoticeDAO noticeDAO = new NoticeDAOimpl();
 
 	public BoardDAOimpl() {
 		System.out.println("BoardDAOimpl()..");
@@ -104,6 +110,19 @@ public class BoardDAOimpl implements BoardDAO {
 
 					// 6.
 					flag = pstmt.executeUpdate();
+					
+					if (flag == 1) {
+						// 알림
+						pstmt = conn.prepareStatement(BoardDB_postgres.SQL_MEETING_NAME);
+						pstmt.setLong(1, 1L);
+						rs = pstmt.executeQuery();
+						rs.next();
+						String name = rs.getString("name");
+						NoticeVO noticeVO = new NoticeVO("\'" + name + "\'" 
+						+ "모임에 게시물을 등록하였습니다.", vo.getMember_id(), vo.getMeeting_id());
+						noticeDAO.insert(noticeVO);
+						System.out.println("알림 push 완료");
+					}
 
 				} catch (SQLException e) {
 					e.printStackTrace();
