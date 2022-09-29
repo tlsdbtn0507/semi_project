@@ -16,12 +16,12 @@
 	<div id="bg">
 		<div class="container">
 			<div class="row">
-				<form method="post" action="boardUpdateOK.do">
+				<form method="post" action="b_boardUpdateOK.do">
 					<table>
 						<th>
 						<tr>
 							<th colspan="2" id="title">게시판 수정</th>
-							<input type="button" class="backBtn" value="<"> 
+							<input type="button" class="backBtn" value="<">
 							<input type="submit" class="btn" value="글 수정완료">
 						</tr>
 						</th>
@@ -29,11 +29,9 @@
 					<hr>
 					<table class="table">
 						<tr>
-							<td>
-								<select name="notice" id="notice">
+							<td><select name="notice" id="notice">
 									<option placeholder="false">비공지</option>
-									<option placeholder="false">공지</option>
-							</td>
+									<option placeholder="false">공지</option></td>
 						</tr>
 						<tbody>
 							<tr>
@@ -45,9 +43,12 @@
 									name="writer" maxlength="12" value="${vo2.writer}"></td>
 							</tr>
 							<tr>
-								<td id="contents"><textarea placeholder="글내용"
-										name="contents" maxlength="500" value="${vo2.contents}">
-                </textarea></td>
+								<td id="contents"><textarea type="text" placeholder="글내용" name="contents"
+									maxlength="500"style="height:350px; width:300px; border:1px solid white; font-size:20px"> </textarea></td>
+							</tr>
+							<tr>
+								<td><input type="hidden" id="board_id" name="board_id"
+									value="${param.board_id}"></td>
 							</tr>
 						</tbody>
 					</table>

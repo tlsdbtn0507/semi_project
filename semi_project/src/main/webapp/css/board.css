@@ -21,7 +21,7 @@ body {
 }
 
 /* btn사이즈 */
-.hidden {
+#notice {
   display: none;
 }
 
@@ -140,4 +140,56 @@ a {
 
 th > a {
   color: black;
+  font-size: 15px;
+}
+.hidden {
+  display: none;
+}
+
+#navmodal {
+  position: fixed;
+  float: left;
+  background-color: rgba(36, 36, 34, 0.76);
+  opacity: 0.8;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  bottom: 80px;
+  width: 200;
+  height: 150px;
+  list-style: none;
+  animation-name: appear;
+  animation-duration: 0.5s;
+}
+
+#navmodal li {
+  margin-top: 30px;
+  width: 200px;
+  float: left;
+  border: none;
+}
+
+#meetingCreate {
+  height: 70px;
+  width: 70px;
+  border-radius: 70%;
+  left: 700px;
+}
+#roundCreate {
+  height: 70px;
+  width: 70px;
+  right: 700px;
+  border-radius: 70%;
+}
+#text {
+  color: white;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 0.8;
+  }
 }

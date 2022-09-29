@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BoardDeleteController
  */
-@WebServlet({ "/boardDelete.do", "/boardDeleteOK.do" })
+@WebServlet({ "/b_boardDelete.do", "/b_boardDeleteOK.do" })
 public class BoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,9 +34,9 @@ public class BoardDeleteController extends HttpServlet {
 		String sPath = request.getServletPath();
 		System.out.println("doGet:" + sPath);
 
-		if(sPath.equals("/boardDelete.do")) {
-			request.getRequestDispatcher("boardDelete.jsp").forward(request, response);
-		}else if(sPath.equals("/boardDeleteOK.do")) {
+		if(sPath.equals("/b_boardDelete.do")) {
+			request.getRequestDispatcher("boardJsp/boardDelete.jsp").forward(request, response);
+		}else if(sPath.equals("/b_boardDeleteOK.do")) {
 			String board_id = request.getParameter("board_id");
 			System.out.println(board_id);
 			
@@ -47,9 +47,9 @@ public class BoardDeleteController extends HttpServlet {
 			
 			int result = dao.delete(vo);
 			if (result == 1)
-				response.sendRedirect("board.do");
+				response.sendRedirect("b_board.do");
 			else
-				response.sendRedirect("boardDelete.do?board_id="+board_id);
+				response.sendRedirect("b_boardDelete.do?board_id="+board_id);
 			
 			
 		}

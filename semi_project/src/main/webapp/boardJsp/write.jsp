@@ -17,7 +17,7 @@ console.log("localStorage:",localStorage.user_name);
     <div id="bg">
       <div class="container">
         <div class="row">
-        <form method="post" action="writeOK.do">
+        <form method="post" action="b_writeOK.do">
             <table>
                 <th>
                     <tr>
@@ -43,10 +43,10 @@ console.log("localStorage:",localStorage.user_name);
                         <td id="writetitle"><input type="text" placeholder="제목을 입력해 주세요"name="title"maxlength="50"></td>
                     </tr>
                     <tr>
-                        <td id="writer"><input type="text" placeholder="작성자:"name="writer"maxlength="12"></td>
+                        <td id="writer"><input type="text" placeholder="작성자(닉네임으로 지어주세요):"name="writer"maxlength="12"></td>
                     </tr>
                     <tr>
-                        <td id="contents"><textarea  placeholder="게시글을 작성해주세요"name="contents"maxlength="500"></textarea></td>
+                        <td id="contents"><textarea type="text"  placeholder="게시글을 작성해주세요"name="contents"maxlength="500" style="height:350px; width:300px; border:1px solid white; font-size:20px"></textarea></td>
                     </tr>
                     </tbody>
                 </table>

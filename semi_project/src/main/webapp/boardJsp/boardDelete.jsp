@@ -25,10 +25,10 @@
             ${vo2.writer}
 
             <button>
-              <a  href="boardUpdate.do?board_id=${param.board_id}">📝</a>
+              <a  href="b_boardUpdate.do?board_id=${param.board_id}">📝</a>
             </button>
             <button>
-              <a class="delete" href="boardDelete.do?board_id=${param.board_id}">🗑️</a>
+              <a class="delete" href="b_boardDelete.do?board_id=${param.board_id}">🗑️</a>
             </button>
           </p>
 
@@ -38,9 +38,9 @@
             ${vo2.contents}
 
             <div class="modal">
-                <button> <a href="view.do?board_id=${param.board_id}"></a> x</button>
+                <button> <a href="b_view.do?board_id=${param.board_id}"></a> x</button>
                 <h1>정말 삭제하시겠습니까?</h1>
-                <a href="boardDeleteOK.do?board_id=${param.board_id}">네 삭제하겠습니다</a>
+                <a href="b_boardDeleteOK.do?board_id=${param.board_id}">네 삭제하겠습니다</a>
 
             </div>
 

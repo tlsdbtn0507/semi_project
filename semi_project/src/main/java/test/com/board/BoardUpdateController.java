@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class BoardInsertController
  */
-@WebServlet({ "/boardUpdate.do", "/boardUpdateOK.do" })
+@WebServlet({ "/b_boardUpdate.do", "/b_boardUpdateOK.do" })
 public class BoardUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -48,7 +48,7 @@ public class BoardUpdateController extends HttpServlet {
 
 		request.setAttribute("vo2", vo2);
 
-		request.getRequestDispatcher("boardUpdate.jsp").forward(request, response);
+		request.getRequestDispatcher("boardJsp/boardUpdate.jsp").forward(request, response);
 
 	}
 
@@ -82,9 +82,9 @@ public class BoardUpdateController extends HttpServlet {
 		System.out.println("result:" + result);
 
 		if (result == 1)
-			response.sendRedirect("board.do");
+			response.sendRedirect("b_board.do");
 		else
-			response.sendRedirect("boardUpdate.do?board_id="+board_id);
+			response.sendRedirect("b_boardUpdate.do?board_id="+board_id);
 
 	}// end doPost
 

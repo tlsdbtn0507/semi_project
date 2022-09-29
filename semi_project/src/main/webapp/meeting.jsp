@@ -16,10 +16,10 @@ console.log("localStorage:",localStorage.user_name);
     <div id="bg">
       <div id="navup">
         <ul>
-          <li><a href="home.do">액티비티</a></li>
-          <li><a href="board.do">게시판</a></li>
-          <li><a href="vote.do">투표</a></li>
-          <li><a href="album.do">앨범</a></li>
+          <li><a href="h_home.do">액티비티</a></li>
+          <li><a href="b_board.do">게시판</a></li>
+          <li><a href="v_vote.do">투표</a></li>
+          <li><a href="a_album.do">앨범</a></li>
         </ul>
       </div>
 
@@ -27,12 +27,12 @@ console.log("localStorage:",localStorage.user_name);
 
       <div id="navmain">
         <li>
-          <a href="home.do"
+          <a href="h_home.do"
             ><img src="png/homeIcon.png" id="homeIcon" /><br />홈</a
           >
         </li>
         <li>
-          <a href="search.do"
+          <a href="s_search.do"
             ><img src="png/search.png" id="search" /><br />검색</a
           >
         </li>
@@ -40,10 +40,10 @@ console.log("localStorage:",localStorage.user_name);
           <img src="png/mainAddBtn.png" id="Addbtn" />
         </li>
         <li>
-          <a href="notice.do"><img src="png/bell.png" id="bell" /><br />알림</a>
+          <a href="n_notice.do"><img src="png/bell.png" id="bell" /><br />알림</a>
         </li>
         <li>
-          <a href="album.do"
+          <a href="a_album.do"
             ><img src="png/mypage.png" id="mypage" /><br />마이페이지</a
           >
         </li>
