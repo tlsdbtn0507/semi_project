@@ -1,6 +1,5 @@
 package test.com.board;
 
-import java.security.Timestamp;
 import java.util.Date;
 
 public class BoardVO {
