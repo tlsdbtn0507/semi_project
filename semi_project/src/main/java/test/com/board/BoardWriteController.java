@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class BoardInsertController
  */
-@WebServlet({ "/write.do", "/writeOK.do" })
+@WebServlet({ "/b_write.do", "/b_writeOK.do" })
 public class BoardWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,15 +33,23 @@ public class BoardWriteController extends HttpServlet {
 			throws ServletException, IOException {
 		String sPath = request.getServletPath();
 		System.out.println("doGet:" + sPath);
+		
+//		System.out.println(request.getParameter("board_id"));
+//		
+//		BoardVO vo = new BoardVO();
+//		vo.setBoard_id(Integer.parseInt(request.getParameter("board_id")));
+//		
+//		BoardDAO dao = new BoardDAOimpl();
+//		
+//		BoardVO vo2 = dao.selectOne(vo);
+//		System.out.println("vo2:"+vo2);
+//		
+//		request.setAttribute("vo2", vo2);
+		request.getRequestDispatcher("boardJsp/write.jsp").forward(request,response);
+		
+		
 
-		HttpSession session = request.getSession();
-		String member_id = (String) session.getAttribute("member_id");
-		System.out.println("member_id:" + member_id);
-		if (member_id != null) {
-			request.getRequestDispatcher("board.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("write.do");
-		}
+
 
 	}
 
@@ -61,7 +69,7 @@ public class BoardWriteController extends HttpServlet {
 		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
 
 		System.out.println(request.getParameter("title"));
-		System.out.println(request.getParameter("content"));
+		System.out.println(request.getParameter("contents"));
 		System.out.println(request.getParameter("writer"));
 		System.out.println(request.getParameter("notice"));
 
@@ -77,10 +85,11 @@ public class BoardWriteController extends HttpServlet {
 		int result = dao.createBoard(vo);
 		System.out.println("result:" + result);
 
-		if (result == 1)
-			response.sendRedirect("board.do");
-		else
-			response.sendRedirect("write.do");
+		if(result==1)
+			response.sendRedirect("b_board.do");
+		else 
+			response.sendRedirect("b_write.do");
+
 
 	}// end doPost
 

@@ -5,14 +5,26 @@ import java.util.Date;
 public class BoardVO {
 	private long board_id; // 게시판 번호 
 	private int meeting_id;
-	private int member_id;
 	private String title;
 	private String contents;
 	private String writer;
 	private String notice;
 	private Date wdate;
+	private int member_id;
 	
 	
+	
+	
+	public int getMember_id() {
+		return member_id;
+	}
+
+
+	public void setMember_id(int member_id) {
+		this.member_id = member_id;
+	}
+
+
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -38,14 +50,6 @@ public class BoardVO {
 	}
 
 
-	public int getMember_id() {
-		return member_id;
-	}
-
-
-	public void setMember_id(int member_id) {
-		this.member_id = member_id;
-	}
 
 
 	public String getTitle() {
@@ -98,18 +102,20 @@ public class BoardVO {
 	}
 
 
-	public BoardVO(long board_id, int meeting_id, int member_id, String title, String contents, String writer,
+	public BoardVO(long board_id, int meeting_id, String title, String contents, String writer,
 			String notice, Date wdate) {
 		super();
 		this.board_id = board_id;
 		this.meeting_id = meeting_id;
-		this.member_id = member_id;
 		this.title = title;
 		this.contents = contents;
 		this.writer = writer;
 		this.notice = notice;
 		this.wdate = wdate;
 	}
+
+
+	
 	
 	
 	

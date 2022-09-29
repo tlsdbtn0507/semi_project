@@ -109,7 +109,7 @@ public class InsertOKAction {
 		if(result==1)
 			response.sendRedirect("login.do");
 		else
-			response.sendRedirect("insert.do");
+			response.sendRedirect("m_insert.do");
 	}
 
 }

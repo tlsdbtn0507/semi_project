@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class BoardInsertController
  */
-@WebServlet({ "/view.do" })
+@WebServlet({ "/b_view.do" })
 public class BoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -48,7 +48,7 @@ public class BoardViewController extends HttpServlet {
 		
 		request.setAttribute("vo2", vo2);
 		
-		request.getRequestDispatcher("view.jsp").forward(request, response);
+		request.getRequestDispatcher("boardJsp/view.jsp").forward(request, response);
 		
 	}
 

@@ -18,6 +18,7 @@ public class LoginAction {
 		System.out.println(request.getParameter("password"));
 
 		MemberDAO dao = new MemberDAOimpl();
+
 		MemberVO vo = new MemberVO();
 		vo.setMember_name(request.getParameter("member_name"));
 		vo.setPassword(request.getParameter("password"));
@@ -25,9 +26,14 @@ public class LoginAction {
 		MemberVO vo2 = dao.login(vo);
 		System.out.println("login:" + vo2);
 
-		if (vo2 != null) {
+		if(vo.getMember_name().equals(vo2.getMember_name())){
 			HttpSession session = request.getSession();
 			session.setAttribute("member_id", vo2.getMember_id());
+		
+			session.setAttribute("nickname", vo2.getNickname());
+	    	response.sendRedirect("meeting.jsp");
+	    	System.out.println(vo2.getMember_id());
+	    	System.out.println(vo2.getNickname());
 			// 알림
 			NoticeDAO noticeDAO = new NoticeDAOimpl();
 			noticeDAO.activity_notice(vo2.getMember_id());
@@ -36,6 +42,7 @@ public class LoginAction {
 		} else {
 			response.sendRedirect("login.do");
 		}
+
 	}
 
 }
