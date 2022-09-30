@@ -1,6 +1,5 @@
 package test.com.round;
 
-import java.sql.Date;
 
 public class RoundVO {
 	private long round_id; // 라운드 번호

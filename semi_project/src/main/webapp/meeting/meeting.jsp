@@ -8,7 +8,7 @@
 <title>semi project meeting</title>
 <link rel="stylesheet" href="css/board.css" />
 <script>
-console.log("sessionStorage:",sessionStorage.user_id);
+console.log("sessionStorage:",sessionStorage.member_name);
 console.log("localStorage:",localStorage.user_name);
 </script>
   </head>
@@ -43,7 +43,7 @@ console.log("localStorage:",localStorage.user_name);
           <a href="n_notice.do"><img src="png/bell.png" id="bell" /><br />알림</a>
         </li>
         <li>
-          <a href="mypage/mypage.jsp"
+          <a href="a_album.do"
             ><img src="png/mypage.png" id="mypage" /><br />마이페이지</a
           >
         </li>

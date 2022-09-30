@@ -20,15 +20,13 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
-@WebServlet({ "/main_round_searchList.do", "/main_round_selectAll.do",
-	"/main_round_insert.do","/main_round_insertOK.do","/round_enter.do",
-	"/round_selectOne.do","/round_join_selectOne.do",
-	"/myrounding_list.do"})
+@WebServlet({ "/main_round_searchList.do", "/main_round_searchListOK.do", "/main_round_selectAll.do", 
+	"/main_round_insert.do", "/main_round_insertOK.do", "/round_enter.do", "/round_selectOne.do", "/round_join_selectOne.do",
+	"/myrounding_list.do" })
 public class RoundController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	RoundDAO dao = new RoundDAOimpl();
-	
 
 	public RoundController() {
 		super();
@@ -37,33 +35,32 @@ public class RoundController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-		
-		//test용--> 로그인구현 다 되면 지우기
-		HttpSession session = request.getSession(); //객체 초기화
-		session.setMaxInactiveInterval(60);//interval 설정(초단위, 기본은 10~15분)
-		session.setAttribute("member_id", "1"); //-> 브라우저 X표 누르기전까지는 session에 저장됨.
-		//session에서 member_id를 가져옴.
+
+		// test용--> 로그인구현 다 되면 지우기
+		HttpSession session = request.getSession(); // 객체 초기화
+		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
+		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
+		// session에서 member_id를 가져옴.
 		String member_id = (String) session.getAttribute("member_id");
-		
-		
+
 		String sPath = request.getServletPath();
 		if (sPath.equals("/main_round_insert.do")) {
 
 			request.getRequestDispatcher("round/insert.jsp").forward(request, response);
-		}else if(sPath.equals("/round_selectOne.do")) {
+		} else if (sPath.equals("/round_selectOne.do")) {
 			String round_id = request.getParameter("round_id");
-			
+
 			RoundDAO dao = new RoundDAOimpl();
-			
+
 			// 라운드 유저
 			RoundUserVO vo1 = new RoundUserVO();
 			vo1.setRound_id(Long.parseLong(round_id));
 			vo1.setMember_id(Long.parseLong(member_id));
-			
+
 			RoundVO vo2 = dao.selectOne(vo1);
-			
+
 			request.setAttribute("vo2", vo2);
-			
+
 			response.getWriter().println(vo2.getRound_id());
 			response.getWriter().println(vo2.getName());
 			response.getWriter().println(vo2.getCourse());
@@ -72,8 +69,7 @@ public class RoundController extends HttpServlet {
 			response.getWriter().println(vo2.getImage_url());
 //			RequestDispatcher rd = request.getRequestDispatcher("round/selectOne.jsp");
 //			rd.forward(request, response);
-		}
-		else if (sPath.equals("/main_round_selectAll.do")) {
+		} else if (sPath.equals("/main_round_selectAll.do")) {
 
 			List<RoundVO> vos = dao.selectAll();
 			System.out.println("vos.size():" + vos.size());
@@ -83,42 +79,46 @@ public class RoundController extends HttpServlet {
 			request.getRequestDispatcher("round/selectAll.jsp").forward(request, response);
 		} else if (sPath.equals("/main_round_searchList.do")) {
 
-			List<RoundVO> vos = dao.searchList(request.getParameter("searchKey"), request.getParameter("searchWord"));
+			request.getRequestDispatcher("round/round_search.jsp").forward(request, response);
+
+		} else if (sPath.equals("/main_round_searchListOK.do")) {
+
+			List<RoundVO> vos = dao.searchList(request.getParameter("searchWord"));
 
 			request.setAttribute("vos", vos);
 
-			request.getRequestDispatcher("round/selectAll.jsp").forward(request, response);
-		} else if(sPath.equals("/myrounding_list.do")) {
-			
-			
+			request.getRequestDispatcher("round/round_search.jsp").forward(request, response);
+
+		} else if (sPath.equals("/myrounding_list.do")) {
+
 			List<RoundVO> vos = dao.mySelectAll(member_id);
-			//json으로 반환
+			// json으로 반환
 //			PrintWriter out = response.getWriter();
 //			out.print(vos.toString());
-			request.setAttribute("vos",vos);
+			request.setAttribute("vos", vos);
 			request.getRequestDispatcher("mypage/myround.jsp").forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String dir_path = request.getServletContext().getRealPath("/upload");
 		System.out.println(dir_path);
 		request.setCharacterEncoding("UTF-8");
 		String sPath = request.getServletPath();
-		
+
 		long round_id = 0l;
-		
-		HttpSession session = request.getSession(); //객체 초기화
-		session.setMaxInactiveInterval(60);//interval 설정(초단위, 기본은 10~15분)
-		session.setAttribute("member_id", "1"); //-> 브라우저 X표 누르기전까지는 session에 저장됨.
-		
-		//session에서 member_id를 가져옴.
+
+		HttpSession session = request.getSession(); // 객체 초기화
+		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
+		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
+
+		// session에서 member_id를 가져옴.
 		String member_id = (String) session.getAttribute("member_id");
-		
+
 		// 메인 라운딩 개설하기 버튼
-		if(sPath.equals("/main_round_insertOK.do")) {
+		if (sPath.equals("/main_round_insertOK.do")) {
 			String name = "";
 			String course = "";
 			String round_date = "";
@@ -127,7 +127,7 @@ public class RoundController extends HttpServlet {
 
 			int fileSizeMax = 1024 * 1024 * 100;
 			boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
-			
+
 			if (isMultipartContent) {
 				DiskFileItemFactory factory = new DiskFileItemFactory();
 				factory.setSizeThreshold(fileSizeMax);
@@ -174,9 +174,9 @@ public class RoundController extends HttpServlet {
 			RoundDAO dao1 = new RoundDAOimpl();
 			RoundDAOimpl dao2 = new RoundDAOimpl();
 			RoundVO vo = new RoundVO();
-			
+
 			round_id = dao2.round_id();
-			
+
 			vo.setRound_id(round_id); // nextval 을 따로 씀.
 			vo.setName(name);
 			vo.setCourse(course);
@@ -184,23 +184,23 @@ public class RoundController extends HttpServlet {
 			vo.setTotal_people(total_people);
 			vo.setImage_url(image_url);
 			vo.setMember_id(Long.parseLong(member_id));
-			
-			int result = dao1.insert(vo); // 라운드 개설 
-			
+
+			int result = dao1.insert(vo); // 라운드 개설
+
 			// 라운드 개설 유무 (개설 되었다면 라운드유저에 개설한 유저를 라운드 유저로서 데이터 삽)
-			if (result ==1) {
+			if (result == 1) {
 				System.out.println("라운드가 개설되었습니다.");
-				
+
 				RoundDAO dao11 = new RoundDAOimpl();
 				RoundUserVO vo2 = new RoundUserVO();
-				
-				vo2.setRound_id(round_id); 
+
+				vo2.setRound_id(round_id);
 				System.out.println(round_id);
 				vo2.setMember_id(Long.parseLong(member_id));
 				vo2.setRole("ROUND_LEADER");
-				
-				int result2 = dao11.enter(vo2); 
-				
+
+				int result2 = dao11.enter(vo2);
+
 				if (result2 == 1) {
 					System.out.println("라운드장이 되었습니다.");
 				} else {
@@ -209,11 +209,9 @@ public class RoundController extends HttpServlet {
 			} else {
 				System.out.println("라운드개설을 실패하였습니다.");
 			}
-			
-			
-		}else if(sPath.equals("/round_enter.do")) {
-			
-			
+
+		} else if (sPath.equals("/round_enter.do")) {
+
 			RoundDAO dao = new RoundDAOimpl();
 
 			RoundUserVO vo = new RoundUserVO();
