@@ -260,6 +260,12 @@ public class MeetingDAOimpl implements MeetingDAO {
 
 				vo.setMeeting_id(rs.getLong("meeting_id"));
 				vo.setName(rs.getString("name"));
+				vo.setAge(rs.getString("age"));
+				vo.setGender(rs.getString("gender"));
+				vo.setLocation(rs.getString("location"));
+				vo.setTotal_people(rs.getInt("total_people"));
+				vo.setCreation_date(rs.getString("creation_date"));
+				vo.setHandy(rs.getString("handy"));
 				vo.setImage_url(rs.getString("image_url"));
 
 				list.add(vo);

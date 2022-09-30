@@ -163,15 +163,12 @@ public class RoundDAOimpl implements RoundDAO {
 	}
 
 	@Override
-	public List<RoundVO> searchList(String searchKey, String searchWord) {
+	public List<RoundVO> searchList(String searchWord) {
 		List<RoundVO> list = new ArrayList<RoundVO>();
-		searchKey = "round";
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 
-			if (searchKey.equals("round")) {
-				pstmt = conn.prepareStatement(DB_oracle.ROUND_SEARCH_LIST_NAME); // TEL 이 넘어오면
-			}
+			pstmt = conn.prepareStatement(DB_oracle.ROUND_SEARCH_LIST_NAME); // TEL 이 넘어오면
 
 			pstmt.setString(1, "%" + searchWord + "%"); // 여기에 물음표를 넣어주어야 하네.
 
@@ -183,6 +180,11 @@ public class RoundDAOimpl implements RoundDAO {
 
 				vo.setRound_id(rs.getLong("round_id"));
 				vo.setName(rs.getString("name"));
+				vo.setCourse(rs.getString("course"));
+				vo.setTotal_people(rs.getInt("total_people"));
+				vo.setCurrent_people(rs.getInt("current_people"));
+				vo.setRound_date(rs.getString("round_date"));
+				vo.setImage_url(rs.getString("image_url"));
 
 				list.add(vo);
 			}
@@ -316,9 +318,9 @@ public class RoundDAOimpl implements RoundDAO {
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 
-			// 라운드에 가입 되어 있지 않다면 
+			// 라운드에 가입 되어 있지 않다면
 			// 이름이랑 코스만 일단 띄우게 함.
-			
+
 			if (!distinguish(vo1.getRound_id(), vo1.getMember_id())) {
 				pstmt = conn.prepareStatement(DB_oracle.ROUND_SELECT_ONE); // 쿼리문이 들어감.
 
@@ -330,7 +332,7 @@ public class RoundDAOimpl implements RoundDAO {
 					vo2.setRound_id(rs.getLong("round_id"));
 					vo2.setName(rs.getString("name"));
 					vo2.setCourse(rs.getString("course"));
-					
+
 //					vo2.setTotal_people(rs.getInt("total_people"));
 //					vo2.setRound_date(rs.getString("round_date"));
 //					vo2.setImage_url(rs.getString("image_url"));

@@ -17,7 +17,7 @@ public interface RoundDAO {
 	public List<RoundVO> mySelectAll(String member_id);
 
 	// 라운드 검색하기 
-	public List<RoundVO> searchList(String searchKey, String searchWord);
+	public List<RoundVO> searchList(String searchWord);
 
 	// 라운드 상세보기 
 	public RoundVO selectOne(RoundUserVO vo1);

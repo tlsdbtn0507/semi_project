@@ -26,7 +26,7 @@ public interface DB_oracle {
 	// 라운드
 	String ROUND_INSERT = "insert into " + "round (round_id,name,course,total_people,round_date,image_url,member_id) "
 			+ "values(?,?,?,?,?,?,?)";
-	String ROUND_SEARCH_LIST_NAME = "select name from round where name like ?";
+	String ROUND_SEARCH_LIST_NAME = "select * from round where name like ?";
 	String ROUND_SELECT_ALL = "select * from round";
 	String ROUND_SELECT_ONE = "select * from round where round_id = ?";
 	String ROUND_ENTER = "insert into " + "round_user (round_user_id,round_id,member_id,role) "
