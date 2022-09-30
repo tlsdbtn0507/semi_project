@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
 		} else if (sPath.equals("/logout.do")) {
 			HttpSession session = request.getSession();
 			session.removeAttribute("member_id");
-			response.sendRedirect("meeting.jsp");
+			response.sendRedirect("login.do");
 
 		}
 

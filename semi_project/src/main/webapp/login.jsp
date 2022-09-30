@@ -15,7 +15,7 @@
           <input type="password" name="password" placeholder="비밀번호" />
           <button id="loginBtn">로그인</button>
           <br />
-          <span>아이디가 없으신가요? <a href="insert.jsp">회원가입</a></span>
+          <span>아이디가 없으신가요? <a href="m_insert.do">회원가입</a></span>
           </form>
       </div>
     </body>

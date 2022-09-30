@@ -43,7 +43,7 @@ console.log("localStorage:",localStorage.user_name);
           <a href="n_notice.do"><img src="png/bell.png" id="bell" /><br />알림</a>
         </li>
         <li>
-          <a href="a_album.do"
+          <a href="mypage/mypage.jsp"
             ><img src="png/mypage.png" id="mypage" /><br />마이페이지</a
           >
         </li>
