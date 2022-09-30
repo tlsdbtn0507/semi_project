@@ -24,15 +24,25 @@ import test.com.round.RoundDAOimpl;
 import test.com.round.RoundUserVO;
 import test.com.round.RoundVO;
 
+/**
+ * Servlet implementation class BoardDeleteController
+ */
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_insert.do",
 		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do", "/meeting_enter.do",
 		"/meeting_update.do", "/meeting_updateOK.do" })
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
 	public MeetingController() {
 		super();
 	}
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 
 	MeetingDAO dao = new MeetingDAOimpl();
 
@@ -48,6 +58,7 @@ public class MeetingController extends HttpServlet {
 		String member_id = (String) session.getAttribute("member_id");
 
 		String sPath = request.getServletPath();
+		System.out.println("doGet:" + sPath);
 
 		if (sPath.equals("/main_meeting_insert.do")) {
 
@@ -101,16 +112,19 @@ public class MeetingController extends HttpServlet {
 //			System.out.println(vos.get(0).getName());
 
 			request.getRequestDispatcher("meeting/selectAll.jsp").forward(request, response);
+			
 		} else if (sPath.equals("/mymeeting_list.do")) {
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
 			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
+			request.getRequestDispatcher("mypage/mymeeting.jsp").forward(request, response);
+		
 		} else if (sPath.equals("/meeting_invite.do")) {
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
 			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
+			//실수로 마이 액티비티 제스피 파일 넣었습니다 나중에 초대 할 때 수정할게용
+			request.getRequestDispatcher("/mypage/myactivity.jsp").forward(request, response);
 		}
 
 	}

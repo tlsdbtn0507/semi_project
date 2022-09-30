@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/signupstyle.css" />
+<link rel="stylesheet" href="css/signupstyle.css?after" />
 <title>semi project signup</title>
 </head>
 <body>

@@ -1,0 +1,220 @@
+/* 諛곌꼍�궗吏� */
+html {
+  box-sizing: border-box;
+  background: url("../png/bgimg.png") center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+body {
+  margin: 0;
+}
+/* 紐⑤컮�씪 �궗�씠利덉쓽 �븯�� 諛뷀깢�솕硫� */
+#bg {
+  padding: 20px;
+  height: 900px;
+  width: 414px;
+  background: white;
+}
+/* �쉶�썝媛��엯 ���씠�� */
+.p {
+  width: 400px;
+  text-align: left;
+  font-size: 20px;
+}
+.p > button {
+  font-size: 20px;
+  background: white;
+  border: 1px solid white;
+}
+/* �땳�꽕�엫 �븘�씠�뵒 以묐났�솗�씤 踰꾪듉 */
+#btn_nickCheck {
+  /* margin: 15px; */
+  margin-bottom: 5px;
+  height: 30px;
+  float: right;
+  color: white;
+  background-color: blue;
+  border: 1px solid blue;
+  border-radius: 5px;
+}
+
+input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 20px;
+  width: 250px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+#nick {
+  margin-left: 65px;
+}
+/* 吏��뿭 �꽑�깮移� */
+select {
+  float: left;
+  font-size: 15px;
+}
+
+#upFile {
+  width: 73px;
+  height: 20px;
+}
+
+/* 吏��뿭 踰꾪듉 �꽕紐� */
+label {
+  /* float: left; */
+  font-size: 18px;
+}
+/* �셿猷뚮쾭�듉 */
+#insert {
+  align-content: center;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+  margin-top: 40px;
+  color: white;
+  background: gray;
+  border: 1px solid gray;
+  border-radius: 20px;
+  font-size: 35px;
+}
+
+#gender {
+  margin-left: 90px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 10px;
+  width: 250px;
+  height: 40px;
+}
+#loc {
+  margin-left: 90px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 10px;
+  width: 250px;
+  height: 40px;
+}
+/* 하단 바 */
+#navmain {
+  position: fixed;
+  bottom: 0;
+  float: left;
+  height: 80px;
+  /* left: 36.58%; */
+  left: inherit;
+  background: white;
+}
+/* 하단 바 배경 */
+#navmain li {
+  width: 80px;
+  background-color: white;
+  display: block;
+  float: left;
+  border: none;
+}
+/* 아이콘 글씨 */
+#navmain a {
+  font-size: 13px;
+  color: #777;
+}
+/* 홈 아이콘 */
+#homeIcon {
+  height: 30px;
+  width: 30px;
+  border: 2px solid gray;
+  border-radius: 90%;
+}
+/* 검색 아이콘 */
+#search {
+  height: 35px;
+  width: 35px;
+  opacity: 0.8;
+}
+/* 개설 아이콘 */
+#Addbtn {
+  height: 55px;
+  width: 90px;
+}
+/* 알림 아이콘 */
+#bell {
+  height: 18px;
+  width: 18px;
+  padding: 7px;
+  border: 2px solid gray;
+  border-radius: 90%;
+  opacity: 0.8;
+}
+/* 마이페이지 아이콘 */
+#mypage {
+  height: 37px;
+  width: 37px;
+  border-radius: 90%;
+  background: white;
+  border: 1px solid gray;
+}
+img {
+  left: 7000px;
+  width: 150px;
+  height: 150px;
+}
+
+.hidden {
+  display: none;
+}
+#navmodal {
+  position: fixed;
+  float: left;
+  background-color: rgba(36, 36, 34, 0.76);
+  opacity: 0.8;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  bottom: 80px;
+  width: 200;
+  height: 150px;
+  list-style: none;
+  animation-name: appear;
+  animation-duration: 0.5s;
+}
+#navmodal li {
+  margin-top: 30px;
+  width: 200px;
+  float: left;
+  border: none;
+}
+
+#meetingCreate {
+  height: 70px;
+  width: 70px;
+  border-radius: 70%;
+  left: 700px;
+}
+#roundCreate {
+  height: 70px;
+  width: 70px;
+  right: 700px;
+  border-radius: 70%;
+}
+b {
+  color: white;
+}
+#text {
+  color: white;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 0.8;
+  }
+}

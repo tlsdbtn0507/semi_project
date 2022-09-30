@@ -31,7 +31,6 @@ public class LoginAction {
 			session.setAttribute("member_id", vo2.getMember_id());
 		
 			session.setAttribute("nickname", vo2.getNickname());
-	    	response.sendRedirect("meeting.jsp");
 	    	System.out.println(vo2.getMember_id());
 	    	System.out.println(vo2.getNickname());
 			// 알림

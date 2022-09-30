@@ -96,7 +96,7 @@ public class RoundController extends HttpServlet {
 //			PrintWriter out = response.getWriter();
 //			out.print(vos.toString());
 			request.setAttribute("vos",vos);
-			request.getRequestDispatcher("r_selectAll.jsp").forward(request, response);
+			request.getRequestDispatcher("mypage/myround.jsp").forward(request, response);
 		}
 	}
 

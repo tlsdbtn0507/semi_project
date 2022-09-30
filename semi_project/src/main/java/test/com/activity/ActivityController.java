@@ -55,7 +55,7 @@ public class ActivityController extends HttpServlet {
 //			PrintWriter out = response.getWriter();
 //			out.print(vos.toString());
 			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("a_selectAll.jsp").forward(request, response);
+			request.getRequestDispatcher("mypage/myactivity.jsp").forward(request, response);
 		} else if (sPath.equals("/main_activity_selectAll.do")) {
 			List<ActivityVO> vos = dao.selectAll();
 			// json으로 반환
