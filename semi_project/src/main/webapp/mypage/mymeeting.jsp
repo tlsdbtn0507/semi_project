@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>semi project meetingboard</title>
-<link rel="stylesheet" href="css/myactivity.css" />
+<link rel="stylesheet" href="css/myactivity.css?after" />
 </head>
 <body>
 	<div id="bg">

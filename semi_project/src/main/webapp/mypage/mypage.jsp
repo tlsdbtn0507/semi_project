@@ -6,7 +6,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
   <head>
     <meta charset="UTF-8" />
     <title>semi project meetingboard</title>
-    <link rel="stylesheet" href="../css/mypage.css" />
+    <link rel="stylesheet" href="../css/mypage.css?after" />
   </head>
   <body>
     <div id="bg">

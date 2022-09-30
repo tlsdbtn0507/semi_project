@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>semi project myactivity</title>
-<link rel="stylesheet" href="css/myactivity.css" />
+<link rel="stylesheet" href="css/myactivity.css?after" />
 </head>
 <body>
 	<div id="bg">
@@ -35,11 +35,11 @@
 		<section id="round1">
 			<tr>
 				<img src="png/bell.png" id="Img" />
-				<li class="name">${vo.name}</li>
-				<li class="date">${vo.round_date}</li>
-				<li class="course">${vo.course}</li>
-				<li class="currentP">${vo.current_people}</li>
-				<li class="image">${vo.image_url}</li>
+				<li class="name">1${vo.name}</li>
+				<li class="date">2${vo.round_date}</li>
+				<li class="course">3${vo.course}</li>
+				<li class="currentP">4${vo.current_people}</li>
+				<li class="image">5${vo.image_url}</li>
 			</tr>
 		</section>
 

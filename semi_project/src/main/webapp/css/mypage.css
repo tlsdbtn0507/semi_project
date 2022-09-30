@@ -73,12 +73,14 @@ p {
 }
 
 
-/* �븯�떒 諛� */
 #navmain {
   position: fixed;
   bottom: 0;
   float: left;
   height: 80px;
+  /* left: 36.58%; */
+  left: inherit;
+  background: white;
 }
 /* �븯�떒 諛� 諛곌꼍 */
 #navmain li {
@@ -128,6 +130,11 @@ p {
   background: white;
   border: 1px solid gray;
 }
+img {
+  left: 7000px;
+  width: 150px;
+  height: 150px;
+}
 
 .hidden {
   display: none;
@@ -165,12 +172,16 @@ p {
   right: 700px;
   border-radius: 70%;
 }
+button>b{
+	color:black;
+}
+b {
+  color: white;
+}
 #text {
   color: white;
 }
-b{
- color: white;
-}
+
 @keyframes appear {
   from {
     opacity: 0;
