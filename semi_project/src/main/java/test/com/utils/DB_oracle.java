@@ -55,10 +55,8 @@ public interface DB_oracle {
 	String SQL_ACTIVITY_UPDATE_NOTICE_START = "update activity_user set notice_start='true' where activity_id=?";
 	String SQL_ACTIVITY_UPDATE_NOTICE_END = "update activity_user set notice_end='true' where activity_id=?";
 	String SQL_NOTICE = "select * from notice where member_id=? and meeting_id=?";
-	
-	//초대하기
-	String MEMBER_SEARCH_NAME = "select * from member where nickname like ? and member_id not in(select member_id from meeting_user where meeting_id=?)";
 
+	// main (메인페이지)
 	// 미팅
 	String SQL_RECOMMEND_MEETING_AGE_SELECT_ALL = "select distinct meeting_id,name,image_url "
 			+ "from recommend_meeting_view where age like (select age from member where member_id=?) "
@@ -80,7 +78,6 @@ public interface DB_oracle {
 			+ "and secret like 'false' "
 			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
 			+ "and current_people<total_people";
-	
 	String SQL_MY_MEETING_SELECT_ALL = "select meeting.meeting_id, name, explanation, image_url "
 			+ "from meeting join meeting_user on meeting.meeting_id = meeting_user.meeting_id "
 			+ "where meeting_user.member_id=?";
@@ -110,5 +107,4 @@ public interface DB_oracle {
 			+ "(TO_DATE(activity_date, 'YYYY-MM-DD') - TO_DATE(TO_CHAR(SYSDATE,'YYYY-MM-DD'))) d_day "
 			+ "from recommend_activity_view "
 			+ "where secret like 'false' and member_id !=? and current_people<total_people";
-
 }

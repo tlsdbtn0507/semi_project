@@ -1,6 +1,7 @@
 package test.com.notice;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,30 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class NoticeController
- */
-@WebServlet({ "/alarm_selectAll.do", "/alarm_deleteOK.do" })
+@WebServlet({ "/alarm_selectAll.do", "/alarm_deleteOK.do","/alarm.do" })
 public class NoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private NoticeDAO dao = new NoticeDAOimpl();
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public NoticeController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String sPath = request.getServletPath();
 		System.out.println("Get:" + sPath);
+
+		response.setCharacterEncoding("UTF-8");
 
 		// test용--> 로그인구현 다 되면 지우기
 		HttpSession session = request.getSession(); // 객체 초기화
@@ -41,35 +33,42 @@ public class NoticeController extends HttpServlet {
 		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
 
 		if (sPath.equals("/alarm_deleteOK.do")) {
-			long notice_id = Integer.parseInt(request.getParameter("num"));
+			long notice_id = Long.parseLong(request.getParameter("notice_id"));
 			int result = dao.delete(notice_id);
 
-			if (result == 1)
+			if (result == 1) {
 				response.sendRedirect("alarm_selectAll.do");
-			else // 음... 없어도 될 것 같은디...
+				System.out.println("삭제가 되었습니다.");
+			} else if(result == 0) {
 				response.sendRedirect("alarm_selectAll.do");
+				System.out.println("삭제가 되지 않았습니다.");
+			}
 		} else if (sPath.equals("/alarm_selectAll.do")) {
 			// session에서 member_id를 가져옴.
 			String member_id = (String) session.getAttribute("member_id");
-			// category(또래끼리,성별끼리,실력이 비슷한,내 근처의 )
-			String category = request.getParameter("category");
 			System.out.println(member_id);
-			System.out.println(category);
-			List<NoticeVO> vos = dao.selectAll(member_id);
-
+			List<NoticeVO> vos = dao.selectAll("1");
+			List<NoticeVO> vos2 = new ArrayList<NoticeVO>();;
+			
+			for (NoticeVO data : vos) {
+				if(data.getContents().contains("초대")) {
+					vos2.add(data);
+				}
+			}
+			
+			// 일반 알림
 			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("alarm_selectAll.jsp").forward(request, response);
-		}
+			// 초대 알림
+			request.setAttribute("vos2", vos2);
+			
+			request.getRequestDispatcher("notice/notice_selectAll.jsp").forward(request, response);
+
+		} 
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

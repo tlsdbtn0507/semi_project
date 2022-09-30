@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+html {
+	box-sizing: border-box;
+	background: url("../png/bgimg.png") center no-repeat;
+	background-size: cover;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+
+body {
+	margin: 0;
+}
+/* 모바일 사이즈의 하얀 바탕화면 */
+#bg {
+	padding: 20px;
+	height: 900px;
+	width: 414px;
+	background: white;
+}
+
+/* btn사이즈 */
+#notice {
+	display: none;
+}
+
+/* 상단 바 */
+#navup ul {
+	list-style: none;
+	margin: 0;
+}
+
+#navup li {
+	width: 80px;
+	background-color: rgb(193, 199, 184);
+	display: block;
+	float: left;
+	margin-right: 7px;
+	border: none;
+	border-bottom: 1px solid #777;
+}
+
+#navup a {
+	color: gray;
+	display: block;
+	font-weight: bold;
+	padding: 5px;
+	text-decoration: none;
+	text-align: center;
+	background-color: white;
+}
+
+#navup li:hover {
+	border-bottom: #24b3ff;
+}
+
+#navup a :hover {
+	color: skyblue;
+}
+
+p {
+	height: 10px;
+}
+/*게시글 등록버튼 */
+#boardInsert {
+	border-radius: 10%;
+	height: 25px;
+	color: white;
+	background: blue;
+	border: blue;
+	float: right;
+	margin-top: 20px;
+}
+
+a {
+	color: white;
+}
+
+#writer {
+	float: right;
+}
+
+/* 하단 바 */
+#navmain {
+	position: fixed;
+	bottom: 0;
+	float: left;
+	height: 80px;
+}
+/* 하단 바 배경 */
+#navmain li {
+	width: 80px;
+	background-color: white;
+	display: block;
+	float: left;
+	border: none;
+}
+/* 아이콘 글씨 */
+#navmain a {
+	font-size: 13px;
+	color: #777;
+}
+/* 홈 아이콘 */
+#homeIcon {
+	height: 30px;
+	width: 30px;
+	border: 2px solid gray;
+	border-radius: 90%;
+}
+/* 검색 아이콘 */
+#search {
+	height: 35px;
+	width: 35px;
+	opacity: 0.8;
+}
+/* 개설 아이콘 */
+#Addbtn {
+	height: 55px;
+	width: 90px;
+}
+/* 알림 아이콘 */
+#bell {
+	height: 18px;
+	width: 18px;
+	padding: 7px;
+	border: 2px solid gray;
+	border-radius: 90%;
+	opacity: 0.8;
+}
+/* 마이페이지 아이콘 */
+#mypage {
+	height: 37px;
+	width: 37px;
+	border-radius: 90%;
+	background: white;
+	border: 1px solid gray;
+}
+
+#writer {
+	margin-left: 250px;
+}
+
+th>a {
+	color: black;
+	font-size: 15px;
+}
+
+.hidden {
+	display: none;
+}
+
+#navmodal {
+	position: fixed;
+	float: left;
+	background-color: rgba(36, 36, 34, 0.76);
+	opacity: 0.8;
+	border-top-left-radius: 10%;
+	border-top-right-radius: 10%;
+	bottom: 80px;
+	width: 200;
+	height: 150px;
+	list-style: none;
+	animation-name: appear;
+	animation-duration: 0.5s;
+}
+
+#navmodal li {
+	margin-top: 30px;
+	width: 200px;
+	float: left;
+	border: none;
+}
+
+#meetingCreate {
+	height: 70px;
+	width: 70px;
+	border-radius: 70%;
+	left: 700px;
+}
+
+#roundCreate {
+	height: 70px;
+	width: 70px;
+	right: 700px;
+	border-radius: 70%;
+}
+
+#text {
+	color: white;
+}
+
+@keyframes appear {from { opacity:0;
+	transform: translateY(80px);
+}
+
+to {
+	opacity: 0.8;
+}
+
+}
+#logo{
+	height : 70px;
+}
+#main_event{
+	padding-top: 10px;
+}
+.title{
+	float: left;
+    color: black;
+    font-family: 'Jua', sans-serif;
+    font-size: 25px;
+    margin: 25px 0px 0px 25px;
+}
