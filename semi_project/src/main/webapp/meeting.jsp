@@ -8,8 +8,8 @@
 <title>semi project meeting</title>
 <link rel="stylesheet" href="css/board.css" />
 <script>
-console.log("sessionStorage:",sessionStorage.user_id);
-console.log("localStorage:",localStorage.user_name);
+console.log("sessionStorage:",sessionStorage.member_id);
+console.log("localStorage:",localStorage.member_name);
 </script>
   </head>
   <body> 

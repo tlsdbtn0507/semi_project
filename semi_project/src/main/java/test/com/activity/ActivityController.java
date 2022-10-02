@@ -2,6 +2,7 @@ package test.com.activity;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -72,20 +73,45 @@ public class ActivityController extends HttpServlet {
 			System.out.println(category);
 			List<ActivityVO> vos = dao.recommendSelectAll(member_id, category);
 			// json으로 반환
-//			PrintWriter out = response.getWriter();
-//			out.print(vos.toString());
-			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("a_selectAll.jsp").forward(request, response);
+			String txt = "[";
+			for (int i=0;i<vos.size();i++) {
+				txt += "{\"activity_id\":"+vos.get(i).getActivity_id()+",";
+				txt += "\"name\":\""+vos.get(i).getName()+"\""+",";
+				txt += "\"activity_date\":\""+vos.get(i).getActivity_date()+"\""+",";
+				txt += "\"activity_time\":\""+vos.get(i).getActivity_time()+"\""+",";
+				txt += "\"location\":\""+vos.get(i).getLocation()+"\""+",";
+				txt += "\"total_people\":\""+vos.get(i).getTotal_people()+"\""+",";
+				txt += "\"current_people\":\""+vos.get(i).getCurrent_people()+"\""+",";
+				txt += "\"image_url\":\""+vos.get(i).getImage_url()+"\""+"}";
+				if(i<vos.size()-1)txt += ",";
+			}
+			txt += "]";
+			PrintWriter out = response.getWriter();
+			out.print(txt);
+			System.out.println(txt);
 		} else if (sPath.equals("/imminent_activity_selectAll.do")) {
 			// session에서 member_id를 가져옴.
 			String member_id = (String) session.getAttribute("member_id");
 			// category(또래끼리,성별끼리,실력이 비슷한,내 근처의 )
 			List<ActivityVO> vos = dao.imminentSelectAll(member_id);
 			// json으로 반환
-//			PrintWriter out = response.getWriter();
-//			out.print(vos.toString());
-			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("a_selectAll.jsp").forward(request, response);
+/// json으로 반환
+			String txt = "[";
+			for (int i=0;i<vos.size();i++) {
+				txt += "{\"activity_id\":"+vos.get(i).getActivity_id()+",";
+				txt += "\"name\":\""+vos.get(i).getName()+"\""+",";
+				txt += "\"activity_date\":\""+vos.get(i).getActivity_date()+"\""+",";
+				txt += "\"activity_time\":\""+vos.get(i).getActivity_time()+"\""+",";
+				txt += "\"location\":\""+vos.get(i).getLocation()+"\""+",";
+				txt += "\"total_people\":\""+vos.get(i).getTotal_people()+"\""+",";
+				txt += "\"current_people\":\""+vos.get(i).getCurrent_people()+"\""+",";
+				txt += "\"image_url\":\""+vos.get(i).getImage_url()+"\""+"}";
+				if(i<vos.size()-1)txt += ",";
+			}
+			txt += "]";
+			PrintWriter out = response.getWriter();
+			out.print(txt);
+			System.out.println(txt);
 		} else if (sPath.equals("/meeting_activity_selectAll.do")) {
 			
 			MeetingVO vo2 = new MeetingVO();

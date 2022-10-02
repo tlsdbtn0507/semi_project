@@ -2,6 +2,7 @@ package test.com.meeting;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import org.json.simple.JSONArray;
 
 import test.com.round.RoundDAO;
 import test.com.round.RoundDAOimpl;
@@ -26,7 +28,7 @@ import test.com.round.RoundVO;
 
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_insert.do",
 		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do", "/meeting_enter.do",
-		"/meeting_update.do", "/meeting_updateOK.do" })
+		"/meeting_update.do", "/meeting_updateOK.do","/recommend_meeting_selectAll.do" })
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,12 +42,8 @@ public class MeetingController extends HttpServlet {
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8"); // UTF-8형식으로 바꿔주기
 
-		// test용--> 로그인구현 다 되면 지우기
 		HttpSession session = request.getSession(); // 객체 초기화
-		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
-		session.setAttribute("member_id", "2"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
-		// session에서 member_id를 가져옴.
-		String member_id = (String) session.getAttribute("member_id");
+		String member_id = String.valueOf(session.getAttribute("member_id"));
 
 		String sPath = request.getServletPath();
 
@@ -104,8 +102,33 @@ public class MeetingController extends HttpServlet {
 		} else if (sPath.equals("/mymeeting_list.do")) {
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
-			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
+			System.out.println(member_id);
+			String txt = "[";
+			for (int i=0;i<vos.size();i++) {
+				txt += "{\"meeting_id\":"+vos.get(i).getMeeting_id()+",";
+				txt += "\"name\":\""+vos.get(i).getName()+"\""+",";
+				txt += "\"image_url\":\""+vos.get(i).getImage_url()+"\""+"}";
+				if(i<vos.size()-1)txt += ",";
+			}
+			txt += "]";
+			PrintWriter out = response.getWriter();
+			out.print(txt);
+			System.out.println(txt);
+		} else if (sPath.equals("/recommend_meeting_selectAll.do")) {
+
+			List<MeetingVO> vos = dao.recommendSelectAll(member_id);
+			System.out.println(member_id);
+			String txt = "[";
+			for (int i=0;i<vos.size();i++) {
+				txt += "{\"meeting_id\":"+vos.get(i).getMeeting_id()+",";
+				txt += "\"name\":\""+vos.get(i).getName()+"\""+",";
+				txt += "\"image_url\":\""+vos.get(i).getImage_url()+"\""+"}";
+				if(i<vos.size()-1)txt += ",";
+			}
+			txt += "]";
+			PrintWriter out = response.getWriter();
+			out.print(txt);
+			System.out.println(txt);
 		} else if (sPath.equals("/meeting_invite.do")) {
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);

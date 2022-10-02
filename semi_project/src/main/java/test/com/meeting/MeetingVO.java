@@ -145,4 +145,11 @@ public class MeetingVO {
 		this.creation_date = creation_date;
 	}
 
+	@Override
+	public String toString() {
+		return "MeetingVO [meeting_id=" + meeting_id + ", name=" + name + ", explanation=" + explanation + ", gender="
+				+ gender + ", age=" + age + ", location=" + location + ", permission=" + permission + ", secret="
+				+ secret + ", handy=" + handy + ", total_people=" + total_people + ", creation_date=" + creation_date
+				+ ", member_id=" + member_id + ", image_url=" + image_url + "]";
+	}
 }

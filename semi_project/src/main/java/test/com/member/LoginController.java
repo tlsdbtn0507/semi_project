@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class BoardDeleteController
  */
-@WebServlet({ "/login.do", "/logout.do", "/loginOK.do" })
+@WebServlet({ "/login.do", "/logout.do", "/loginOK.do","/h_home.do" })
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,9 +40,11 @@ public class LoginController extends HttpServlet {
 		} else if (sPath.equals("/logout.do")) {
 			HttpSession session = request.getSession();
 			session.removeAttribute("member_id");
-			response.sendRedirect("meeting.jsp");
+			response.sendRedirect("h_home.do");
+		} else if (sPath.equals("/h_home.do")) {
+			request.getRequestDispatcher("mainJsp/main.jsp").forward(request, response);
+		} 
 
-		}
 
 	}
 
