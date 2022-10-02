@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class MemberController
  */
-@WebServlet({ "/m_insert.do", "/insertOK.do", "/m_update.do", "/m_updateOK.do", "/m_delete.do", "/m_deleteOK.do",
+@WebServlet({ "/m_insert.do", "/m_insertOK.do", "/m_update.do", "/m_updateOK.do", "/m_delete.do", "/m_deleteOK.do",
 	"/m_selectAll.do", "/m_selectOne.do", "/m_searchList.do" })
 public class MemberController extends HttpServlet {
 private static final long serialVersionUID = 1L;
@@ -47,7 +47,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
 
 	if (sPath.equals("/m_insert.do")) {
-		RequestDispatcher rd = request.getRequestDispatcher("insert.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("memberJsp/insert.jsp");
 		rd.forward(request, response);
 	} else if (sPath.equals("/m_selectAll.do")) {
 		List<MemberVO> vos = dao.selectAll();
@@ -55,7 +55,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		RequestDispatcher rd = request.getRequestDispatcher("m_selectAll.jsp");
 		rd.forward(request, response);
 	} else if (sPath.equals("/m_update.do")) {
-		RequestDispatcher rd = request.getRequestDispatcher("m_update.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("memberJsp/update.jsp");
 		rd.forward(request, response);
 	} else if (sPath.equals("/m_updateOK.do")) {
 		RequestDispatcher rd = request.getRequestDispatcher("m_update.jsp");
@@ -69,10 +69,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		request.setAttribute("vo", vo);
 		RequestDispatcher rd = request.getRequestDispatcher("m_update.jsp");
 		rd.forward(request, response);
-	} // else if (sPath.equals("/m_searchList.do")) {
+	} else if (sPath.equals("/m_insertOK.do")) {
+		response.sendRedirect("mypage.do");
+		}
+// else if (sPath.equals("/m_searchList.do")) {
 //		new SearchListAction().execute(request, response);
-//	} else if (sPath.equals("/m_insertOK.do")) {
-//		response.sendRedirect("m_insert.do");
 //	} else if (sPath.equals("/m_deleteOK.do")) {
 //		new DeleteOKAction().execute(request, response);
 //	}
@@ -90,7 +91,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
 		System.out.print("doPost():");
 		System.out.println(sPath);
-		if (sPath.equals("/insertOK.do")) {
+		if (sPath.equals("/m_insertOK.do")) {
 			new InsertOKAction().execute(request, response);;
 		} 
 	}// end doPost

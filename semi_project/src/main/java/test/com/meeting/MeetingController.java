@@ -26,9 +26,11 @@ import test.com.round.RoundDAOimpl;
 import test.com.round.RoundUserVO;
 import test.com.round.RoundVO;
 
-@WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_insert.do",
-		"/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do", "/meeting_enter.do",
-		"/meeting_update.do", "/meeting_updateOK.do","/recommend_meeting_selectAll.do" })
+
+@WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_searchListOK.do",
+		"/main_meeting_insert.do", "/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do",
+		"/meeting_enter.do", "/meeting_update.do", "/meeting_updateOK.do" })
+
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,8 +45,8 @@ public class MeetingController extends HttpServlet {
 		response.setCharacterEncoding("UTF-8"); // UTF-8형식으로 바꿔주기
 
 		HttpSession session = request.getSession(); // 객체 초기화
-		String member_id = String.valueOf(session.getAttribute("member_id"));
 
+		String member_id = String.valueOf(session.getAttribute("member_id"));
 		String sPath = request.getServletPath();
 
 		if (sPath.equals("/main_meeting_insert.do")) {
@@ -85,6 +87,9 @@ public class MeetingController extends HttpServlet {
 			request.getRequestDispatcher("meeting/selectAll.jsp").forward(request, response);
 		} else if (sPath.equals("/main_meeting_searchList.do")) {
 
+			request.getRequestDispatcher("meeting/meeting_search.jsp").forward(request, response);
+		} else if (sPath.equals("/main_meeting_searchListOK.do")) {
+
 			MeetingVO vo = new MeetingVO();
 			vo.setLocation(request.getParameter("location"));
 			vo.setGender(request.getParameter("gender"));
@@ -98,10 +103,11 @@ public class MeetingController extends HttpServlet {
 //			response.getWriter().println(vos.get(0).getName());
 //			System.out.println(vos.get(0).getName());
 
-			request.getRequestDispatcher("meeting/selectAll.jsp").forward(request, response);
+			request.getRequestDispatcher("meeting/meeting_search.jsp").forward(request, response);
 		} else if (sPath.equals("/mymeeting_list.do")) {
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
+
 			System.out.println(member_id);
 			String txt = "[";
 			for (int i=0;i<vos.size();i++) {
@@ -133,7 +139,7 @@ public class MeetingController extends HttpServlet {
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
 			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("selectAll.jsp").forward(request, response);
+			request.getRequestDispatcher("mypage/mymeeting.jsp").forward(request, response);
 		}
 
 	}

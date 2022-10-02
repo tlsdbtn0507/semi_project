@@ -27,7 +27,8 @@ public class LoginAction {
 		if(vo.getMember_name().equals(vo2.getMember_name())){
 			HttpSession session = request.getSession();
 			session.setAttribute("member_id", vo2.getMember_id());
-		
+
+			session.setAttribute("nickname", vo2.getNickname());
 	    	System.out.println(vo2.getMember_id());
 			// 알림
 			NoticeDAO noticeDAO = new NoticeDAOimpl();
