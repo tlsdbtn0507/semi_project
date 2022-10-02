@@ -1,0 +1,60 @@
+html {
+  box-sizing: border-box;
+  background: url("../png/bgimg.png") center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+body {
+  margin: 0;
+}
+/* ����� �������� �Ͼ� ����ȭ�� */
+#bg {
+  padding: 20px;
+  height: 900px;
+  width: 414px;
+  background: white;
+}
+.backBtn{
+	background: white;
+	border: 1px white;
+	float:left;
+	font-size: 30px;
+	margin-top: 20px;
+}
+img{
+	float:left;
+	width:40px;
+	height:40px;
+}
+p{
+	text-align:left;
+}
+button{
+	background:white;
+	border:white;
+}
+td > hr{
+	opacity: 0.3;
+}
+td{
+	width:414px;
+	text-align:left;
+}
+#noAlarm{
+	width:150px;
+	height:130px;
+	text-align:center;
+	padding-left:130px;
+	padding-top:50px;
+	padding-bottom:30px
+}
+b{
+	text-align:center;
+	padding-left:120px;
+	padding-top:30px;
+}

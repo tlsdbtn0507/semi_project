@@ -1,31 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>semi project meeting</title>
-<link rel="stylesheet" href="../css/board.css" />
-<script>
-console.log("sessionStorage:",sessionStorage.member_name);
-console.log("localStorage:",localStorage.user_name);
-</script>
-  </head>
-  <body> 
-    <div id="bg">
-      <div id="navup">
-        <ul>
-          <li><a href="h_home.do">액티비티</a></li>
-          <li><a href="b_board.do">게시판</a></li>
-          <li><a href="v_vote.do">투표</a></li>
-          <li><a href="a_album.do">앨범</a></li>
-        </ul>
-      </div>
+<title>semi project main</title>
 
-      
-
-      <div id="navmodal" class="hidden">
+<link rel="stylesheet" href="css/search.css?after">
+</head>
+<script src="../js/jquery-3.6.1.min.js"></script>
+</head>
+<body>
+	<div id="bg">
+		<div id="navlogo">
+			<img src="png/golfzonlogo.png" id ="logo" />
+		</div>
+		<div style="margin-top: 100px;">
+			<form action="main_meeting_searchListOK.do" method="get">
+				<table>
+					<a href="javascript:window.history.back();"><button>←</button></a>
+					<input type="text" name="searchWord" id="searchWord"
+							value="🔍라운드/모임 검색"> <input id="searchBtn" type="submit" value="검색"><br>
+	
+					<div id="nav">
+						<br>
+						<ul>
+							<li id="round"><a href="main_round_selectAll.do" style="color: gray; border-bottom:gray">라운드</a></li>
+							<li id="meeting"><a href="main_meeting_selectAll.do" style="color: gray; border-bottom:gray">모임</a> </li>
+						</ul>
+					</div>
+					
+					<hr>
+					<div>
+						
+					</div>
+					<div  class="container">
+			<section  id="round_searchList">
+					<!-- el 태그로 받는다.  var 변수로 객체변수 설정. -->
+					<c:forEach var="vo" items="${vos}"> 
+						
+					</c:forEach>
+			</section> 
+		</div>
+					
+			</form>
+		</div>
+		<div id="navmodal" class="hidden">
             <li>
                 <a href="m_meetingCreate.do">
                     <img src="png/meetingCreate.png" id="meetingCreate" /><br /><b>모임 개설하기</b>
@@ -54,7 +74,7 @@ console.log("localStorage:",localStorage.user_name);
           <img src="png/mainAddBtn.png" id="Addbtn" />
         </li>
         <li>
-          <a href="alarm_selectAll.do"><img src="png/bell.png" id="bell" /><br />알림</a>
+          <a href="n_notice.do"><img src="png/bell.png" id="bell" /><br />알림</a>
         </li>
         <li>
           <a href="mypage/mypage.jsp"
@@ -73,5 +93,5 @@ console.log("localStorage:",localStorage.user_name);
 
         mainBtn.addEventListener('click',showModal)
     </script>
-  </body>
+</body>
 </html>

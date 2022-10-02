@@ -50,7 +50,7 @@
 		<div id="navmain">
 			<li><a href="home.do"><img src="png/homeIcon.png"
 					id="homeIcon" /><br />홈</a></li>
-			<li><a href="search.do"><img src="png/search.png"
+			<li><a href="s_search.do"><img src="png/search.png"
 					id="search" /><br />검색</a></li>
 			<li><img src="png/mainAddBtn.png" id="Addbtn" /></li>
 			<li><a href="notice.do"><img src="png/bell.png" id="bell" /><br />알림</a>
