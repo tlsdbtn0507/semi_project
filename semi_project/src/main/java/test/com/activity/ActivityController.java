@@ -2,6 +2,7 @@ package test.com.activity;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,9 +22,9 @@ import org.apache.commons.io.FilenameUtils;
 
 import test.com.meeting.MeetingVO;
 
-@WebServlet({ "/myactivity_list.do", "/main_activity_selectAll.do", "/recommend_activity_selectAll.do",
-		"/imminent_activity_selectAll.do", "/meeting_activity_selectAll.do",
-		"/activity_insert.do","/activity_insertOK.do","/activity_enter.do"})
+@WebServlet({ "/myactivity_list.do","/myactivity_listOK.do" ,"/main_activity_selectAll.do", "/recommend_activity_selectAll.do",
+		"/imminent_activity_selectAll.do", "/meeting_activity_selectAll.do", "/activity_insert.do",
+		"/activity_insertOK.do", "/activity_enter.do" })
 
 public class ActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -44,17 +45,36 @@ public class ActivityController extends HttpServlet {
 		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
 		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
 
-		if (sPath.equals("/myactivity_list.do")) {
+		if (sPath.equals("/myactivity_listOK.do")) {
 			// session에서 member_id를 가져옴.
 			String member_id = (String) session.getAttribute("member_id");
 			// activityStatus(활동전,활동중,활동후)
 			String activityState = request.getParameter("activityState");
 			System.out.println("activityState:" + activityState);
 			List<ActivityVO> vos = dao.mySelectAll(member_id, activityState);
+
 			// json으로 반환
-//			PrintWriter out = response.getWriter();
-//			out.print(vos.toString());
-			request.setAttribute("vos", vos);
+			String txt = "[";
+			for (int i = 0; i < vos.size(); i++) {
+				txt += "{\"activity_id\":" + vos.get(i).getActivity_id() + ",";
+				txt += "\"name\":\"" + vos.get(i).getName() + "\"" + ",";
+				txt += "\"activity_date\":\"" + vos.get(i).getActivity_date() + "\"" + ",";
+				txt += "\"activity_time\":\"" + vos.get(i).getActivity_time() + "\"" + ",";
+				txt += "\"location\":\"" + vos.get(i).getLocation() + "\"" + ",";
+				txt += "\"total_people\":\"" + vos.get(i).getTotal_people() + "\"" + ",";
+				txt += "\"current_people\":\"" + vos.get(i).getCurrent_people() + "\"" + ",";
+				txt += "\"image_url\":\"" + vos.get(i).getImage_url() + "\"" + "}";
+				if (i < vos.size() - 1)
+					txt += ",";
+			}
+			txt += "]";
+			PrintWriter out = response.getWriter();
+			out.print(txt);
+			System.out.println(txt);
+
+//			request.setAttribute("vos", vos);
+		} else if (sPath.equals("/myactivity_list.do")) {
+
 			request.getRequestDispatcher("mypage/myactivity.jsp").forward(request, response);
 		} else if (sPath.equals("/main_activity_selectAll.do")) {
 			List<ActivityVO> vos = dao.selectAll();
@@ -87,7 +107,7 @@ public class ActivityController extends HttpServlet {
 			request.setAttribute("vos", vos);
 			request.getRequestDispatcher("a_selectAll.jsp").forward(request, response);
 		} else if (sPath.equals("/meeting_activity_selectAll.do")) {
-			
+
 			MeetingVO vo2 = new MeetingVO();
 			vo2.setMeeting_id(Long.parseLong(request.getParameter("meeting_id")));
 
@@ -95,7 +115,7 @@ public class ActivityController extends HttpServlet {
 
 //			request.setAttribute("vos_ma",vos_ma); 
 //			request.getRequestDispatcher("meeting/activity_selectAll.jsp").forward(request, response);
-			
+
 			for (ActivityVO data : vos_ma) {
 				response.getWriter().println(data.getMeeting_id());
 				response.getWriter().println(data.getActivity_id());
@@ -107,8 +127,7 @@ public class ActivityController extends HttpServlet {
 				response.getWriter().println(data.getTotal_people());
 				response.getWriter().println(data.getCurrent_people());
 			}
-		}
-		else if(sPath.equals("/activity_insert.do")) {
+		} else if (sPath.equals("/activity_insert.do")) {
 			System.out.println("activity/insert.jsp 입장");
 		}
 
@@ -116,7 +135,7 @@ public class ActivityController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String dir_path = request.getServletContext().getRealPath("/upload");
 		System.out.println(dir_path);
 		request.setCharacterEncoding("UTF-8");
@@ -124,7 +143,7 @@ public class ActivityController extends HttpServlet {
 		String sPath = request.getServletPath();
 
 		long activity_id = 0l;
-		
+
 		// session
 		HttpSession session = request.getSession();
 		session.setAttribute("member_id", "1");
@@ -133,8 +152,8 @@ public class ActivityController extends HttpServlet {
 		if (sPath.equals("/activity_insertOK.do")) {
 			// 현재 시간 구하기
 			SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-			Date now = new Date();         
-		
+			Date now = new Date();
+
 			String name = "";
 			String explanation = "";
 			String activity_date = "";
@@ -199,10 +218,10 @@ public class ActivityController extends HttpServlet {
 			ActivityDAO dao = new ActivityDAOimpl();
 			ActivityDAOimpl dao2 = new ActivityDAOimpl();
 			ActivityVO vo = new ActivityVO();
-			
+
 			activity_id = dao2.activity_id();
 			System.out.println("activity_id 값 : " + activity_id);
-			
+
 			vo.setActivity_id(activity_id);
 			vo.setName(name);
 			vo.setExplanation(explanation);
@@ -218,9 +237,9 @@ public class ActivityController extends HttpServlet {
 
 			if (result == 1) {
 				System.out.println("액티비티가 개설되었습니다.");
-				
+
 				ActivityUserVO vo2 = new ActivityUserVO();
-				
+
 				vo2.setActivity_id(activity_id);
 				vo2.setMeeting_id(Long.parseLong(request.getParameter("meeting_id")));
 				System.out.println("activity_id 값  : " + activity_id);
@@ -233,12 +252,12 @@ public class ActivityController extends HttpServlet {
 				} else {
 					System.out.println("액티비티장이 될 수 없습니다.");
 				}
-				
+
 			} else {
 				System.out.println("액티비티개설을 실패하였습니다.");
 			}
-		}else if(sPath.equals("/activity_enter.do")) {
-			
+		} else if (sPath.equals("/activity_enter.do")) {
+
 			ActivityDAO dao22 = new ActivityDAOimpl();
 
 			ActivityUserVO vo = new ActivityUserVO();
@@ -255,7 +274,7 @@ public class ActivityController extends HttpServlet {
 				System.out.println("액티비티에 입장 실패하였습니다.");
 			}
 		}
-		
+
 	}
 
 }

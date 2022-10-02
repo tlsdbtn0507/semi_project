@@ -43,7 +43,7 @@ public class MeetingController extends HttpServlet {
 		// test용--> 로그인구현 다 되면 지우기
 		HttpSession session = request.getSession(); // 객체 초기화
 		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
-		session.setAttribute("member_id", "2"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
+		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
 		// session에서 member_id를 가져옴.
 		String member_id = (String) session.getAttribute("member_id");
 
@@ -107,6 +107,7 @@ public class MeetingController extends HttpServlet {
 		} else if (sPath.equals("/mymeeting_list.do")) {
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
+//			request.setAttribute("vo", member_id);
 			request.setAttribute("vos", vos);
 			request.getRequestDispatcher("mypage/mymeeting.jsp").forward(request, response);
 		} else if (sPath.equals("/meeting_invite.do")) {
