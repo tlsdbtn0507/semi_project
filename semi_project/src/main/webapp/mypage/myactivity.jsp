@@ -7,7 +7,71 @@
 <meta charset="UTF-8" />
 <title>semi project myactivity</title>
 <link rel="stylesheet" href="css/myactivity.css?after" />
+<link rel="stylesheet" href="css/main.css" />
+<script src="js/jquery-3.6.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
+<script>
+//남자일 경우에
+function activity_ongoing(x) {
+    $('#myactivity_list').empty();
+    $.ajax({
+        type: 'GET',
+        url: '/semi_project/myactivity_listOK.do?activityState='+x,
+        data: {},
+        success: function (data) {
+				console.log(data)
+				let rows = JSON.parse(data);
+				console.log(rows);
+            for (let i = 0; i < rows.length; i++) {
+                let location = rows[i]['location']
+                let total_people = rows[i]['total_people']
+                /* let activities = rows[i] */
+                let activity_id = rows[i]['activity_id']
+                let name = rows[i]['name']
+                let activity_date = rows[i]['activity_date']
+                let activity_time = rows[i]['activity_time']
+                let current_people = rows[i]['current_people']
+                let image_url = rows[i]['image_url']
+                
+				console.log(activity_id,name,location)
+                
+                let temp_html = '<table class="table_margin"><tr><td class="img_td" rowspan="5">'
+					+ '<a href="activity_selectOne.do?activity_id='
+					+ activity_id
+					+ '">'
+					+ '<img class="img_square" width="65px" alt="'+image_url+'" src="png/'+image_url+'">'
+					+ '</a></td>'
+					+ '<td><a class="lists" href="activity_selectOne.do?activity_id='
+					+ activity_id
+					+ '">'
+					+ name
+					+ '</a></td></tr>'
+					+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
+					+ activity_id
+					+ '">'
+					+ activity_date
+					+ " "
+					+ activity_time
+					+ '</a></td></tr>'
+					+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
+					+ activity_id
+					+ '">'
+					+ location
+					+ '</a></td></tr>'
+					+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
+					+ activity_id
+					+ '">'
+					+ current_people
+					+ "명 참여중"
+					+ '</a></td></tr></table>'
+
+                 $('#myactivity_list').append(temp_html)
+            }
+        }
+    })
+}
+</script>
 <body>
 	<div id="bg">
 		<h3>마이페이지</h3>
@@ -20,27 +84,39 @@
 		<div id="navup">
 			<ul>
 				<li><a href="mymeeting_list.do">모임</a></li>
-				<li><a href="myactivity_list.do"
-					style="color: skyblue; border-bottom: 1px solid skyblue">액티비티</a></li>
+				<li><a style="color: skyblue; border-bottom: 1px solid skyblue">액티비티</a></li>
 				<li><a href="myrounding_list.do">라운드</a></li>
 			</ul>
 		</div>
 		<br /> <br /> <br /> <select name="activitystate"
-			id="activitystate">
-			<option placeholder="활동중">활동중</option>
-			<option placeholder="활동전">활동전</option>
-			<option placeholder="활동후">활동후</option>
+			id="activitystate" onchange="activity_ongoing(value)">
+			<option>선택</option>
+			<option value="활동중">활동중</option>
+			<option value="활동전">활동전</option>
+			<option value="활동후">활동후</option>
 		</select> <br /> <br />
 
-		<section id="activity1">
-			<tr>
-				<img src="png/bell.png" id="Img" />
-				<li class="name">1${vo.name}</li>
-				<li class="date">2${vo.activity_date}${vo.activity_time}</li>
-				<li class="location">3${vo.location}</li>
-				<li class="currentP">4${vo.current_people}</li>
-				<li class="image">5${vo.image_url}</li>
-			</tr>
+		<section id="myactivity_list">
+			<%-- <table>
+				<tbody>
+					<c:forEach var="vo" items="${vos}">
+						<tr>
+							<td><a
+								href="activity_selectOne.do?activity_id=${vo.activity_id}">
+									<img alt="image_url" src="upload/${vo.image_url}" width="50px"
+									height="50px">
+							</a></td>
+							<td>${vo.name}</td>
+							<td>${vo.activity_date}</td>
+							<td>${vo.activity_time}</td>
+							<td>${vo.location}</td>
+							<td>${vo.current_people}</td>
+							<td>${vo.total_people}</td>
+
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table> --%>
 		</section>
 
 		<div id="navmodal" class="hidden">
@@ -54,7 +130,7 @@
 			</a></li>
 		</div>
 
-		<div id="navmain">
+		<!-- <div id="navmain">
 			<li><a href="home.do"><img src="png/homeIcon.png"
 					id="homeIcon" /><br />홈</a></li>
 			<li><a href="search.do"><img src="png/search.png"
@@ -64,9 +140,57 @@
 			</li>
 			<li><a href="mypage/mypage.jsp"><img src="png/mypage.png"
 					id="mypage" /><br />마이페이지</a></li>
-		</div>
+		</div> -->
 	</div>
 	<script>
+		/* $(function() {
+			let x = '활동중';
+			console.log(x);
+			$
+					.get(
+							"/myactivity_list.do?activityState=" + x,
+							function(responseText) {
+								console.log(".get:", responseText);
+								let myactivity_list = JSON.parse(responseText);
+								console.log(".get:", myactivity_list);
+								myactivity_list
+										.forEach(function(myactivity) {
+											console.log(myactivity.name);
+											$("#myactivity_list")
+													.append(
+															'<table class="table_margin"><tr><td class="img_td" rowspan="5">'
+																	+ '<a href="activity_selectOne.do?activity_id='
+																	+ myactivity.activity_id
+																	+ '">'
+																	+ '<img class="img_square" width="65px" alt="'+myactivity.image_url+'" src="png/'+myactivity.image_url+'">'
+																	+ '</a></td>'
+																	+ '<td><a class="lists" href="activity_selectOne.do?activity_id='
+																	+ myactivity.activity_id
+																	+ '">'
+																	+ myactivity.name
+																	+ '</a></td></tr>'
+																	+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
+																	+ myactivity.activity_id
+																	+ '">'
+																	+ myactivity.activity_date
+																	+ " "
+																	+ myactivity.activity_time
+																	+ '</a></td></tr>'
+																	+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
+																	+ myactivity.activity_id
+																	+ '">'
+																	+ myactivity.location
+																	+ '</a></td></tr>'
+																	+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
+																	+ myactivity.activity_id
+																	+ '">'
+																	+ myactivity.current_people
+																	+ "명 참여중"
+																	+ '</a></td></tr></table>');
+										});
+							});
+		}); */
+		
 		const mainBtn = document.getElementById("Addbtn");
 		const mainModal = document.getElementById("navmodal");
 		const logOut = document.getElementById("logout");
