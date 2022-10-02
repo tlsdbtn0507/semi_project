@@ -1,0 +1,219 @@
+html {
+  box-sizing: border-box;
+  background: url("../png/bgimg.png") center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+body {
+  margin: 0;
+}
+/* ����� �������� �Ͼ� ����ȭ�� */
+#bg {
+  padding: 20px;
+  height: max-content;
+  width: 414px;
+  background: white;
+}
+form {
+  margin-top: 20px;
+}
+
+#navlogo {
+  position: fixed;
+  top: 0;
+  float: left;
+  width: 414px;
+  height: 80px;
+  left: inherit;
+  background: white;
+}
+
+#logo{
+  width: 185px;
+  height: 69px;
+}
+
+a > button {
+  width: 40px;
+  font-size: 30px;
+  background: white;
+  border: 0.1px white;
+  float: left;
+}
+#searchWord {
+  padding: 0;
+  border: 1;
+  width: 300px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: gray;
+  /* opacity: 0.3; */
+}
+#searchBtn {
+  height: 30px;
+  background: white;
+  border: 1px white;
+  opacity: 0.3;
+}
+
+#nav {
+  background: white;
+  height: 40px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+}
+#nav li {
+  width: 80px;
+  background: white;
+  display: block;
+  float: left;
+  margin-right: 7px;
+}
+
+select {
+  width: 70px;
+  text-align: center;
+  height: 30px;
+  border-radius: 20px;
+  float: left;
+  margin: 5px;
+}
+#age {
+  width: 90px;
+}
+
+.container {
+  overflow: scroll;
+  width: 420px;
+  height: 750px;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+ul > li > a > img {
+  float: left;
+}
+
+section {
+  margin-top: 20px;
+}
+
+/* �ϴ� �� */
+#navmain {
+  position: fixed;
+  bottom: 0;
+  float: left;
+  height: 80px;
+  background: white;
+}
+/* �ϴ� �� ��� */
+#navmain li {
+  width: 80px;
+  background-color: white;
+  display: block;
+  float: left;
+  border: none;
+}
+/* ������ �۾� */
+#navmain a {
+  font-size: 13px;
+  color: #777;
+}
+/* Ȩ ������ */
+#homeIcon {
+  height: 30px;
+  width: 30px;
+  border: 2px solid gray;
+  border-radius: 90%;
+}
+/* �˻� ������ */
+#search {
+  height: 35px;
+  width: 35px;
+  opacity: 0.8;
+}
+/* ���� ������ */
+#Addbtn {
+  height: 55px;
+  width: 90px;
+}
+/* �˸� ������ */
+#bell {
+  height: 18px;
+  width: 18px;
+  padding: 7px;
+  border: 2px solid gray;
+  border-radius: 90%;
+  opacity: 0.8;
+}
+/* ���������� ������ */
+#mypage {
+  height: 37px;
+  width: 37px;
+  border-radius: 90%;
+  background: white;
+  border: 1px solid gray;
+}
+
+.hidden {
+  display: none;
+}
+#navmodal {
+  position: fixed;
+  float: left;
+  background-color: rgba(36, 36, 34, 0.76);
+  opacity: 0.8;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  bottom: 80px;
+  width: 200;
+  height: 150px;
+  list-style: none;
+  animation-name: appear;
+  animation-duration: 0.5s;
+}
+#navmodal li {
+  margin-top: 30px;
+  width: 200px;
+  float: left;
+  border: none;
+}
+
+#meetingCreate {
+  height: 70px;
+  width: 70px;
+  border-radius: 70%;
+  left: 700px;
+}
+#roundCreate {
+  height: 70px;
+  width: 70px;
+  right: 700px;
+  border-radius: 70%;
+}
+#text {
+  color: white;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 0.8;
+  }
+}
