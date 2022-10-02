@@ -37,7 +37,7 @@ public class LoginAction {
 			NoticeDAO noticeDAO = new NoticeDAOimpl();
 			noticeDAO.activity_notice(vo2.getMember_id());
 			System.out.println("알림 push 완료");
-			response.sendRedirect("meeting.jsp");
+			response.sendRedirect("meeting/meeting.jsp");
 		} else {
 			response.sendRedirect("login.do");
 		}
