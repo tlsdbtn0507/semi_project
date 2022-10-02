@@ -78,7 +78,7 @@ public interface DB_oracle {
 			+ "and secret like 'false' "
 			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
 			+ "and current_people<total_people";
-	String SQL_MY_MEETING_SELECT_ALL = "select meeting.meeting_id, name, explanation, image_url "
+	String SQL_MY_MEETING_SELECT_ALL = "select meeting.meeting_id, name, explanation, image_url, age,gender,total_people,location "
 			+ "from meeting join meeting_user on meeting.meeting_id = meeting_user.meeting_id "
 			+ "where meeting_user.member_id=?";
 	// 액티비티

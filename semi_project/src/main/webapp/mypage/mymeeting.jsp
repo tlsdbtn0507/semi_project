@@ -7,11 +7,12 @@
 <meta charset="UTF-8" />
 <title>semi project meetingboard</title>
 <link rel="stylesheet" href="css/myactivity.css?after" />
+<link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
 	<div id="bg">
 		<h3>마이페이지</h3>
-		<p id="profImg"></p>${vo.nickname} 
+		<p id="profImg"></p>${vo.nickname}
 		<a href="m_update.do"><button id="memberUpdate">
 				<b>프로필 수정</b>
 			</button></a> <a href="logout.do"><button id="logout">
@@ -27,13 +28,34 @@
 		</div>
 		<br /> <br /> <br /> <br /> <br />
 
-		<section id="meeting1">
-			<tr>
-				<img src="png/bell.png" id="Img" />
-				<li class="name">${vo.name}</li>
-				<li class="explanation">${vo.explanation}</li>
-				<li class="image">${vo.image_url}</li>
-			</tr>
+		<section id="meeting1"
+			style="overflow: scroll; width: 400px; height: 500px;">
+			<table class="table_margin">
+				<tbody>
+					<!-- el 태그로 받는다.  var 변수로 객체변수 설정. -->
+					<c:forEach var="vo" items="${vos}">
+						<tr>
+							<td><a
+								href="meeting_selectOne.do?meeting_id=${vo.meeting_id}"> <img
+									class="img_square" width="65px" alt="'+image_url+'"
+									src="upload/${vo.image_url}">
+							</a></td>
+							<td class="lists">${vo.name}</td>
+						<tr>
+							<td class="list">${vo.explanation}</td>
+						</tr>
+						<tr>
+							<td><a class="list">${vo.location}</a></td>
+							<td><a class="list">나이 : ${vo.age}</a></td>
+							<td><a class="list">성별 : ${vo.gender}</a></td>
+						</tr>
+						<tr>
+							<td><a class="list">모집인원 : ${vo.total_people}</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+
 		</section>
 
 		<div id="navmodal" class="hidden">
