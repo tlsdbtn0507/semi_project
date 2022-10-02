@@ -56,11 +56,14 @@ public interface DB_oracle {
 	String SQL_ACTIVITY_UPDATE_NOTICE_END = "update activity_user set notice_end='true' where activity_id=?";
 	String SQL_NOTICE = "select * from notice where member_id=? and meeting_id=?";
 
+	//초대
+	String MEMBER_SEARCH_NAME = "select * from member where nickname like ? and member_id not in(select member_id from meeting_user where meeting_id=?);";
+	
 	// main (메인페이지)
 	// 미팅
 	String SQL_RECOMMEND_MEETING_AGE_SELECT_ALL = "select distinct meeting_id,name,image_url "
 			+ "from recommend_meeting_view where age like (select age from member where member_id=?) "
-			+ "and secret like 'false' "
+			+ "and secret='false' "
 			+ "and not meeting_id in(select meeting_id from recommend_meeting_view where member_id=?) "
 			+ "and current_people<total_people";
 	String SQL_RECOMMEND_MEETING_GENDER_SELECT_ALL = "select distinct meeting_id,name,image_url "
@@ -89,7 +92,7 @@ public interface DB_oracle {
 	String SQL_MY_ROUND_SELECT_ALL = "select round.round_id,name,course,round_date,(select count(*)from round_user where round_user.round_id = round.round_id) current_people, total_people, image_url from round join round_user on round.round_id = round_user.round_id where round_user.member_id=?";
 	String SQL_ACTIVITY_SELECT_ALL = "select activity.activity_id,name,activity_date,activity_time,location, "
 			+ "(select count(*)from activity_user where activity_user.activity_id = activity.activity_id) current_people, "
-			+ "image_url, total_people from activity join activityUser "
+			+ "image_url, total_people from activity join activity_user "
 			+ "on activity.activity_id = activity_user.activity_id order by activity_id desc";
 	String SQL_RECOMMEND_ACTIVITY_AGE_SELECT_ALL = "select distinct activity_id,name,activity_date,activity_time,activity_location,current_people,image_url,total_people from recommend_activity_view "
 			+ "where meeting_age like (select age from member where member_id=?) and secret like 'false' and member_id !=? "
@@ -107,4 +110,5 @@ public interface DB_oracle {
 			+ "(TO_DATE(activity_date, 'YYYY-MM-DD') - TO_DATE(TO_CHAR(SYSDATE,'YYYY-MM-DD'))) d_day "
 			+ "from recommend_activity_view "
 			+ "where secret like 'false' and member_id !=? and current_people<total_people";
+
 }
