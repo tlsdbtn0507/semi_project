@@ -41,8 +41,11 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("member_id");
 			response.sendRedirect("login.do");
-
+		} else if (sPath.equals("/h_home.do")) {
+			request.getRequestDispatcher("main/main.jsp").forward(request, response);
 		} 
+
+
 
 	}
 

@@ -45,7 +45,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
       <div id="navmain">
         <li>
-          <a href="home.do"
+          <a href="h_home.do"
             ><img src="../png/homeIcon.png" id="homeIcon" /><br />홈</a
           >
         </li>

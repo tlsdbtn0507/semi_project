@@ -2,6 +2,7 @@ package test.com.round;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -33,13 +34,9 @@ public class RoundController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-
-		// test용--> 로그인구현 다 되면 지우기
+		
 		HttpSession session = request.getSession(); // 객체 초기화
-		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
-		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
-		// session에서 member_id를 가져옴.
-		String member_id = (String) session.getAttribute("member_id");
+		String member_id = String.valueOf(session.getAttribute("member_id"));
 
 		String sPath = request.getServletPath();
 		if (sPath.equals("/main_round_insert.do")) {
@@ -85,17 +82,23 @@ public class RoundController extends HttpServlet {
 			List<RoundVO> vos = dao.searchList(request.getParameter("searchWord"));
 
 			request.setAttribute("vos", vos);
-
 			request.getRequestDispatcher("round/round_search.jsp").forward(request, response);
 
 		} else if (sPath.equals("/myrounding_list.do")) {
 
 			List<RoundVO> vos = dao.mySelectAll(member_id);
-			// json으로 반환
-//			PrintWriter out = response.getWriter();
-//			out.print(vos.toString());
-			request.setAttribute("vos", vos);
-			request.getRequestDispatcher("mypage/myround.jsp").forward(request, response);
+
+			String txt = "[";
+			for (int i=0;i<vos.size();i++) {
+				txt += "{\"round_id\":"+vos.get(i).getRound_id()+",";
+				txt += "\"name\":\""+vos.get(i).getName()+"\""+",";
+				txt += "\"image_url\":\""+vos.get(i).getImage_url()+"\""+"}";
+				if(i<vos.size()-1)txt += ",";
+			}
+			txt += "]";
+			PrintWriter out = response.getWriter();
+			out.print(txt);
+			System.out.println(txt);
 		}
 	}
 

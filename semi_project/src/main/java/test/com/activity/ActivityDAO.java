@@ -25,7 +25,7 @@ public interface ActivityDAO {
 	public List<ActivityVO> mySelectAll(String member_name, String activityState);
 	
 	// 모임 내 액티비티 리스트
-	public List<ActivityVO> inSelectAll(MeetingVO vo);
+	public List<ActivityVO> inSelectAll(String member_id, String activityState);
 
 	// 액티비티 검색하기     1
 	public List<ActivityVO> searchList(String key, String value);
