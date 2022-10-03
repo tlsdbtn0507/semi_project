@@ -14,7 +14,7 @@ public interface DB_oracle {
 	// member_id 컬럼은 일단
 	String MEETING_INSERT = "insert into "
 			+ "meeting (meeting_id,name,explanation,gender,age,location,permission,secret,total_people,image_url,member_id,creation_date,handy) "
-			+ "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	String MEETING_UPDATE = "update meeting set name = ?,explanation = ?, gender = ?,age=?,location = ?,permission = ? ,secret = ? ,total_people = ?,image_url = ? where meeting_id = ?";
 	String MEETING_SEARCH_LIST_NAME = "select * from meeting where name like ? and location = ? and gender = ? and age = ?";
 	String MEETING_SELECT_ALL = "select * from meeting";

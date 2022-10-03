@@ -1,15 +1,14 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'main' of https\://github.com/Semi-Project-Meeting/semi_project.git
 eclipse.preferences.version=1
 encoding//src/main/webapp/boardJsp/board.jsp=UTF-8
 encoding//src/main/webapp/boardJsp/view.jsp=UTF-8
 encoding//src/main/webapp/css/board.css=UTF-8
-<<<<<<< HEAD
 encoding//src/main/webapp/css/insert.css=UTF-8
-=======
 encoding//src/main/webapp/css/myactivity.css=UTF-8
 encoding//src/main/webapp/css/mypage.css=UTF-8
 encoding//src/main/webapp/css/search.css=UTF-8
-encoding//src/main/webapp/css/signupstyle.css=UTF-8
->>>>>>> branch 'main' of https://github.com/Semi-Project-Meeting/semi_project.git
 encoding//src/main/webapp/css/style.css=UTF-8
 encoding//src/main/webapp/css/view.css=UTF-8
 encoding//src/main/webapp/css/write.css=UTF-8

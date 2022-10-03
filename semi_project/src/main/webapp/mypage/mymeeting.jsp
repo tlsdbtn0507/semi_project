@@ -23,7 +23,7 @@
 				<li><a href="mymeeting_list.do"
 					style="color: skyblue; border-bottom: 1px solid skyblue">모임</a></li>
 				<li><a href="myactivity_list.do">액티비티</a></li>
-				<li><a href="myrounding_list.do">라운드</a></li>
+<!-- 				<li><a href="myrounding_list.do">라운드</a></li> -->
 			</ul>
 		</div>
 		<br /> <br /> <br /> <br /> <br />

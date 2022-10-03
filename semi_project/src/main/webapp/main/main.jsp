@@ -26,7 +26,7 @@
 												.append(
 														'<tr><td class="img_td"><a href="meeting_selectOne.do?meeting_id='
 																+ my_meeting.meeting_id
-																+ '"> <img class="img_round" width="65px" alt="'+my_meeting.image_url+'" src="png/'+my_meeting.image_url+'">'
+																+ '"> <img class="img_round" width="65px" alt="'+my_meeting.image_url+'" src="upload/'+my_meeting.image_url+'">'
 																+ '</a></td> <td><a class="lists" href="meeting_selectOne.do?meeting_id='
 																+ my_meeting.meeting_id
 																+ '"</a>'
@@ -48,7 +48,7 @@
 												.append(
 														'<tr><td class="img_td"><a href="round_selectOne.do?round_id='
 																+ my_round.round_id
-																+ '"> <img class="img_round_orange" width="65px" alt="'+my_round.image_url+'" src="png/'+my_round.image_url+'">'
+																+ '"> <img class="img_round_orange" width="65px" alt="'+my_round.image_url+'" src="upload/'+my_round.image_url+'">'
 																+ '</a></td> <td><a class="lists" href="round_selectOne.do?round_id='
 																+ my_round.round_id
 																+ '"</a>'
@@ -66,7 +66,8 @@
 
 		function rec_activity(x) {
 			$("#recommend_activity").empty();
-			$.get(
+			$
+					.get(
 							"recommend_activity_selectAll.do?category=" + x,
 							function(responseText) {
 								console.log(".get:", responseText);
@@ -83,7 +84,7 @@
 																	+ '<a href="activity_selectOne.do?activity_id='
 																	+ recommend_activity.activity_id
 																	+ '">'
-																	+ '<img class="img_square" width="65px" alt="'+recommend_activity.image_url+'" src="png/'+recommend_activity.image_url+'">'
+																	+ '<img class="img_square" width="65px" alt="'+recommend_activity.image_url+'" src="upload/'+recommend_activity.image_url+'">'
 																	+ '</a></td>'
 																	+ '<td><a class="lists" href="activity_selectOne.do?activity_id='
 																	+ recommend_activity.activity_id
@@ -129,7 +130,7 @@
 																+ '<a href="activity_selectOne.do?activity_id='
 																+ imminent_activity.activity_id
 																+ '">'
-																+ '<img class="img_square" width="65px" alt="'+imminent_activity.image_url+'" src="png/'+imminent_activity.image_url+'">'
+																+ '<img class="img_square" width="65px" alt="'+imminent_activity.image_url+'" src="upload/'+imminent_activity.image_url+'">'
 																+ '</a></td>'
 																+ '<td><a class="lists" href="activity_selectOne.do?activity_id='
 																+ imminent_activity.activity_id
@@ -169,11 +170,17 @@
 										console.log(recommend_meeting.name);
 										$("#recommend_meeting")
 												.append(
-														'<table class="table_float"><tr><td class="img_td2"><a href="meeting_selectOne.do?meeting_id='+recommend_meeting.meeting_id+'">'
-														+'<img class="img_round td_center" width="65px" alt="'+recommend_meeting.image_url+'" src="png/'+recommend_meeting.image_url+'">'
-														+'</a></td></tr>'
-														+'<tr><td><a class="total"href="meeting_selectOne.do?meeting_id='+recommend_meeting.meeting_id+'">'+recommend_meeting.name+'</a></td>'
-														+'</tr></table>');
+														'<table class="table_float"><tr><td class="img_td2"><a href="meeting_selectOne.do?meeting_id='
+																+ recommend_meeting.meeting_id
+																+ '">'
+																+ '<img class="img_round td_center" width="65px" alt="'+recommend_meeting.image_url+'" src="upload/'+recommend_meeting.image_url+'">'
+																+ '</a></td></tr>'
+																+ '<tr><td><a class="total"href="meeting_selectOne.do?meeting_id='
+																+ recommend_meeting.meeting_id
+																+ '">'
+																+ recommend_meeting.name
+																+ '</a></td>'
+																+ '</tr></table>');
 									});
 						});
 
@@ -183,7 +190,6 @@
 </script>
 </head>
 <body>
-	${member_id}
 	<div id="bg">
 		<div id="nav">
 			<img src="png/golfzonlogo.png" id="logo" />
@@ -253,49 +259,14 @@
 				</thead>
 			</table>
 
-			<div id="recommend_meeting">
-			</div>
+			<div id="recommend_meeting"></div>
 
 
 		</div>
 
-
-		<div id="navmodal" class="hidden">
-			<li><a href="m_meetingCreate.do"> <img
-					src="png/meetingCreate.png" id="meetingCreate" /><br /> <b>모임
-						개설하기</b>
-			</a></li>
-			<li><a href="r_roundCreate.do"> <img
-					src="png/roundCreate.png" id="roundCreate" /><br /> <b>라운드
-						개설하기</b>
-			</a></li>
-
-
-		</div>
-
-		<div id="navmain">
-			<li><a href="h_home.do">
-			<img src="png/homeIcon.png" id="homeIcon" /><br />홈</a>
-			</li>
-			<li><a href="s_search.do"><img src="png/search.png" id="search" /><br />검색</a>
-			</li>
-			<li><img src="png/mainAddBtn.png" id="Addbtn" />
-			</li>
-			<li><a href="n_notice.do"><img src="png/bell.png" id="bell" /><br />알림</a>
-			</li>
-			<li><a href="a_album.do"><img src="png/mypage.png" id="mypage" /><br />마이페이지</a>
-			</li>
-		</div>
+		<jsp:include page="default.jsp"></jsp:include>
 	</div>
-	<script>
-		const mainBtn = document.getElementById("Addbtn");
-		const mainModal = document.getElementById("navmodal")
-
-		const showModal = function() {
-			mainModal.classList.toggle('hidden')
-		}
-
-		mainBtn.addEventListener('click', showModal)
-	</script>
 </body>
+
+
 </html>

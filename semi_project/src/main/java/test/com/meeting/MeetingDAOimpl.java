@@ -408,7 +408,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 
 			pstmt.setLong(1, vo.getMeeting_id());
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
+			if (rs.next()) {
 				vo2.setMeeting_id(rs.getLong("meeting_id"));
 				vo2.setName(rs.getString("name"));
 				vo2.setExplanation(rs.getString("explanation"));

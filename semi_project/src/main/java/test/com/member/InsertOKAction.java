@@ -22,7 +22,7 @@ public class InsertOKAction {
 		String id = "";
 		String pw = "";
 		String age = "";
-		String golfAvgCheck = "";
+		String handy = "";
 		String loc = "";
 		String gender = "";
 		
@@ -64,8 +64,8 @@ public class InsertOKAction {
 						if(item.getFieldName().equals("age")) {
 							age = item.getString("UTF-8");
 						}
-						if(item.getFieldName().equals("golfAvgCheck")) {
-							golfAvgCheck = item.getString("UTF-8");
+						if(item.getFieldName().equals("handy")) {
+							handy = item.getString("UTF-8");
 						}
 						if(item.getFieldName().equals("loc")) {
 							loc = item.getString("UTF-8");
@@ -98,7 +98,7 @@ public class InsertOKAction {
 		vo.setMember_name(id);
 		vo.setPassword(pw);
 		vo.setAge(age);
-		vo.setHandy(golfAvgCheck);
+		vo.setHandy(handy);
 		vo.setLocation(loc);
 		vo.setGender(gender);
 		

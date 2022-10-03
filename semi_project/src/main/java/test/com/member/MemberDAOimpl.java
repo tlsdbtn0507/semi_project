@@ -11,6 +11,7 @@ import java.util.List;
 import test.com.notice.NoticeDAO;
 import test.com.notice.NoticeDAOimpl;
 import test.com.notice.NoticeVO;
+import test.com.utils.DB_oracle;
 
 public class MemberDAOimpl implements MemberDAO {
 	private Connection conn;
@@ -151,13 +152,12 @@ public class MemberDAOimpl implements MemberDAO {
 			conn = DriverManager.getConnection(MemberDB_postgres.URL, MemberDB_postgres.USER,
 					MemberDB_postgres.PASSWORD);
 			System.out.println("conn successed...");
-			pstmt = conn.prepareStatement(MemberDB_postgres.SQL_MEMBER_UPDATE);
-			pstmt.setString(1, vo.getNickname());
-			pstmt.setString(2, vo.getAge());
-			pstmt.setString(3, vo.getHandy());
-			pstmt.setString(4, vo.getLocation());
-			pstmt.setString(5, vo.getImage_url());
-			pstmt.setLong(6, vo.getMember_id());
+			pstmt = conn.prepareStatement(DB_oracle.MEMBER_UPDATE);
+			pstmt.setString(1, vo.getImage_url());
+			pstmt.setString(2, vo.getNickname());
+			pstmt.setString(3, vo.getLocation());
+			pstmt.setString(4, vo.getHandy());
+			pstmt.setLong(5, vo.getMember_id());
 
 			flag = pstmt.executeUpdate();
 
@@ -300,7 +300,7 @@ public class MemberDAOimpl implements MemberDAO {
 	@Override
 	public MemberVO nickNameCheck(MemberVO vo) {
 		MemberVO vo2 = null;
-
+		
 		try {
 			conn = DriverManager.getConnection(MemberDB_postgres.URL, MemberDB_postgres.USER,
 					MemberDB_postgres.PASSWORD);
