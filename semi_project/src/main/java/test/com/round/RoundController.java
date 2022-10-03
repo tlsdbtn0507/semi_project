@@ -18,9 +18,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
-@WebServlet({ "/main_round_searchList.do", "/main_round_searchListOK.do", "/main_round_selectAll.do", 
-	"/main_round_insert.do", "/main_round_insertOK.do", "/round_enter.do", "/round_selectOne.do", "/round_join_selectOne.do",
-	"/myrounding_list.do" })
+@WebServlet({ "/main_round_searchList.do", "/main_round_searchListOK.do", "/main_round_selectAll.do",
+		"/main_round_insert.do", "/main_round_insertOK.do", "/round_enter.do", "/round_selectOne.do",
+		"/round_join_selectOne.do", "/myrounding_list.do" })
 public class RoundController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,7 @@ public class RoundController extends HttpServlet {
 			// 라운드 유저
 			RoundUserVO vo1 = new RoundUserVO();
 			vo1.setRound_id(Long.parseLong(round_id));
-			vo1.setMember_id(Long.parseLong(member_id)); 
+			vo1.setMember_id(Long.parseLong(member_id));
 
 			RoundVO vo2 = dao.selectOne(vo1);
 
@@ -65,10 +65,9 @@ public class RoundController extends HttpServlet {
 			response.getWriter().println(vo2.getRound_date());
 			response.getWriter().println(vo2.getTotal_people());
 			response.getWriter().println(vo2.getImage_url());
-			
-			request.getRequestDispatcher("round/selectOne.jsp").forward(request,
-			response);
-			 
+
+			request.getRequestDispatcher("round/selectOne.jsp").forward(request, response);
+
 		} else if (sPath.equals("/main_round_selectAll.do")) {
 
 			List<RoundVO> vos = dao.selectAll();
@@ -103,10 +102,9 @@ public class RoundController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*
-		 * String dir_path = request.getServletContext().getRealPath("/upload");
-		 * System.out.println(dir_path);
-		 */
+		String dir_path = request.getServletContext().getRealPath("/upload");
+		System.out.println(dir_path);
+
 		request.setCharacterEncoding("UTF-8");
 		String sPath = request.getServletPath();
 
@@ -126,11 +124,6 @@ public class RoundController extends HttpServlet {
 			String round_date = "";
 			int total_people = 0;
 			String image_url = "";
-			
-			String dir_path = 
-					request.getServletContext()
-					.getRealPath("/upload");
-			System.out.println(dir_path);
 
 			int fileSizeMax = 1024 * 1024 * 100;
 			boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
@@ -192,8 +185,8 @@ public class RoundController extends HttpServlet {
 			vo.setImage_url(image_url);
 			vo.setMember_id(Long.parseLong(member_id));
 
-			System.out.println("round_id"+round_id);
-			System.out.println("name"+name);
+			System.out.println("round_id" + round_id);
+			System.out.println("name" + name);
 			int result = dao1.insert(vo); // 라운드 개설
 
 			// 라운드 개설 유무 (개설 되었다면 라운드유저에 개설한 유저를 라운드 유저로서 데이터 삽)
@@ -230,11 +223,11 @@ public class RoundController extends HttpServlet {
 			// 현재 로그인된 자신의 member_id로 넣어야함.
 			vo.setMember_id(Long.parseLong(member_id));
 			vo.setRole("ROUND_MEMBER");
-			
-			request.setAttribute("vo",vo);
+
+			request.setAttribute("vo", vo);
 //			RequestDispatcher rd = request.getRequestDispatcher("round/enter.jsp");
 //			rd.forward(request, response);
-			
+
 			int result = dao.enter(vo);
 
 			if (result == 1) {
@@ -242,7 +235,7 @@ public class RoundController extends HttpServlet {
 				response.sendRedirect("myrounding_list.do");
 			} else {
 				System.out.println("라운드에 입장 실패하였습니다.");
-				
+
 			}
 		}
 	}
