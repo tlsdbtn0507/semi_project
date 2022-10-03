@@ -12,7 +12,7 @@
 	<div id="bg">
 		<h3>마이페이지</h3>
 		<p id="profImg"></p>
-		${member_name} <a href="m_update.do"><button id="memberUpdate">
+		${nickname} <a href="m_update.do"><button id="memberUpdate">
 				<b>프로필 수정</b>
 			</button></a> <a href="logout.do"><button id="logout">
 				<b>로그 아웃</b>
@@ -32,23 +32,23 @@
 			<option placeholder="활동후">활동후</option>
 		</select> <br /> <br />
 
-		<section id="round1">
-			<tr>
-				<img src="png/bell.png" id="Img" />
+		<form method="post" id="round${vo.round_id}">
+		<c:forEach var="vo" items="${vo}">
+				<img width="50" alt="${vo.image_url}" src="upload/${vo.image_url}">
 				<li class="name">1${vo.name}</li>
 				<li class="date">2${vo.round_date}</li>
 				<li class="course">3${vo.course}</li>
 				<li class="currentP">4${vo.current_people}</li>
 				<li class="image">5${vo.image_url}</li>
-			</tr>
-		</section>
+		</c:forEach>
+		</form>
 
 		<div id="navmodal" class="hidden">
 			<li><a href="meetingCreate.do"> <img
 					src="../png/meetingCreate.png" id="meetingCreate" /><br /> <b>모임
 						개설하기</b>
 			</a></li>
-			<li><a href="roundCreate.do"> <img
+			<li><a href="main_round_insert.do"> <img
 					src="../png/roundCreate.png" id="roundCreate" /><br /> <b>라운드
 						개설하기</b>
 			</a></li>

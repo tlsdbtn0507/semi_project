@@ -81,7 +81,7 @@ public class RoundDAOimpl implements RoundDAO {
 			pstmt.setString(3, vo.getCourse());
 			pstmt.setInt(4, vo.getTotal_people());
 			pstmt.setString(5, vo.getRound_date().toString());
-			pstmt.setString(6, vo.getImage_url());
+			pstmt.setString(6, vo.getImage_url()); 
 			pstmt.setLong(7, vo.getMember_id());
 
 			flag = pstmt.executeUpdate();
@@ -332,7 +332,6 @@ public class RoundDAOimpl implements RoundDAO {
 					vo2.setRound_id(rs.getLong("round_id"));
 					vo2.setName(rs.getString("name"));
 					vo2.setCourse(rs.getString("course"));
-
 //					vo2.setTotal_people(rs.getInt("total_people"));
 //					vo2.setRound_date(rs.getString("round_date"));
 //					vo2.setImage_url(rs.getString("image_url"));
