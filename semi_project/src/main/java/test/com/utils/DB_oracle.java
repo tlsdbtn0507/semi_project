@@ -8,6 +8,7 @@ public interface DB_oracle {
 
 	// 멤버 (회원)
 	String SQL_LOGIN = "select * from member where member_name=? and password=?";
+	String MEMBER_UPDATE = "update member set image_url=?, nickname=?, location=?, handy=? where member_id=?";
 
 	// 모임
 	// member_id 컬럼은 일단

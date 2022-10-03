@@ -12,6 +12,7 @@ public class MeetingVO {
 	private String handy; // 타수 
 	private int total_people; // 컬럼에는 없고 VO에만 있음.
 	private String creation_date; // 타수 
+	private String distinguishment; // 가입 유저 판별 변
 	
 	// fk
 	private long member_id;
@@ -143,6 +144,14 @@ public class MeetingVO {
 
 	public void setCreation_date(String creation_date) {
 		this.creation_date = creation_date;
+	}
+
+	public String getDistinguishment() {
+		return distinguishment;
+	}
+
+	public void setDistinguishment(String distinguishment) {
+		this.distinguishment = distinguishment;
 	}
 
 	@Override
