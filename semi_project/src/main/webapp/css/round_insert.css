@@ -1,0 +1,98 @@
+html {
+  box-sizing: border-box;
+  background: url("../png/bgimg.png") center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+body {
+  margin: 0;
+}
+/* ����� �������� �Ͼ� ����ȭ�� */
+#bg {
+  padding: 20px;
+  height: 900px;
+  width: 414px;
+  background: white;
+}
+form{
+	text-align:center;
+	height:800px;
+}
+#img{
+	border-radius:20px;
+	margin:auto;
+	display:block;
+	margin-top:30px;
+}
+/* .img{
+	text-align:center;
+} */
+input[type="file"]{
+	background-color:white;
+	display:none
+}
+.input-file-button{
+  background-color:#FF6600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+td{
+	width:400px;
+	padding-bottom:20px;
+} 
+#name{
+	width:350px;
+	height:30px;
+	border:1px white;
+	font-size: 20px;
+	text-align:center;
+	margin-top:30px;
+}
+#round_date{
+	font-size: 20px;
+	width:150px;
+	border: 1px white;
+}
+.courseTd{
+	width:150px;
+}
+#course{
+	height:30px;
+	width:200px;
+	border: 1px white;
+	font-size: 20px;
+	text-align:center;
+	float:right;
+	
+}
+#courseTd{
+	text-align:left;
+	width:100px;
+	margin:0;
+}
+#total_people{
+	height:30px;
+	width:200px;
+	border: 1px white;
+	font-size: 20px;
+	text-align:center;
+	float:right;
+}
+hr{
+	opacity:0.5;
+}
+#btn{
+	margin-top:300px;
+	bottom:0;
+	width:300px;
+	height:40px;
+	font-size:25px;
+}
+
+

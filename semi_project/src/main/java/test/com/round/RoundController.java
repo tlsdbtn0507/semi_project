@@ -3,8 +3,6 @@ package test.com.round;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,9 +19,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
-@WebServlet({ "/main_round_searchList.do", "/main_round_searchListOK.do", "/main_round_selectAll.do", 
-	"/main_round_insert.do", "/main_round_insertOK.do", "/round_enter.do", "/round_selectOne.do", "/round_join_selectOne.do",
-	"/myrounding_list.do" })
+@WebServlet({ "/main_round_searchList.do", "/main_round_searchListOK.do", "/main_round_selectAll.do",
+		"/main_round_insert.do", "/main_round_insertOK.do", "/round_enter.do", "/round_selectOne.do",
+		"/round_join_selectOne.do", "/myrounding_list.do" })
 public class RoundController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -64,8 +62,9 @@ public class RoundController extends HttpServlet {
 			response.getWriter().println(vo2.getRound_date());
 			response.getWriter().println(vo2.getTotal_people());
 			response.getWriter().println(vo2.getImage_url());
-//			RequestDispatcher rd = request.getRequestDispatcher("round/selectOne.jsp");
-//			rd.forward(request, response);
+
+			request.getRequestDispatcher("round/selectOne.jsp").forward(request, response);
+
 		} else if (sPath.equals("/main_round_selectAll.do")) {
 
 			List<RoundVO> vos = dao.selectAll();
@@ -108,10 +107,11 @@ public class RoundController extends HttpServlet {
 
 		String dir_path = request.getServletContext().getRealPath("/upload");
 		System.out.println(dir_path);
+
 		request.setCharacterEncoding("UTF-8");
 		String sPath = request.getServletPath();
 
-		long round_id = 0l;
+		long round_id = 0;
 
 		HttpSession session = request.getSession(); // 객체 초기화
 		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
@@ -188,6 +188,8 @@ public class RoundController extends HttpServlet {
 			vo.setImage_url(image_url);
 			vo.setMember_id(Long.parseLong(member_id));
 
+			System.out.println("round_id" + round_id);
+			System.out.println("name" + name);
 			int result = dao1.insert(vo); // 라운드 개설
 
 			// 라운드 개설 유무 (개설 되었다면 라운드유저에 개설한 유저를 라운드 유저로서 데이터 삽)
@@ -200,12 +202,14 @@ public class RoundController extends HttpServlet {
 				vo2.setRound_id(round_id);
 				System.out.println(round_id);
 				vo2.setMember_id(Long.parseLong(member_id));
+				System.out.println(member_id);
 				vo2.setRole("ROUND_LEADER");
 
 				int result2 = dao11.enter(vo2);
 
 				if (result2 == 1) {
 					System.out.println("라운드장이 되었습니다.");
+					response.sendRedirect("h_home.do");
 				} else {
 					System.out.println("라운드장이 될 수 없습니다.");
 				}
@@ -222,12 +226,19 @@ public class RoundController extends HttpServlet {
 			// 현재 로그인된 자신의 member_id로 넣어야함.
 			vo.setMember_id(Long.parseLong(member_id));
 			vo.setRole("ROUND_MEMBER");
+
+			request.setAttribute("vo", vo);
+//			RequestDispatcher rd = request.getRequestDispatcher("round/enter.jsp");
+//			rd.forward(request, response);
+
 			int result = dao.enter(vo);
 
 			if (result == 1) {
 				System.out.println("라운드에 입장하였습니다.");
+				response.sendRedirect("myrounding_list.do");
 			} else {
 				System.out.println("라운드에 입장 실패하였습니다.");
+
 			}
 		}
 	}
