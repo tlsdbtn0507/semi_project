@@ -12,7 +12,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <script>
-//남자일 경우에
 function activity_ongoing(x) {
     $('#myactivity_list').empty();
     $.ajax({
@@ -88,8 +87,7 @@ function activity_ongoing(x) {
 				<li><a href="myrounding_list.do">라운드</a></li>
 			</ul>
 		</div>
-		<br /> <br /> <br /> 
-		<select name="activitystate"
+		<br /> <br /> <br /> <select name="activitystate"
 			id="activitystate" onchange="activity_ongoing(value)">
 			<option>선택</option>
 			<option value="활동중">활동중</option>
@@ -98,26 +96,7 @@ function activity_ongoing(x) {
 		</select> <br /> <br />
 
 		<section id="myactivity_list">
-			<%-- <table>
-				<tbody>
-					<c:forEach var="vo" items="${vos}">
-						<tr>
-							<td><a
-								href="activity_selectOne.do?activity_id=${vo.activity_id}">
-									<img alt="image_url" src="upload/${vo.image_url}" width="50px"
-									height="50px">
-							</a></td>
-							<td>${vo.name}</td>
-							<td>${vo.activity_date}</td>
-							<td>${vo.activity_time}</td>
-							<td>${vo.location}</td>
-							<td>${vo.current_people}</td>
-							<td>${vo.total_people}</td>
-
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table> --%>
+			
 		</section>
 
 		<div id="navmodal" class="hidden">
@@ -144,53 +123,6 @@ function activity_ongoing(x) {
 		</div> -->
 	</div>
 	<script>
-		/* $(function() {
-			let x = '활동중';
-			console.log(x);
-			$
-					.get(
-							"/myactivity_list.do?activityState=" + x,
-							function(responseText) {
-								console.log(".get:", responseText);
-								let myactivity_list = JSON.parse(responseText);
-								console.log(".get:", myactivity_list);
-								myactivity_list
-										.forEach(function(myactivity) {
-											console.log(myactivity.name);
-											$("#myactivity_list")
-													.append(
-															'<table class="table_margin"><tr><td class="img_td" rowspan="5">'
-																	+ '<a href="activity_selectOne.do?activity_id='
-																	+ myactivity.activity_id
-																	+ '">'
-																	+ '<img class="img_square" width="65px" alt="'+myactivity.image_url+'" src="png/'+myactivity.image_url+'">'
-																	+ '</a></td>'
-																	+ '<td><a class="lists" href="activity_selectOne.do?activity_id='
-																	+ myactivity.activity_id
-																	+ '">'
-																	+ myactivity.name
-																	+ '</a></td></tr>'
-																	+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
-																	+ myactivity.activity_id
-																	+ '">'
-																	+ myactivity.activity_date
-																	+ " "
-																	+ myactivity.activity_time
-																	+ '</a></td></tr>'
-																	+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
-																	+ myactivity.activity_id
-																	+ '">'
-																	+ myactivity.location
-																	+ '</a></td></tr>'
-																	+ '<tr><td><a class="list" href="activity_selectOne.do?activity_id='
-																	+ myactivity.activity_id
-																	+ '">'
-																	+ myactivity.current_people
-																	+ "명 참여중"
-																	+ '</a></td></tr></table>');
-										});
-							});
-		}); */
 		
 		const mainBtn = document.getElementById("Addbtn");
 		const mainModal = document.getElementById("navmodal");

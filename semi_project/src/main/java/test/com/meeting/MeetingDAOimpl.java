@@ -78,7 +78,6 @@ public class MeetingDAOimpl implements MeetingDAO {
 
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
-//			name,explanation,gender,age,location,permission,secret,total_people,image_url)
 
 			pstmt = conn.prepareStatement(DB_oracle.MEETING_INSERT); // 쿼리문이 들어감.
 
@@ -94,18 +93,17 @@ public class MeetingDAOimpl implements MeetingDAO {
 			pstmt.setString(10, vo.getImage_url());
 			pstmt.setLong(11, vo.getMember_id());
 			pstmt.setString(12, vo.getCreation_date());
+			pstmt.setString(13, vo.getHandy());
 
 			flag = pstmt.executeUpdate();
 
-			
 			if (flag == 1) {
 				// 알림
-				NoticeVO noticeVO = new NoticeVO("\'" + vo.getName() + "\'" 
-				+ "모임을 개설하였습니다.", vo.getMember_id(), vo.getMeeting_id());
+				NoticeVO noticeVO = new NoticeVO("\'" + vo.getName() + "\'" + "모임을 개설하였습니다.", vo.getMember_id(),
+						vo.getMeeting_id());
 				noticeDAO.insert(noticeVO);
 				System.out.println("알림 push 완료");
 			}
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -239,18 +237,18 @@ public class MeetingDAOimpl implements MeetingDAO {
 
 	// 모임 검색 페이지
 	@Override
-	public List<MeetingVO> searchList(MeetingVO vo2,String searchWord) {
+	public List<MeetingVO> searchList(MeetingVO vo2, String searchWord) {
 		List<MeetingVO> list = new ArrayList<MeetingVO>();
-		
+
 		try {
 			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 
 			pstmt = conn.prepareStatement(DB_oracle.MEETING_SEARCH_LIST_NAME);
 
-			pstmt.setString(1, "%" + searchWord + "%"); 
-			pstmt.setString(2, vo2.getLocation()); 
-			pstmt.setString(3, vo2.getGender()); 
-			pstmt.setString(4, vo2.getAge()); 
+			pstmt.setString(1, "%" + searchWord + "%");
+			pstmt.setString(2, vo2.getLocation());
+			pstmt.setString(3, vo2.getGender());
+			pstmt.setString(4, vo2.getAge());
 
 			rs = pstmt.executeQuery();
 
@@ -403,45 +401,26 @@ public class MeetingDAOimpl implements MeetingDAO {
 	public MeetingVO selectOne(MeetingUserVO vo) {
 		MeetingVO vo2 = new MeetingVO();
 		try {
-			
-			// 모임에 가입되어있지 않다면
-			if (!distinguish(vo.getMeeting_id(), vo.getMember_id())) {
-				conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
-				
-				pstmt = conn.prepareStatement(DB_oracle.MEETING_SELECT_ONE); // 쿼리문이 들어감.
-				
-				pstmt.setLong(1, vo.getMeeting_id());
-				rs = pstmt.executeQuery();
-				while (rs.next()) {
-					vo2.setMeeting_id(rs.getLong("meeting_id"));
-					vo2.setName(rs.getString("name"));
-//					vo2.setExplanation(rs.getString("explanation"));
-//					vo2.setTotal_people(rs.getInt("total_people"));
-//					vo2.setGender(rs.getString("gender"));
-//					vo2.setAge(rs.getString("age"));
-//					vo2.setLocation(rs.getString("location"));
-//					vo2.setImage_url(rs.getString("image_url"));
-				}
-			}
-			// 모임에 가입 되어 있다면 
-			else if (distinguish(vo.getMeeting_id(), vo.getMember_id())) {
-				conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 
-				pstmt = conn.prepareStatement(DB_oracle.MEETING_SELECT_ONE); // 쿼리문이 들어감.
+			conn = DriverManager.getConnection(DB_oracle.URL, DB_oracle.USER, DB_oracle.PASSWORD);
 
-				pstmt.setLong(1, vo.getMeeting_id());
-				rs = pstmt.executeQuery();
-				while (rs.next()) {
-					vo2.setMeeting_id(rs.getLong("meeting_id"));
-					vo2.setName(rs.getString("name"));
-					vo2.setExplanation(rs.getString("explanation"));
-					vo2.setTotal_people(rs.getInt("total_people"));
-					vo2.setGender(rs.getString("gender"));
-					vo2.setAge(rs.getString("age"));
-					vo2.setLocation(rs.getString("location"));
-					vo2.setImage_url(rs.getString("image_url"));
-				}
+			pstmt = conn.prepareStatement(DB_oracle.MEETING_SELECT_ONE); // 쿼리문이 들어감.
+
+			pstmt.setLong(1, vo.getMeeting_id());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				vo2.setMeeting_id(rs.getLong("meeting_id"));
+				vo2.setName(rs.getString("name"));
+				vo2.setExplanation(rs.getString("explanation"));
+				vo2.setTotal_people(rs.getInt("total_people"));
+				vo2.setGender(rs.getString("gender"));
+				vo2.setAge(rs.getString("age"));
+				vo2.setLocation(rs.getString("location"));
+				vo2.setImage_url(rs.getString("image_url"));
+				vo2.setCreation_date(rs.getString("creation_date"));
+				vo2.setDistinguishment(String.valueOf(distinguish(vo.getMeeting_id(), vo.getMember_id())));
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally { // close가 있어서 finally 해줘야됨.
@@ -500,7 +479,7 @@ public class MeetingDAOimpl implements MeetingDAO {
 
 		return flag;
 	}
-	
+
 	@Override
 	public List<MeetingVO> recommendSelectAll(String member_id) {
 		System.out.println("mySelectAll()...");

@@ -27,11 +27,9 @@ import test.com.round.RoundDAOimpl;
 import test.com.round.RoundUserVO;
 import test.com.round.RoundVO;
 
-
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_searchListOK.do",
-		"/main_meeting_insert.do", "/main_meeting_insertOK.do", "/meeting_selectOne.do", 
-		"/mymeeting_list.do", "/main_mymeeting_list.do",
-		"/meeting_enter.do", "/meeting_update.do", "/meeting_updateOK.do" })
+		"/main_meeting_insert.do", "/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do",
+		"/main_mymeeting_list.do", "/meeting_enter.do", "/meeting_update.do", "/meeting_updateOK.do" })
 
 public class MeetingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -68,17 +66,8 @@ public class MeetingController extends HttpServlet {
 
 			request.setAttribute("vo2", vo2);
 
-			response.getWriter().println(vo2.getMeeting_id());
-			response.getWriter().println(vo2.getName());
-			response.getWriter().println(vo2.getExplanation());
-			response.getWriter().println(vo2.getGender());
-			response.getWriter().println(vo2.getAge());
-			response.getWriter().println(vo2.getLocation());
-			response.getWriter().println(vo2.getSecret());
-			response.getWriter().println(vo2.getTotal_people());
-			response.getWriter().println(vo2.getImage_url());
-			RequestDispatcher rd = request.getRequestDispatcher("meeting/meeting.jsp");
-			rd.forward(request, response);
+			request.getRequestDispatcher("meeting/meeting.jsp").forward(request, response);
+
 		} else if (sPath.equals("/main_meeting_selectAll.do")) {
 
 			List<MeetingVO> vos = dao.selectAll();
@@ -112,17 +101,18 @@ public class MeetingController extends HttpServlet {
 
 			System.out.println(member_id);
 			String txt = "[";
-			for (int i=0;i<vos.size();i++) {
-				txt += "{\"meeting_id\":"+vos.get(i).getMeeting_id()+",";
-				txt += "\"name\":\""+vos.get(i).getName()+"\""+",";
-				txt += "\"image_url\":\""+vos.get(i).getImage_url()+"\""+"}";
-				if(i<vos.size()-1)txt += ",";
+			for (int i = 0; i < vos.size(); i++) {
+				txt += "{\"meeting_id\":" + vos.get(i).getMeeting_id() + ",";
+				txt += "\"name\":\"" + vos.get(i).getName() + "\"" + ",";
+				txt += "\"image_url\":\"" + vos.get(i).getImage_url() + "\"" + "}";
+				if (i < vos.size() - 1)
+					txt += ",";
 			}
 			txt += "]";
 			PrintWriter out = response.getWriter();
 			out.print(txt);
 			System.out.println(txt);
-		}  else if (sPath.equals("/mymeeting_list.do")) {
+		} else if (sPath.equals("/mymeeting_list.do")) {
 
 			List<MeetingVO> vos = dao.selectAll();
 			System.out.println("vos.size():" + vos.size());
@@ -134,11 +124,12 @@ public class MeetingController extends HttpServlet {
 			List<MeetingVO> vos = dao.recommendSelectAll(member_id);
 			System.out.println(member_id);
 			String txt = "[";
-			for (int i=0;i<vos.size();i++) {
-				txt += "{\"meeting_id\":"+vos.get(i).getMeeting_id()+",";
-				txt += "\"name\":\""+vos.get(i).getName()+"\""+",";
-				txt += "\"image_url\":\""+vos.get(i).getImage_url()+"\""+"}";
-				if(i<vos.size()-1)txt += ",";
+			for (int i = 0; i < vos.size(); i++) {
+				txt += "{\"meeting_id\":" + vos.get(i).getMeeting_id() + ",";
+				txt += "\"name\":\"" + vos.get(i).getName() + "\"" + ",";
+				txt += "\"image_url\":\"" + vos.get(i).getImage_url() + "\"" + "}";
+				if (i < vos.size() - 1)
+					txt += ",";
 			}
 			txt += "]";
 			PrintWriter out = response.getWriter();
@@ -180,6 +171,7 @@ public class MeetingController extends HttpServlet {
 			String location = "";
 			String permission = "";
 			String secret = "";
+			String handy = "";
 			int total_people = 0;
 			String image_url = "";
 			String creation_date = date_format.format(now);
@@ -217,6 +209,9 @@ public class MeetingController extends HttpServlet {
 							}
 							if (item.getFieldName().equals("secret")) {
 								secret = item.getString("UTF-8");
+							}
+							if (item.getFieldName().equals("handy")) {
+								handy = item.getString("UTF-8");
 							}
 							if (item.getFieldName().equals("total_people")) {
 								total_people = Integer.parseInt(item.getString("UTF-8"));
@@ -257,6 +252,7 @@ public class MeetingController extends HttpServlet {
 			vo.setExplanation(explanation);
 			vo.setGender(gender);
 			vo.setAge(age);
+			vo.setHandy(handy);
 			vo.setLocation(location);
 			vo.setPermission(permission);
 			vo.setSecret(secret);
@@ -282,8 +278,10 @@ public class MeetingController extends HttpServlet {
 
 				if (result2 == 1) {
 					System.out.println("모임장이 되었습니다.");
+					response.sendRedirect("h_home.do");
 				} else {
 					System.out.println("모임장이 될 수 없습니다.");
+					response.sendRedirect("main_meeting_insert.do");
 				}
 
 			} else {
