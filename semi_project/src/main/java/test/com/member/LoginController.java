@@ -40,9 +40,9 @@ public class LoginController extends HttpServlet {
 		} else if (sPath.equals("/logout.do")) {
 			HttpSession session = request.getSession();
 			session.removeAttribute("member_id");
-			response.sendRedirect("h_home.do");
+			response.sendRedirect("login.do");
 		} else if (sPath.equals("/h_home.do")) {
-			request.getRequestDispatcher("mainJsp/main.jsp").forward(request, response);
+			request.getRequestDispatcher("main/main.jsp").forward(request, response);
 		} 
 
 

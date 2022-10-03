@@ -39,7 +39,10 @@ public interface DB_oracle {
 	String ACTIVITY_INSERT = "insert into "
 			+ "activity (activity_id,name,explanation,activity_date,activity_time,location,total_people,member_id,meeting_id,image_url) "
 			+ "values(?,?,?,?,?,?,?,?,?,?)";
-	String MEETING_ACTIVITY_SELECT_ALL = "select * from activity where meeting_id = ?";
+	String MEETING_ACTIVITY_SELECT_ALL = "select activity.activity_id,name,activity_date,activity_time,location, "
+			+ "(select count(*)from activity_user where activity_user.activity_id = activity.activity_id) current_people, "
+			+ "image_url, total_people from activity join activity_user "
+			+ "on activity.activity_id = activity_user.activity_id " + "where meeting_id=?";
 	String ACTIVITY_ID = "select seq_activity.nextval from dual";
 	String ACTIVITY_ENTER = "insert into " + "activity_user (activity_user_id,activity_id,meeting_id,member_id,role) "
 			+ "values(seq_activity_user.nextval,?,?,?,?)";
