@@ -50,7 +50,6 @@ console.log("localStorage:",localStorage.user_name);
                     </tr>
                     </tbody>
                 </table>
-        </div>
         </form>
         
       </div>

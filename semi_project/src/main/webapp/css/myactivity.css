@@ -13,7 +13,7 @@ html {
 body {
 	margin: 0;
 }
-/* 留덉씠�럹�씠吏� �긽�떒 */
+
 h3 {
 	text-align: left;
 }
@@ -29,8 +29,11 @@ p {
 }
 
 button {
-	border-radius: 10%;
-	border: 2px solid white;
+	font-weight: bolder;
+	border: 0.4em solid #D3D5D9;
+	font-size: 16px;
+	color: white;
+	background-color: #D3D5D9;
 }
 /* 紐⑤컮�씪 �궗�씠利덉쓽 �븯�� 諛뷀깢�솕硫� */
 #bg {
@@ -135,7 +138,7 @@ p {
 	border: 1px solid gray;
 }
 
-#activitystate {
+.activitystate {
 	float: left;
 }
 
@@ -149,13 +152,14 @@ select {
 /* section {
 	text-align: left;
 } */
-section > li {
+section>li {
 	list-style: none;
 	list-style-position: outside;
 	text-align: left;
 }
+
 #Img {
-	float:left;
+	float: left;
 	width: 150px;
 	height: 150px;
 }
@@ -220,4 +224,8 @@ keyframes appear {from { opacity:0;
 to {
 	opacity: 0.8;
 }
+
+.display-flex {
+	display: flex;
+	justify-content: flex-start;
 }

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,8 @@ import test.com.round.RoundVO;
 
 
 @WebServlet({ "/main_meeting_selectAll.do", "/main_meeting_searchList.do", "/main_meeting_searchListOK.do",
-		"/main_meeting_insert.do", "/main_meeting_insertOK.do", "/meeting_selectOne.do", "/mymeeting_list.do",
+		"/main_meeting_insert.do", "/main_meeting_insertOK.do", "/meeting_selectOne.do", 
+		"/mymeeting_list.do", "/main_mymeeting_list.do",
 		"/meeting_enter.do", "/meeting_update.do", "/meeting_updateOK.do" })
 
 public class MeetingController extends HttpServlet {
@@ -75,8 +77,8 @@ public class MeetingController extends HttpServlet {
 			response.getWriter().println(vo2.getSecret());
 			response.getWriter().println(vo2.getTotal_people());
 			response.getWriter().println(vo2.getImage_url());
-//			RequestDispatcher rd = request.getRequestDispatcher("round/selectOne.jsp");
-//			rd.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("meeting/meeting.jsp");
+			rd.forward(request, response);
 		} else if (sPath.equals("/main_meeting_selectAll.do")) {
 
 			List<MeetingVO> vos = dao.selectAll();
@@ -104,7 +106,7 @@ public class MeetingController extends HttpServlet {
 //			System.out.println(vos.get(0).getName());
 
 			request.getRequestDispatcher("meeting/meeting_search.jsp").forward(request, response);
-		} else if (sPath.equals("/mymeeting_list.do")) {
+		} else if (sPath.equals("/main_mymeeting_list.do")) {
 
 			List<MeetingVO> vos = dao.mySelectAll(member_id);
 
@@ -120,6 +122,13 @@ public class MeetingController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(txt);
 			System.out.println(txt);
+		}  else if (sPath.equals("/mymeeting_list.do")) {
+
+			List<MeetingVO> vos = dao.selectAll();
+			System.out.println("vos.size():" + vos.size());
+
+			request.setAttribute("vos", vos);
+			request.getRequestDispatcher("mypage/mymeeting.jsp").forward(request, response);
 		} else if (sPath.equals("/recommend_meeting_selectAll.do")) {
 
 			List<MeetingVO> vos = dao.recommendSelectAll(member_id);

@@ -88,7 +88,8 @@ function activity_ongoing(x) {
 				<li><a href="myrounding_list.do">라운드</a></li>
 			</ul>
 		</div>
-		<br /> <br /> <br /> <select name="activitystate"
+		<br /> <br /> <br /> 
+		<select name="activitystate"
 			id="activitystate" onchange="activity_ongoing(value)">
 			<option>선택</option>
 			<option value="활동중">활동중</option>
