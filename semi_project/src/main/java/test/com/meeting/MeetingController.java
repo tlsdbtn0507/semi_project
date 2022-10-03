@@ -51,9 +51,10 @@ public class MeetingController extends HttpServlet {
 
 		if (sPath.equals("/main_meeting_insert.do")) {
 
-			request.getRequestDispatcher("meeting/insert.jsp").forward(request, response);
+			request.getRequestDispatcher("meeting/meeting_insert.jsp").forward(request, response);
 		} else if (sPath.equals("/meeting_selectOne.do")) {
 			String meeting_id = request.getParameter("meeting_id");
+			System.out.println(meeting_id);
 
 			MeetingDAO dao = new MeetingDAOimpl();
 
@@ -278,7 +279,7 @@ public class MeetingController extends HttpServlet {
 
 				if (result2 == 1) {
 					System.out.println("모임장이 되었습니다.");
-					response.sendRedirect("h_home.do");
+					response.sendRedirect("meeting_selectOne.do?meeting_id="+meeting_id);
 				} else {
 					System.out.println("모임장이 될 수 없습니다.");
 					response.sendRedirect("main_meeting_insert.do");
