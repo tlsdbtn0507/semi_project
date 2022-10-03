@@ -84,7 +84,7 @@ function activity_ongoing(x) {
 			<ul>
 				<li><a href="mymeeting_list.do">모임</a></li>
 				<li><a style="color: skyblue; border-bottom: 1px solid skyblue">액티비티</a></li>
-				<li><a href="myrounding_list.do">라운드</a></li>
+<!-- 				<li><a href="myrounding_list.do">라운드</a></li> -->
 			</ul>
 		</div>
 		<br /> <br /> <br /> <select name="activitystate"

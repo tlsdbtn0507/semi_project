@@ -53,6 +53,7 @@
 					<tr>
 						<td><label for="location">지역 : </label></td>
 						<td><select name="location" id="location">
+								<option>전국</option>
 								<option>서울</option>
 								<option>경기</option>
 								<option>인천</option>
@@ -79,6 +80,7 @@
 					<tr>
 						<td><label for="age">나이 : </label></td>
 						<td><select name="age" id="age">
+								<option>전체 연령</option>
 								<option>10대</option>
 								<option>20대</option>
 								<option>30대</option>
@@ -109,6 +111,6 @@
 			</table>
 		</form>
 
-		<jsp:include page="../default.jsp"></jsp:include>
+		<jsp:include page="../main/default.jsp"></jsp:include>
 </body>
 </html>
