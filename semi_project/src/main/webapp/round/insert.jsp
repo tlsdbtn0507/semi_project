@@ -14,7 +14,7 @@
 			<tr class="img">
 				<img src="png/img_0001.png" id="img" />
 				<td><label className="input-file-button" for="input-file">
-						사진<label> <input type="file" id="input-file" name="upFile" /></td>
+						사진<label> <input type="file" id="input-file" name="image_url" /></td>
 			</tr>
 			<table>
 				<tr>

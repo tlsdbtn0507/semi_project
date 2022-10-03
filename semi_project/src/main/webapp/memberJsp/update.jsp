@@ -77,7 +77,8 @@
 			<button id="btn_nickCheck">중복확인</button>
 
 			<input type="text" name="age" id="age" value=""
-				placeholder="나이를 입력해주세요" /> <input type="text"
+				placeholder="나이를 입력해주세요" /> 
+			<input type="text"
 				name="golfAvgCheck" id="golfAvgCheck" value=""
 				placeholder="평균 타수를 입력해주세요" />
 			<!-- <br /> -->
