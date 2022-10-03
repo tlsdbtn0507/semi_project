@@ -18,7 +18,7 @@ public interface DB_oracle {
 	String MEETING_UPDATE = "update meeting set name = ?,explanation = ?, gender = ?,age=?,location = ?,permission = ? ,secret = ? ,total_people = ?,image_url = ? where meeting_id = ?";
 	String MEETING_SEARCH_LIST_NAME = "select * from meeting where name like ? and location = ? and gender = ? and age = ? and secret='false'";
 	String MEETING_SELECT_ALL = "select * from meeting where secret='false'";
-	String MEETING_SELECT_ONE = "select * from meeting where meeting_id = ?";
+	String MEETING_SELECT_ONE = "select * from meeting where me	eting_id = ?";
 	String MEETING_ENTER = "insert into " + "meeting_user (meeting_user_id,meeting_id,member_id,role) "
 			+ "values(seq_meeting_user.nextval,?,?,?)";
 	String MEETING_ID = "select seq_meeting.nextval from dual";

@@ -26,8 +26,8 @@
 					<div id="nav">
 						<br>
 						<ul>
-							<li id="round"><a href="main_round_selectAll.do" style="color: gray; border-bottom:gray">라운드</a></li>
-							<li id="meeting"><a href="main_meeting_selectAll.do" style="color: skyblue; border-bottom: 1px solid skyblue">모임</a> </li>
+							<li id="round"><a href="main_round_searchList.do" style="color: gray; border-bottom:gray">라운드</a></li>
+							<li id="meeting"><a href="main_meeting_searchList.do" style="color: skyblue; border-bottom: 1px solid skyblue">모임</a> </li>
 						</ul>
 					</div>
 					
