@@ -26,7 +26,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <ul>
           <li><a href="../mymeeting_list.do">모임</a></li>
           <li><a href="../myactivity_list.do">액티비티</a></li>
-          <li><a href="../myrounding_list.do">라운드</a></li>
+<!--           <li><a href="../myrounding_list.do">라운드</a></li> -->
         </ul>
       </div>
       <div id="navmodal" class="hidden">

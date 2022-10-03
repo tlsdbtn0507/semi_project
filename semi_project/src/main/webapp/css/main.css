@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap')
+	;
 
 @import
-	url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+	url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap")
+	;
 
 html {
 	box-sizing: border-box;
@@ -23,12 +25,12 @@ body {
 	overflow: scroll;
 	width: 420px;
 	height: 750px;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
 
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-}	
 .container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+	display: none; /* Chrome, Safari, Opera*/
 }
 
 /* 모바일 사이즈의 하얀 바탕화면 */
@@ -62,9 +64,6 @@ body {
 /* 하단 바 */
 #navmain {
 	position: fixed;
-	float: left;
-	height: 80px;
-	padding-top : 10px;
 }
 /* 하단 바 배경 */
 #navmain li {
@@ -163,15 +162,16 @@ body {
 	color: white;
 }
 
-@keyframes appear {
-	from { opacity:0;
+@
+keyframes appear {from { opacity:0;
 	transform: translateY(90px);
 }
+
 to {
 	opacity: 0.8;
-	}
 }
 
+}
 #logo {
 	height: 70px;
 }
@@ -195,6 +195,7 @@ to {
 	text-decoration: none;
 	float: left;
 }
+
 .list {
 	color: #838383;
 	font-size: 12px;
@@ -239,8 +240,8 @@ to {
 /* table tr td{border:1px solid red} */
 .total {
 	color: black;
-	font-family: 'Jua', sans-serif; # d4dfe6
-	font-size: 5px;
+	font-family: 'Jua', sans-serif; #
+	d4dfe6 font-size: 5px;
 	text-decoration: none;
 }
 
@@ -269,13 +270,19 @@ to {
 	padding: 20px 20px;
 }
 
-.table_margin{
-	margin-bottom : 1em;
+.table_margin {
+	margin-bottom: 1em;
 }
-.td_center{
+
+.td_center {
 	text-align: center;
 }
-.table_float{
+
+.table_float {
 	float: left;
 	margin-top: 10px;
+}
+
+input:focus::-webkit-input-placeholder {
+	color: transparent;
 }

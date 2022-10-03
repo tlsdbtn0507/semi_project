@@ -25,7 +25,6 @@ form {
 
 #navlogo {
   position: fixed;
-  top: 0;
   float: left;
   width: 414px;
   height: 80px;
@@ -112,13 +111,13 @@ section {
 }
 
 /* �ϴ� �� */
-#navmain {
-  position: fixed;
-  bottom: 0;
-  float: left;
-  height: 80px;
-  background: white;
-}
+/* #navmain { */
+/*   position: fixed; */
+/*   bottom: 0; */
+/*   float: left; */
+/*   height: 80px; */
+/*   background: white; */
+/* } */
 /* �ϴ� �� ��� */
 #navmain li {
   width: 80px;

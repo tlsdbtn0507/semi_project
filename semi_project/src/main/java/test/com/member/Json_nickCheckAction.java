@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 public class Json_nickCheckAction {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		System.out.println(request.getParameter("nick"));
+		System.out.println(request.getParameter("nickname"));
 	    
 		MemberDAO dao = new MemberDAOimpl();
 	    MemberVO vo = new MemberVO();
-	    vo.setNickname(request.getParameter("nick"));
+	    vo.setNickname(request.getParameter("nickname"));
 		
 	    MemberVO vo2 = dao.nickNameCheck(vo);
 	    System.out.println("nickNameCheck:"+vo2);

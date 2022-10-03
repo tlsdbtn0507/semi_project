@@ -14,7 +14,7 @@
 
 		$
 				.get(
-						"mymeeting_list.do",
+						"main_mymeeting_list.do",
 						function(responseText) {
 							console.log(".get:", responseText);
 							let my_meeting_list = JSON.parse(responseText);
@@ -26,7 +26,7 @@
 												.append(
 														'<tr><td class="img_td"><a href="meeting_selectOne.do?meeting_id='
 																+ my_meeting.meeting_id
-																+ '"> <img class="img_round" width="65px" alt="'+my_meeting.image_url+'" src="png/'+my_meeting.image_url+'">'
+																+ '"> <img class="img_round" width="65px" alt="'+my_meeting.image_url+'" src="upload/'+my_meeting.image_url+'">'
 																+ '</a></td> <td><a class="lists" href="meeting_selectOne.do?meeting_id='
 																+ my_meeting.meeting_id
 																+ '"</a>'
@@ -48,7 +48,7 @@
 												.append(
 														'<tr><td class="img_td"><a href="round_selectOne.do?round_id='
 																+ my_round.round_id
-																+ '"> <img class="img_round_orange" width="65px" alt="'+my_round.image_url+'" src="png/'+my_round.image_url+'">'
+																+ '"> <img class="img_round_orange" width="65px" alt="'+my_round.image_url+'" src="upload/'+my_round.image_url+'">'
 																+ '</a></td> <td><a class="lists" href="round_selectOne.do?round_id='
 																+ my_round.round_id
 																+ '"</a>'
@@ -84,7 +84,7 @@
 																	+ '<a href="activity_selectOne.do?activity_id='
 																	+ recommend_activity.activity_id
 																	+ '">'
-																	+ '<img class="img_square" width="65px" alt="'+recommend_activity.image_url+'" src="png/'+recommend_activity.image_url+'">'
+																	+ '<img class="img_square" width="65px" alt="'+recommend_activity.image_url+'" src="upload/'+recommend_activity.image_url+'">'
 																	+ '</a></td>'
 																	+ '<td><a class="lists" href="activity_selectOne.do?activity_id='
 																	+ recommend_activity.activity_id
@@ -130,7 +130,7 @@
 																+ '<a href="activity_selectOne.do?activity_id='
 																+ imminent_activity.activity_id
 																+ '">'
-																+ '<img class="img_square" width="65px" alt="'+imminent_activity.image_url+'" src="png/'+imminent_activity.image_url+'">'
+																+ '<img class="img_square" width="65px" alt="'+imminent_activity.image_url+'" src="upload/'+imminent_activity.image_url+'">'
 																+ '</a></td>'
 																+ '<td><a class="lists" href="activity_selectOne.do?activity_id='
 																+ imminent_activity.activity_id
@@ -173,7 +173,7 @@
 														'<table class="table_float"><tr><td class="img_td2"><a href="meeting_selectOne.do?meeting_id='
 																+ recommend_meeting.meeting_id
 																+ '">'
-																+ '<img class="img_round td_center" width="65px" alt="'+recommend_meeting.image_url+'" src="png/'+recommend_meeting.image_url+'">'
+																+ '<img class="img_round td_center" width="65px" alt="'+recommend_meeting.image_url+'" src="upload/'+recommend_meeting.image_url+'">'
 																+ '</a></td></tr>'
 																+ '<tr><td><a class="total"href="meeting_selectOne.do?meeting_id='
 																+ recommend_meeting.meeting_id
@@ -190,7 +190,6 @@
 </script>
 </head>
 <body>
-	${member_id}
 	<div id="bg">
 		<div id="nav">
 			<img src="png/golfzonlogo.png" id="logo" />
@@ -265,6 +264,9 @@
 
 		</div>
 
-		<jsp:include page="../default.jsp"></jsp:include>
+		<jsp:include page="default.jsp"></jsp:include>
+	</div>
 </body>
+
+
 </html>

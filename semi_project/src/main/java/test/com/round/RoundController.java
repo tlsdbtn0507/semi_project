@@ -114,8 +114,6 @@ public class RoundController extends HttpServlet {
 		long round_id = 0;
 
 		HttpSession session = request.getSession(); // 객체 초기화
-		session.setMaxInactiveInterval(60);// interval 설정(초단위, 기본은 10~15분)
-		session.setAttribute("member_id", "1"); // -> 브라우저 X표 누르기전까지는 session에 저장됨.
 
 		// session에서 member_id를 가져옴.
 		String member_id = (String) session.getAttribute("member_id");
@@ -190,6 +188,7 @@ public class RoundController extends HttpServlet {
 
 			System.out.println("round_id" + round_id);
 			System.out.println("name" + name);
+			System.out.println("image_url" + image_url);
 			int result = dao1.insert(vo); // 라운드 개설
 
 			// 라운드 개설 유무 (개설 되었다면 라운드유저에 개설한 유저를 라운드 유저로서 데이터 삽)

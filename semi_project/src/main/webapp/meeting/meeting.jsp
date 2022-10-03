@@ -37,7 +37,7 @@ function activity_ongoing(x) {
 				console.log(rows);
 				if(rows.length==0){
 					console.log(rows.length);
-					let temp_img = '<img width="250px" alt="image_url" src="png/no_activity.png">'
+					let temp_img = '<img width="250px" alt="image_url" src="upload/no_activity.png">'
 					+ '<p class="lists" style="margin-left: 86px;">해당하는 액티비티가 없습니다.</p>'
 					$('#activity_list').append(temp_img)
 				} else {
@@ -58,7 +58,7 @@ function activity_ongoing(x) {
 								+ '<a href="activity_selectOne.do?activity_id='
 								+ activity_id
 								+ '">'
-								+ '<img class="img_square" width="65px" alt="'+image_url+'" src="png/'+image_url+'">'
+								+ '<img class="img_square" width="65px" alt="'+image_url+'" src="upload/'+image_url+'">'
 								+ '</a></td>'
 								+ '<td><a class="lists" href="activity_selectOne.do?activity_id='
 								+ activity_id
